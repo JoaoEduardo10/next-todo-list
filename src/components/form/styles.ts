@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export const Conteiner = styled.div`
+export const Conteiner = styled.form`
   ${({ theme }) => css`
-    background-color: #fff;
+    background-color: ${theme.colors.primaryColor};
     width: 40%;
     height: 90%;
     padding: ${theme.padding.extra_big};
