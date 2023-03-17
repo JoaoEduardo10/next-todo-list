@@ -115,4 +115,30 @@ describe('<Inpult />', () => {
       'box-shadow': `1rem 1rem 1.6rem ${theme.colors.secondaryColor}`,
     });
   });
+
+  it('should an text input onChange', () => {
+    renderTheme(<Inpult placeholder="text" type="text" onChange={fn} />);
+
+    const input = screen.getByPlaceholderText('text');
+
+    fireEvent.change(input, { target: { value: 'aaa' } });
+
+    expect(fn).toHaveBeenCalledTimes(3);
+
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('type', 'text');
+  });
+
+  it('should an text input no onChange', () => {
+    renderTheme(<Inpult placeholder="text" type="text" />);
+
+    const input = screen.getByPlaceholderText('text');
+
+    fireEvent.change(input, { target: { value: 'aaa' } });
+
+    expect(fn).toHaveBeenCalledTimes(3);
+
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('type', 'text');
+  });
 });
