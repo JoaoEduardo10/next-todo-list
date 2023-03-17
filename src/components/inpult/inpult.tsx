@@ -7,7 +7,7 @@ import { MdDriveFileRenameOutline, MdEmail } from 'react-icons/md';
 export type TInpultProps = {
   placeholder: string;
   type: 'email' | 'password' | 'text';
-  onChange: React.Dispatch<SetStateAction<string>>;
+  onChange?: React.Dispatch<SetStateAction<string>>;
   value?: string;
 };
 
@@ -28,7 +28,9 @@ export const Inpult = ({
   const isTypePassword = type == 'password' ? isPassowrd : type;
 
   const handleChange = (valueInput: string) => {
-    onChange(valueInput);
+    if (onChange) {
+      onChange(valueInput);
+    }
   };
 
   return (
