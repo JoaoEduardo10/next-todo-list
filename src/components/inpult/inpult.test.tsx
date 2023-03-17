@@ -141,4 +141,12 @@ describe('<Inpult />', () => {
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('type', 'text');
   });
+
+  it('should to match snapshot', () => {
+    const { container } = renderTheme(
+      <Inpult placeholder="text" type="text" value="aaa" onChange={fn} />,
+    );
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
