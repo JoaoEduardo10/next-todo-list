@@ -19,7 +19,15 @@ export default {
 
 export const Tamplate: ComponentStory<typeof Form> = () => {
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: 'black',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Form />
     </div>
   );
