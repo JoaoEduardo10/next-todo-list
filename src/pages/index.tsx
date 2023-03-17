@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <h1>
-        <span>Ola {session && JSON.stringify(session.user)}</span>
+        <span>Ola {session && JSON.stringify(session)}</span>
       </h1>
       <Image
         src={'/images/bg-signIN-end-signUp.jpg'}

@@ -19,7 +19,6 @@ export const compareJwt = (token: string): (Ijwt & IjwtComplete) | null => {
 
     return varifyToken as Ijwt & IjwtComplete;
   } catch (error: any) {
-    console.log(error.message);
     return null;
   }
 };

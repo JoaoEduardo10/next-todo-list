@@ -1,8 +1,21 @@
 import { loginUser } from '../../../utils/fecths';
-import NextAuth from 'next-auth';
+import NextAuth, { Awaitable, Session, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compareJwt } from '../../../utils/jsonWebToken';
-import { match } from 'assert';
+import { JWT } from 'next-auth/jwt';
+import { AdapterUser } from 'next-auth/adapters';
+
+export interface ISessionCreate {
+  acessToken: string;
+}
+
+export type TSession = {
+  session: Session & ISessionCreate;
+  token: JWT;
+  user: User | AdapterUser;
+};
+
+export type TFunction = (parsms: TSession) => Awaitable<TSession> | null;
 
 export default NextAuth({
   secret: process.env.NEXT_AUTH_SECRET,
@@ -52,6 +65,7 @@ export default NextAuth({
       const actualDateInSeconds = Math.floor(Date.now() / 1000); // data atual em segundos
       const tokenExpirationInSeconds = Math.floor(7 * 24 * 60 * 60); // da 7 dias
 
+      // usuario logado
       if (isSignIN) {
         if (!user) {
           return Promise.resolve({});
@@ -64,11 +78,28 @@ export default NextAuth({
         );
       }
 
-      if (!token.expiration || token.expiration > actualDateInSeconds) {
+      // se não tiver expiração ou se a expiração for maior que data atuação
+      const time = token.expiration as unknown as number;
+
+      if (!time) {
+        return Promise.resolve({});
+      }
+
+      if (actualDateInSeconds > time) {
         return Promise.resolve({});
       }
 
       return Promise.resolve(token);
+    },
+    async session({ session, token }) {
+      const newSession: any = { ...session };
+
+      newSession.acessToken = token.jwt;
+      newSession.user = {
+        name: token.name,
+      };
+
+      return { ...newSession };
     },
   },
 });
