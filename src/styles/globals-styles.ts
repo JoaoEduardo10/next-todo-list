@@ -7,6 +7,15 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    font-family: ${({ theme }) => theme.font.family.primary};
+    font-size: 1.6rem;
+  }
+
   ul, ol {
     list-style: none;
   }

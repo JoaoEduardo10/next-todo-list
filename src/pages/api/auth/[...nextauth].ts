@@ -92,6 +92,10 @@ export default NextAuth({
       return Promise.resolve(token);
     },
     async session({ session, token }) {
+      if (!token) {
+        return null;
+      }
+
       const newSession: any = { ...session };
 
       newSession.acessToken = token.jwt;
