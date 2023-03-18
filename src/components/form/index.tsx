@@ -14,7 +14,7 @@ export const FormLogin = () => {
     event.preventDefault();
 
     if (!valueEmail || !valuePassowrd) {
-      alert('Preencha todo os campos!');
+      return;
     }
 
     const response = await signIn('credentials', {
@@ -24,16 +24,15 @@ export const FormLogin = () => {
     });
 
     if (!response?.ok) {
-      alert('Email ou senha inválido');
+      window.alert('retornou');
+      return;
     }
 
-    const redirect = router.query?.redirect || '/';
-
-    router.push(redirect as string);
+    router.push('/');
   };
 
   return (
-    <S.Form onSubmit={handleSubmit}>
+    <S.Form role={'form'} onSubmit={handleSubmit}>
       <S.Heading>Login User</S.Heading>
 
       <Inpult
