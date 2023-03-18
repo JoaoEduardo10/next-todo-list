@@ -112,7 +112,7 @@ describe('<Inpult />', () => {
     fireEvent.blur(input);
 
     expect(label).toHaveStyle({
-      'box-shadow': `1rem 1rem 1.6rem ${theme.colors.secondaryColor}`,
+      'box-shadow': `1rem 1rem 1.6rem ${theme.colors.blackColor}`,
     });
   });
 

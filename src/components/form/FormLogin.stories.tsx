@@ -1,12 +1,12 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { Form, TFormProps } from './Form';
+import { FormLogin } from '.';
 import { GlobalStyles } from '../../styles/globals-styles';
 import { theme } from '../../styles/theme';
 
 export default {
-  title: 'Form',
-  component: Form,
+  title: 'FormLogin',
+  component: FormLogin,
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
@@ -17,18 +17,18 @@ export default {
   ],
 } as Meta;
 
-export const Tamplate: ComponentStory<typeof Form> = () => {
+export const Tamplate: ComponentStory<typeof FormLogin> = () => {
   return (
     <div
       style={{
-        backgroundColor: 'black',
+        background: 'black',
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}
     >
-      <Form />
+      <FormLogin />
     </div>
   );
 };

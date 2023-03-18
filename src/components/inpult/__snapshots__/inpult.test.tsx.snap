@@ -12,7 +12,7 @@ exports[`<Inpult /> should to match snapshot 1`] = `
 }
 
 .c0 {
-  width: 50%;
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -21,7 +21,7 @@ exports[`<Inpult /> should to match snapshot 1`] = `
   border: none;
   background-color: #FFFFFF;
   gap: 0.5rem;
-  box-shadow: 1rem 1rem 1.6rem #F4F7FD;
+  box-shadow: 1rem 1rem 1.6rem #000;
   border-radius: 0.9rem;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;

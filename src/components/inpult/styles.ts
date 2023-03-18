@@ -24,13 +24,13 @@ export const input = styled.input`
 
 export const Label = styled.label<{ animation: boolean; error: boolean }>`
   ${({ theme, animation, error }) => css`
-    width: 50%;
+    width: 100%;
     display: flex;
     padding: 0 ${theme.padding.small};
     border: none;
     background-color: ${theme.colors.primaryColor};
     gap: 0.5rem;
-    box-shadow: 1rem 1rem 1.6rem ${theme.colors.secondaryColor};
+    box-shadow: 1rem 1rem 1.6rem ${theme.colors.blackColor};
     border-radius: 0.9rem;
     justify-content: space-between;
     align-items: center;
