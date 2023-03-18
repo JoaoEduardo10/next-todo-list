@@ -142,6 +142,19 @@ describe('<Inpult />', () => {
     expect(input).toHaveAttribute('type', 'text');
   });
 
+  it('should return a red board indicating an error', () => {
+    renderTheme(<Inpult placeholder="text" type="text" messagerError="erro" />);
+
+    const input = screen.getByPlaceholderText('text');
+    const label = screen.getByLabelText('Label conteiner');
+
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('type', 'text');
+    expect(label).toHaveStyle({
+      border: '0.2rem solid #ad081b',
+    });
+  });
+
   it('should to match snapshot', () => {
     const { container } = renderTheme(
       <Inpult placeholder="text" type="text" value="aaa" onChange={fn} />,

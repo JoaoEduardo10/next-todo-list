@@ -6,7 +6,6 @@ exports[`<Inpult /> should to match snapshot 1`] = `
   padding: 1.6rem;
   border: none;
   background-color: #FFFFFF;
-  background-color: red;
   outline: none;
   line-height: 1.2;
   font-size: 1.7rem;
@@ -39,6 +38,7 @@ exports[`<Inpult /> should to match snapshot 1`] = `
 
 .c0 svg {
   font-size: 2.6rem;
+  cursor: pointer;
 }
 
 <label

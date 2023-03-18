@@ -5,21 +5,25 @@ const animationLabel = (boolean: boolean, theme: DefaultTheme) => css`
   transform: ${boolean && 'scale(1.1)'};
 `;
 
+const errorBorderLine = (theme: DefaultTheme) => css`
+  box-shadow: 0.2rem 0.2rem 4rem #ad081b;
+  border: 0.2rem solid #ad081b;
+`;
+
 export const input = styled.input`
   ${({ theme }) => css`
     width: 80%;
     padding: ${theme.padding.small};
     border: none;
     background-color: ${theme.colors.primaryColor};
-    background-color: red;
     outline: none;
     line-height: 1.2;
     font-size: 1.7rem;
   `}
 `;
 
-export const Label = styled.label<{ animation: boolean }>`
-  ${({ theme, animation }) => css`
+export const Label = styled.label<{ animation: boolean; error: boolean }>`
+  ${({ theme, animation, error }) => css`
     width: 50%;
     display: flex;
     padding: 0 ${theme.padding.small};
@@ -34,9 +38,11 @@ export const Label = styled.label<{ animation: boolean }>`
     transition: all 300ms ease-in;
 
     ${animationLabel(animation, theme)}
+    ${error && errorBorderLine(theme)}
 
     svg {
       font-size: 2.6rem;
+      cursor: pointer;
     }
   `}
 `;

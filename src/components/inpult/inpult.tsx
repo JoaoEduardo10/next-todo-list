@@ -9,6 +9,7 @@ export type TInpultProps = {
   type: 'email' | 'password' | 'text';
   onChange?: React.Dispatch<SetStateAction<string>>;
   value?: string;
+  messagerError?: string;
 };
 
 export const Inpult = ({
@@ -16,6 +17,7 @@ export const Inpult = ({
   type,
   onChange,
   value,
+  messagerError,
 }: TInpultProps) => {
   const [visibiletPassword, setVisibiletPassword] = useState(false);
   const [animation, setAnimation] = useState(false);
@@ -33,11 +35,14 @@ export const Inpult = ({
     }
   };
 
+  const isError = !!messagerError;
+
   return (
     <S.Label
       aria-label="Label conteiner"
       animation={animation}
       htmlFor={isTypePassword}
+      error={isError}
     >
       <S.input
         placeholder={placeholder}

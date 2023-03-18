@@ -65,3 +65,23 @@ export const TamplateInpultPassword: ComponentStory<typeof Inpult> = (
     </div>
   );
 };
+
+export const TamplateInpultPasswordWithErrorBord: ComponentStory<
+  typeof Inpult
+> = (agrs: TInpultProps) => {
+  return (
+    <div
+      style={{
+        backgroundColor: 'black',
+        padding: '5rem',
+      }}
+    >
+      <Inpult
+        {...agrs}
+        placeholder={'Password'}
+        type={'password'}
+        messagerError={'tem erro'}
+      />
+    </div>
+  );
+};
