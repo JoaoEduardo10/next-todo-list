@@ -47,11 +47,12 @@ const errorMessageNotExist = (messageError: boolean) => css`
     @keyframes hidenShowMessageError {
       0% {
         opacity: 1;
-        transform: translateX(20%);
+        transform: translateX(0%);
       }
 
-      50% {
-        transform: translateX(0%);
+      25% {
+
+        transform: translateX(-20%);
       }
 
       100% {

@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormLogin /> should To match snapshot 1`] = `
+.c5 {
+  margin-top: 3rem;
+  width: 16rem;
+  padding: 1.6rem;
+  background-color: #827FD3;
+  border: none;
+  border-radius: 1.6rem;
+  font-size: 1.8rem;
+  line-height: 100%;
+  color: #FFFFFF;
+  cursor: pointer;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.c5:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.c5:disabled {
+  background-color: #F4F7FD;
+  cursor: not-allowed;
+  color: #000;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.c4 {
+  width: 80%;
+  padding: 1.6rem;
+  border: none;
+  background-color: #FFFFFF;
+  outline: none;
+  line-height: 1.2;
+  font-size: 1.7rem;
+}
+
+.c3 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 1.6rem;
+  border: none;
+  background-color: #FFFFFF;
+  gap: 0.5rem;
+  box-shadow: 1rem 1rem 1.6rem #000;
+  border-radius: 0.9rem;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 1.2;
+  -webkit-transition: all 300ms ease-in;
+  transition: all 300ms ease-in;
+}
+
+.c3 svg {
+  font-size: 2.6rem;
+  cursor: pointer;
+}
+
+.c1 {
+  position: relative;
+  background-color: #ad081b;
+  width: 40rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.6rem;
+  border-radius: 1.6rem;
+  opacity: 0;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  -webkit-animation: hidenShowMessageError 1s ease-in-out;
+  animation: hidenShowMessageError 1s ease-in-out;
+}
+
+.c1 span {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 span::before {
+  content: '';
+  position: absolute;
+  right: -50%;
+  width: 0.2rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  background-color: #d9bf6c;
+}
+
+.c1 span svg {
+  color: #F4F7FD;
+}
+
+.c0 {
+  background-color: #F4F7FD;
+  width: 40%;
+  height: 90%;
+  padding: 4.8rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 4rem;
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 1.6rem #FFFFFF;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  margin-bottom: 6rem;
+  color: #827FD3;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 3.8rem;
+}
+
+<form
+  class="c0"
+  role="form"
+>
+  <div
+    aria-label="Message Error"
+    class="c1"
+  >
+     
+    <span>
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 1024 1024"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 0 1 0-96 48.01 48.01 0 0 1 0 96z"
+        />
+      </svg>
+    </span>
+     
+    <span
+      aria-label="Message"
+    />
+  </div>
+  <h1
+    class="c2"
+  >
+    Login User
+  </h1>
+  <label
+    aria-label="Label conteiner"
+    class="c3"
+    for="email"
+  >
+    <input
+      class="c4"
+      id="email"
+      placeholder="Email"
+      type="email"
+      value=""
+    />
+    <svg
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 0h24v24H0z"
+        fill="none"
+      />
+      <path
+        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+      />
+    </svg>
+  </label>
+  <label
+    aria-label="Label conteiner"
+    class="c3"
+    for="password"
+  >
+    <input
+      class="c4"
+      id="password"
+      placeholder="Senha"
+      type="password"
+      value=""
+    />
+    <svg
+      aria-label="Password close"
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 1024 1024"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <clippath>
+          <path
+            clip-rule="evenodd"
+            d="M124-288l388-672 388 672H124z"
+            fill="none"
+          />
+        </clippath>
+      </defs>
+      <path
+        d="M508 624a112 112 0 0 0 112-112c0-3.28-.15-6.53-.43-9.74L498.26 623.57c3.21.28 6.45.43 9.74.43zm370.72-458.44L836 122.88a8 8 0 0 0-11.31 0L715.37 232.23Q624.91 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.7 119.43 136.55 191.45L112.56 835a8 8 0 0 0 0 11.31L155.25 889a8 8 0 0 0 11.31 0l712.16-712.12a8 8 0 0 0 0-11.32zM332 512a176 176 0 0 1 258.88-155.28l-48.62 48.62a112.08 112.08 0 0 0-140.92 140.92l-48.62 48.62A175.09 175.09 0 0 1 332 512z"
+      />
+      <path
+        d="M942.2 486.2Q889.4 375 816.51 304.85L672.37 449A176.08 176.08 0 0 1 445 676.37L322.74 798.63Q407.82 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5z"
+      />
+    </svg>
+  </label>
+  <button
+    class="c5"
+  >
+    Entrar
+  </button>
+</form>
+`;

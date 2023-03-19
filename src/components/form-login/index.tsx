@@ -1,19 +1,36 @@
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../button';
 import { Inpult } from '../inpult/inpult';
+import { MessageError } from '../messageError';
 import * as S from './styles';
 
 export const FormLogin = () => {
   const router = useRouter();
   const [valuePassowrd, setvaluePassowrd] = useState('');
   const [valueEmail, setValueEmail] = useState('');
+  const [error, setError] = useState(false);
+  const [messageError, setMessageError] = useState('');
+
+  useEffect(() => {
+    let timeError: NodeJS.Timeout;
+
+    if (error) {
+      timeError = setTimeout(() => {
+        setError(false);
+      }, 4000);
+    }
+
+    return () => clearTimeout(timeError);
+  }, [error]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!valueEmail || !valuePassowrd) {
+      setError(true);
+      setMessageError('Email e senha são obrigatórios!');
       return;
     }
 
@@ -24,7 +41,8 @@ export const FormLogin = () => {
     });
 
     if (!response?.ok) {
-      window.alert('retornou');
+      setError(true);
+      setMessageError('Email Ou senha incorretos!');
       return;
     }
 
@@ -33,6 +51,7 @@ export const FormLogin = () => {
 
   return (
     <S.Form role={'form'} onSubmit={handleSubmit}>
+      <MessageError error={error} text={messageError} />
       <S.Heading>Login User</S.Heading>
 
       <Inpult

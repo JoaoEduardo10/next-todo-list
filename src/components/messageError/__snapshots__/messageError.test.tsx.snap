@@ -71,6 +71,10 @@ exports[`<MessageError /> should create to Match Snapshot 1`] = `
     </svg>
   </span>
    
-  Test Error
+  <span
+    aria-label="Message"
+  >
+    Test Error
+  </span>
 </div>
 `;
