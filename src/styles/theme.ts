@@ -4,6 +4,8 @@ const theme = {
     secondaryColor: '#F4F7FD',
     purpleColor: '#827FD3',
     blackColor: '#000',
+    redColor: '#ad081b',
+    lite_greenColor: '#1AEB47',
   },
   font: {
     sizes: {
