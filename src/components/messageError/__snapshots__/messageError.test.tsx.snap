@@ -2,7 +2,8 @@
 
 exports[`<MessageError /> should create to Match Snapshot 1`] = `
 .c0 {
-  position: relative;
+  position: fixed;
+  z-index: 3;
   background-color: #ad081b;
   width: 40rem;
   display: -webkit-box;

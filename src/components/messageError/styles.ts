@@ -66,7 +66,8 @@ const errorMessageNotExist = (messageError: boolean) => css`
 
 export const MessageError = styled.div<{ messageError: boolean }>`
   ${({ theme, messageError }) => css`
-    position: relative;
+    position: fixed;
+    z-index: 3;
     background-color: ${theme.colors.redColor};
     width: 40rem;
     display: flex;

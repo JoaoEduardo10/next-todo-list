@@ -1,9 +1,10 @@
 import { FormLogin } from '../components/form-login';
+import { Warpper } from '../components/warpper';
 
 export default function Login() {
   return (
-    <div>
+    <Warpper>
       <FormLogin />
-    </div>
+    </Warpper>
   );
 }
