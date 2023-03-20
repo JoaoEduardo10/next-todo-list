@@ -1,20 +1,34 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import {
+  fireEvent,
+  queryByLabelText,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { FormLogin } from '.';
 import { renderTheme } from '../../utils/render-theme';
 import { act } from 'react-dom/test-utils';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../../styles/theme';
-import { GlobalStyles } from '../../styles/globals-styles';
-import { signIn, SignInAuthorizationParams } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import * as nextAuthReact from 'next-auth/react';
 
 jest.useFakeTimers();
 jest.mock('next-auth/react');
+
 jest.mock('next/router', () => ({
-  useRouter: () => ({
-    pathname: '/',
-  }),
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '/',
+      push: jest.fn(),
+    };
+  },
 }));
+
+jest.spyOn(require('next/router'), 'useRouter');
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+const nextAuthReactMocked = nextAuthReact as jest.Mocked<typeof nextAuthReact>;
 
 describe('<FormLogin />', () => {
   afterEach(() => {
@@ -29,71 +43,125 @@ describe('<FormLogin />', () => {
     expect(form).toBeInTheDocument();
   });
 
-  it('should an error appears for not pressing the form and the disappers after 4 seconds', () => {
-    const { rerender } = renderTheme(<FormLogin />);
+  it('should return an error for not typing the email', async () => {
+    renderTheme(<FormLogin />);
 
-    const button = screen.getByRole('button', { name: 'Entrar' });
-    const message = screen.getByLabelText('Message');
-    const conteinerMessageError = screen.getByLabelText('Message Error');
+    const form = screen.getByRole('form');
 
-    fireEvent.click(button);
+    const inputPassword = screen.getByPlaceholderText('Senha');
+
+    fireEvent.change(inputPassword, { target: { value: '1234' } });
+
+    fireEvent.submit(form);
+    const message = await screen.findByLabelText('Message Error');
+
     expect(message).toHaveTextContent('Email e senha são obrigatórios!');
-    expect(conteinerMessageError).toHaveStyle({
-      animation: 'showMessage 300ms ease-in-out',
-    });
+    expect(message).toBeInTheDocument();
+  });
 
-    act(() => {
-      jest.advanceTimersByTime(4000);
-    });
+  it('should return an error for not typing the password', async () => {
+    renderTheme(<FormLogin />);
 
-    expect(conteinerMessageError).toHaveStyle({
-      animation: 'hidenShowMessageError 1s ease-in-out',
-    });
-
-    rerender(
-      <ThemeProvider theme={theme}>
-        <FormLogin />
-        <GlobalStyles />
-      </ThemeProvider>,
-    );
+    const form = screen.getByRole('form');
 
     const inputEmail = screen.getByPlaceholderText('Email');
 
     fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
-    fireEvent.click(button);
+
+    fireEvent.submit(form);
+    const message = await screen.findByLabelText('Message Error');
+
     expect(message).toHaveTextContent('Email e senha são obrigatórios!');
-    expect(conteinerMessageError).toHaveStyle({
-      animation: 'showMessage 300ms ease-in-out',
-    });
+    expect(message).toBeInTheDocument();
+  });
+
+  it('should make error message disappear', async () => {
+    renderTheme(<FormLogin />);
+
+    const form = screen.getByRole('form');
+
+    const inputEmail = screen.getByPlaceholderText('Email');
+
+    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
+
+    fireEvent.submit(form);
+    const message = await screen.findByLabelText('Message Error');
 
     act(() => {
-      jest.advanceTimersByTime(4000);
+      jest.advanceTimersByTime(5000);
     });
 
-    expect(conteinerMessageError).toHaveStyle({
+    expect(message).toHaveStyle({
       animation: 'hidenShowMessageError 1s ease-in-out',
     });
   });
 
-  it('should return an error for not logging in your user', async () => {
+  it('should but the user does not exist', async () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');
-    const message = screen.getByLabelText('Message');
+
     const inputEmail = screen.getByPlaceholderText('Email');
-    const inputPassword = screen.getByPlaceholderText('Senha');
+    const inputPassowrd = screen.getByPlaceholderText('Senha');
 
-    fireEvent.change(inputEmail, { target: { value: 'test@.gmail.com' } });
-    fireEvent.change(inputPassword, { target: { value: 'eduj1234' } });
+    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
+    fireEvent.change(inputPassowrd, { target: { value: 'eduj1234' } });
 
-    await waitFor(() => {
-      fireEvent.submit(form);
+    fireEvent.submit(form);
+    const message = await screen.findByLabelText('Message Error');
 
-      expect(message).toHaveTextContent('Email Ou senha incorretos!');
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    expect(message).toHaveTextContent('Email Ou senha incorretos!');
+    expect(message).toHaveStyle({
+      animation: 'hidenShowMessageError 1s ease-in-out',
     });
   });
 
-  it('should To match snapshot', async () => {
+  it('should log the user and go to the home page', async () => {
+    nextAuthReactMocked.signIn.mockImplementation(() =>
+      Promise.resolve({ error: '', status: 200, ok: true, url: '' }),
+    );
+
+    useRouter.mockImplementation(() => ({
+      useRouter() {
+        return {
+          route: '/',
+          pathname: '',
+          query: '',
+          asPath: '/',
+          push: jest.fn(),
+        };
+      },
+    }));
+
+    await act(async () => {
+      renderTheme(<FormLogin />);
+    });
+    const form = screen.getByRole('form');
+
+    const inputEmail = screen.getByPlaceholderText('Email');
+    const inputPassowrd = screen.getByPlaceholderText('Senha');
+
+    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
+    fireEvent.change(inputPassowrd, { target: { value: 'eduj1234' } });
+
+    fireEvent.submit(form);
+
+    await waitFor(() => {
+      const message = screen.queryByLabelText('Message Error');
+
+      expect(message).not.toBeInTheDocument();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+  });
+
+  it('should to Match Snapchot', () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');

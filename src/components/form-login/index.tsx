@@ -65,7 +65,9 @@ export const FormLogin = () => {
       return;
     }
 
-    router.push('/');
+    const redirect = router.query?.redirect || '/';
+
+    router.push(redirect as string);
     setLoading(false);
   };
 

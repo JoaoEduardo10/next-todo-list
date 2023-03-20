@@ -1,17 +1,33 @@
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession, useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { frontEndRedirect } from '../utils/front-end-redirect';
+import { serverSideRedirect } from '../utils/server-side-redirect';
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
+
+  if (!session) {
+    return serverSideRedirect(ctx);
+  }
+
+  return {
+    props: {},
+  };
+};
 
 export default function Home() {
-  const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  useEffect(() => {
-    if (!session) {
-      router.push('/login');
-    }
-  }, [session]);
+  if (!session || !status) {
+    return frontEndRedirect();
+  }
+
+  if (typeof window == 'undefined' && status) return null;
+
+  if (!session) {
+    return <p>Voçê não está autenticado!</p>;
+  }
 
   return (
     <>

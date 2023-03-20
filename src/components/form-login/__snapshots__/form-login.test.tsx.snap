@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FormLogin /> should To match snapshot 1`] = `
+exports[`<FormLogin /> should to Match Snapchot 1`] = `
 .c4 {
   margin-top: 3rem;
   width: 16rem;
