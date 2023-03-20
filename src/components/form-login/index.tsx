@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Button } from '../button';
@@ -90,6 +91,8 @@ export const FormLogin = () => {
       />
 
       <Button disabled={loading}>Entrar</Button>
+
+      <Link href={'/cadastro'}>Crie uma conta</Link>
     </S.Form>
   );
 };
