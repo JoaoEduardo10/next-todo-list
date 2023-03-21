@@ -1,20 +1,21 @@
-import { signIn } from 'next-auth/react';
+import { createUser } from '../../utils/fecths';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button } from '../button';
+import * as S from '../form-login/styles';
 import { Inpult } from '../inpult/inpult';
 import { MessageError } from '../messageError';
-import * as S from './styles';
+import { useRouter } from 'next/router';
 
-export const FormLogin = () => {
+export const FormRegister = () => {
   const router = useRouter();
-  const [valuePassowrd, setvaluePassowrd] = useState('');
-  const [valueEmail, setValueEmail] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
-  const [messageError, setMessageError] = useState('');
   const [primaryRederition, setPrimaryRederition] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [messageError, setMessageError] = useState('');
 
   useEffect(() => {
     let timeError: NodeJS.Timeout;
@@ -44,21 +45,17 @@ export const FormLogin = () => {
     event.preventDefault();
     setLoading(true);
 
-    if (!valueEmail || !valuePassowrd) {
+    if (!email || !password || !name) {
       setPrimaryRederition(true);
       setError(true);
-      setMessageError('Email e senha são obrigatórios!');
+      setMessageError('Email, name e senha são obrigatórios!');
       setLoading(false);
       return;
     }
 
-    const response = await signIn('credentials', {
-      email: valueEmail,
-      password: valuePassowrd,
-      redirect: false,
-    });
+    const response = await createUser({ email, name, password });
 
-    if (!response?.ok) {
+    if (response.ok == false) {
       setPrimaryRederition(true);
       setError(true);
       setMessageError('Email Ou senha incorretos!');
@@ -66,33 +63,30 @@ export const FormLogin = () => {
       return;
     }
 
-    const redirect = router.query?.redirect || '/';
-
-    router.push(redirect as string);
+    router.push('/login');
     setLoading(false);
   };
 
   return (
     <S.Form role={'form'} onSubmit={handleSubmit}>
       {primaryRederition && <MessageError error={error} text={messageError} />}
-      <S.Heading>Login User</S.Heading>
-
+      <S.Heading>Cadastro</S.Heading>
+      <Inpult placeholder="Nome" type="text" onChange={setName} value={name} />
       <Inpult
         placeholder="Email"
         type="email"
-        onChange={setValueEmail}
-        value={valueEmail}
+        onChange={setEmail}
+        value={email}
       />
       <Inpult
         placeholder="Senha"
         type="password"
-        onChange={setvaluePassowrd}
-        value={valuePassowrd}
+        onChange={setPassword}
+        value={password}
       />
 
-      <Button disabled={loading}>Entrar</Button>
-
-      <Link href={'/cadastro'}>Crie uma conta</Link>
+      <Button disabled={loading}>Enviar</Button>
+      <Link href={'/login'}>SignIn</Link>
     </S.Form>
   );
 };

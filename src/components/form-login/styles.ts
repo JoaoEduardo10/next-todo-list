@@ -31,12 +31,9 @@ export const Form = styled.form`
       width: 80%;
       padding: 0 ${theme.padding.large};
 
-      ${Label}:nth-child(2) {
-        margin-bottom: 7rem;
-      }
-
       ${Label} {
         height: 10rem;
+        margin-bottom: 2.4rem;
 
         & input {
           font-size: 3.6rem;
@@ -61,8 +58,8 @@ export const Form = styled.form`
     ${theme.media_screen_size.lapTop} {
       justify-content: center;
 
-      ${Label}:nth-child(2) {
-        margin-bottom: 4rem;
+      ${Label}:nth-child(3) {
+        margin-bottom: 0.9;
       }
 
       ${Label} {
@@ -80,7 +77,7 @@ export const Form = styled.form`
 
       ${Button} {
         width: 90%;
-        height: 9rem;
+        height: 6rem;
         font-size: 3rem;
       }
 
@@ -110,12 +107,17 @@ export const Heading = styled.h1`
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3.8rem;
 
+    ${theme.media_screen_size.phone} {
+      margin-bottom: 4rem;
+    }
+
     ${theme.media_screen_size.tablet} {
       font-size: 8rem;
     }
 
     ${theme.media_screen_size.lapTop} {
-      font-size: 5.6rem;
+      font-size: 4rem;
+      margin-bottom: 1.6rem;
     }
   `}
 `;
