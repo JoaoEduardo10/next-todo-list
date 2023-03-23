@@ -17,12 +17,16 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
         <div>
           <Image src={logo} alt={logo} width={100} height={100} />
         </div>
-        <span>kanban</span>
+        <h1>kanban</h1>
       </S.Logo>
       <S.BoardControllerHeader>
-        <div>{boardName}</div>
+        <h2>
+          <span>{boardName}</span> <IoMdMenu />{' '}
+        </h2>
         <div>
-          <Button>+ Adicionar uma Tarefa</Button>
+          <Button>
+            + <span>Adicionar uma Tarefa</span>
+          </Button>
           <FaEllipsisV />
         </div>
       </S.BoardControllerHeader>
