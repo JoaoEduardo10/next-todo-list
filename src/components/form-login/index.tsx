@@ -43,6 +43,7 @@ export const FormLogin = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPrimaryRederition(false);
     setLoading(true);
 
     if (!valueEmail || !valuePassowrd) {

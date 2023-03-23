@@ -44,6 +44,7 @@ export const FormRegister = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPrimaryRederition(false);
     setLoading(true);
 
     if (!email || !password || !name) {
