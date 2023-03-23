@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { getSession, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { Header } from '../components/header';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { serverSideRedirect } from '../utils/server-side-redirect';
 
@@ -31,15 +32,14 @@ export default function Home() {
 
   return (
     <>
-      <h1>
-        <span>Ola</span>
-      </h1>
-      <Image
-        src={'/images/bg-signIN-end-signUp.jpg'}
-        alt={'bg-signIN-end-signUp'}
-        width={100}
-        height={100}
-      />
+      <Header boardId="123" boardName="Board Test" logo="/images/logo.svg" />
+      <div
+        style={{
+          backgroundColor: '#000',
+          height: '100vh',
+          width: '100%',
+        }}
+      ></div>
     </>
   );
 }
