@@ -51,6 +51,28 @@ exports[`<MessageError /> should create to Match Snapshot 1`] = `
   color: #F4F7FD;
 }
 
+@media (max-width:1500px) and (min-width:951px) {
+  .c0 {
+    top: 10%;
+  }
+}
+
+@media (max-width:950px) and (min-width:781px) {
+  .c0 {
+    top: 10%;
+    height: 17rem;
+    width: 90%;
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width:780px) {
+  .c0 {
+    top: 10%;
+    width: 81%;
+  }
+}
+
 <div
   aria-label="Message Error"
   class="c0"

@@ -99,6 +99,22 @@ export const MessageError = styled.div<{ messageError: boolean }>`
       }
     }
 
+    ${theme.media_screen_size.lapTop} {
+      top: 10%;
+    }
+
+    ${theme.media_screen_size.tablet} {
+      top: 10%;
+      height: 17rem;
+      width: 90%;
+      font-size: 3.5rem;
+    }
+
+    ${theme.media_screen_size.phone} {
+      top: 10%;
+      width: 81%;
+    }
+
     ${errorExist(theme, messageError)}
     ${errorMessageNotExist(messageError)}
   `}
