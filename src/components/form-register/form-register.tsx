@@ -6,6 +6,7 @@ import * as S from '../form-login/styles';
 import { Inpult } from '../inpult/inpult';
 import { MessageError } from '../messageError';
 import { useRouter } from 'next/router';
+import { Loading } from '../loading';
 
 export const FormRegister = () => {
   const router = useRouter();
@@ -69,6 +70,7 @@ export const FormRegister = () => {
 
   return (
     <S.Form role={'form'} onSubmit={handleSubmit}>
+      {loading && <Loading />}
       {primaryRederition && <MessageError error={error} text={messageError} />}
       <S.Heading>Cadastro</S.Heading>
       <Inpult placeholder="Nome" type="text" onChange={setName} value={name} />

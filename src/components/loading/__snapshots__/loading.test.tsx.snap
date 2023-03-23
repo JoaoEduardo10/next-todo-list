@@ -3,6 +3,9 @@
 exports[`<Loading /> should to match snapchot 1`] = `
 .c0 {
   position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 6;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.6);
@@ -53,6 +56,7 @@ exports[`<Loading /> should to match snapchot 1`] = `
 }
 
 <div
+  aria-label="Loading"
   class="c0"
 >
   <div

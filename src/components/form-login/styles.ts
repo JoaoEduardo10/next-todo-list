@@ -5,6 +5,7 @@ import { Button } from '../button/styles';
 
 export const Form = styled.form`
   ${({ theme }) => css`
+    position: relative;
     background-color: ${theme.colors.secondaryColor};
     width: 40%;
     height: 95%;

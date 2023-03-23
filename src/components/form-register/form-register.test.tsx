@@ -157,4 +157,10 @@ describe('<FormRegister />', () => {
 
     fireEvent.click(button);
   });
+
+  it('should to match snapshot', async () => {
+    const { container } = renderTheme(<FormRegister />);
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

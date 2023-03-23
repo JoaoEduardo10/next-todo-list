@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button } from '../button';
 import { Inpult } from '../inpult/inpult';
+import { Loading } from '../loading';
 import { MessageError } from '../messageError';
 import * as S from './styles';
 
@@ -74,6 +75,7 @@ export const FormLogin = () => {
 
   return (
     <S.Form role={'form'} onSubmit={handleSubmit}>
+      {loading && <Loading />}
       {primaryRederition && <MessageError error={error} text={messageError} />}
       <S.Heading>Login User</S.Heading>
 
