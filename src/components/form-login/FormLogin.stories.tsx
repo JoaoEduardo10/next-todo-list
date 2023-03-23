@@ -18,17 +18,13 @@ export default {
 } as Meta;
 
 export const Tamplate: ComponentStory<typeof FormLogin> = () => {
-  return (
-    <div
-      style={{
-        background: 'black',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <FormLogin />
-    </div>
-  );
+  return <FormLogin />;
+};
+
+Tamplate.parameters = {
+  nextRouter: {
+    path: '/',
+    asPath: '/',
+    query: {},
+  },
 };

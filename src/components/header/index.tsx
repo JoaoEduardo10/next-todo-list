@@ -21,7 +21,7 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
       </S.Logo>
       <S.BoardControllerHeader>
         <h2>
-          <span>{boardName}</span> <IoMdMenu />{' '}
+          <span>{boardName}</span> <IoMdMenu />
         </h2>
         <div>
           <Button>

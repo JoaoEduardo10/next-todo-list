@@ -20,3 +20,11 @@ export default {
 export const TamplateFormRegister: ComponentStory<typeof FormRegister> = () => {
   return <FormRegister />;
 };
+
+TamplateFormRegister.parameters = {
+  nextRouter: {
+    path: '/login',
+    asPath: '/login',
+    query: {},
+  },
+};
