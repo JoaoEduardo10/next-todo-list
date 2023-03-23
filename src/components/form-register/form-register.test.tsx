@@ -3,7 +3,7 @@ import { renderTheme } from '../../utils/render-theme';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { FetchMock } from 'jest-fetch-mock';
+import fetchMock from 'jest-fetch-mock';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -19,14 +19,15 @@ jest.mock('next/router', () => ({
 
 jest.spyOn(require('next/router'), 'useRouter');
 
-const useRouter = jest.spyOn(require('next/router'), 'useRouter');
-
-const mockFeatch = fetch as jest.MockedFunction<typeof fetch>;
 jest.useFakeTimers();
 
 describe('<FormRegister />', () => {
+  beforeAll(() => {
+    fetchMock.enableMocks();
+  });
+
   afterEach(() => {
-    jest.restoreAllMocks();
+    fetchMock.resetMocks();
   });
 
   it('should returns an error for not sending the email', async () => {
@@ -102,8 +103,8 @@ describe('<FormRegister />', () => {
   });
 
   it('should return an error for not creating a user', async () => {
-    mockFeatch.mockResolvedValue({
-      ok: () => Promise.resolve(false),
+    fetchMock.mockResolvedValueOnce({
+      ok: false,
     } as any);
 
     await act(async () => renderTheme(<FormRegister />));
@@ -118,31 +119,23 @@ describe('<FormRegister />', () => {
 
     const button = screen.getByRole('button', { name: 'Enviar' });
 
-    fireEvent.change(email, { target: { value: 'testgmail' } });
+    fireEvent.change(email, { target: { value: 'test@gmail.com' } });
     fireEvent.change(password, { target: { value: 'test123' } });
     fireEvent.change(name, { target: { value: 'test123' } });
 
     fireEvent.click(button);
 
     jest.advanceTimersByTime(5000);
+
+    const message = screen.queryByLabelText('Message Error');
+
+    expect(message).not.toBeInTheDocument();
   });
 
   it('should creating a user', async () => {
-    mockFeatch.mockResolvedValue({
+    fetchMock.mockResolvedValueOnce({
       ok: () => Promise.resolve(true),
     } as any);
-
-    useRouter.mockImplementation(() => ({
-      useRouter() {
-        return {
-          route: '/login',
-          pathname: '',
-          query: '',
-          asPath: '/login',
-          push: jest.fn(),
-        };
-      },
-    }));
 
     await act(async () => {
       renderTheme(<FormRegister />);
