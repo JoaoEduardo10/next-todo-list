@@ -12,7 +12,7 @@ export type HeaderProps = {
 
 export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
   return (
-    <S.Conteiner>
+    <S.Conteiner aria-label="Cabeçalho">
       <S.Logo>
         <div>
           <Image src={logo} alt={logo} width={100} height={100} />
