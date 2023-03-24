@@ -35,7 +35,7 @@ export default function Home() {
       <Header boardId="123" boardName="Board Test" logo="/images/logo.svg" />
       <div
         style={{
-          backgroundColor: '#000',
+          backgroundColor: '#F4F7FD',
           height: '100vh',
           width: '100%',
         }}

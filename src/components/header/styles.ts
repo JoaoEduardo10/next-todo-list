@@ -1,7 +1,18 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../button/styles';
 
-export const Conteiner = styled.header`
+export const Header = styled.header`
+  ${({ theme }) => css`
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  `}
+`;
+
+export const Conteiner = styled.div`
   ${({ theme }) => css`
     display: flex;
     width: 100%;
