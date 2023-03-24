@@ -2,22 +2,16 @@ import { GetServerSideProps } from 'next';
 import { getSession, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Header } from '../components/header';
+import { TBoard } from '../types';
+import { getAllBoards, getBoard } from '../utils/fecths';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { serverSideRedirect } from '../utils/server-side-redirect';
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx);
-
-  if (!session) {
-    return serverSideRedirect(ctx);
-  }
-
-  return {
-    props: {},
-  };
+type TParamsComponents = {
+  boards: TBoard[];
 };
 
-export default function Home() {
+export default function Home({ boards }: TParamsComponents) {
   const { data: session, status } = useSession();
 
   if (!session || !status) {
@@ -43,3 +37,29 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
+
+  if (!session) {
+    return serverSideRedirect(ctx);
+  }
+
+  try {
+    const newSession: any = {
+      ...session,
+    };
+
+    const boards = await getAllBoards(newSession.acessToken);
+
+    return {
+      props: {
+        boards,
+      },
+    };
+  } catch (error: any) {
+    return {
+      props: {},
+    };
+  }
+};

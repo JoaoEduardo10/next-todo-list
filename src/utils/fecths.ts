@@ -1,4 +1,4 @@
-import { json } from 'stream/consumers';
+import { TBoard } from '../types';
 
 export type TDataProps = {
   email: string;
@@ -41,4 +41,32 @@ const createUser = async (user: IUser) => {
   };
 };
 
-export { loginUser, createUser };
+const getAllBoards = async (token: string) => {
+  const response = await fetch(`${urlApi}/boards`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data: TBoard[] = await response.json();
+
+  return data;
+};
+
+const getBoard = async (token: string, id: string) => {
+  const response = await fetch(`${urlApi}/boards/${id}`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data: TBoard[] = await response.json();
+
+  return data;
+};
+
+export { loginUser, createUser, getAllBoards, getBoard };

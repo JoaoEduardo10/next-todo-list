@@ -30,7 +30,7 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
         </S.Logo>
         <S.BoardControllerHeader>
           <h2>
-            <span>{boardName}</span> $
+            <span>{boardName}</span>
             {!show ? (
               <IoMdMenu aria-label="Menu Open" onClick={handleClick} />
             ) : (
