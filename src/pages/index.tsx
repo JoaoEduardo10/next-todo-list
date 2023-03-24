@@ -1,11 +1,13 @@
 import { GetServerSideProps } from 'next';
 import { getSession, useSession } from 'next-auth/react';
-import Image from 'next/image';
+import { useEffect } from 'react';
 import { Header } from '../components/header';
 import { TBoard } from '../types';
-import { getAllBoards, getBoard } from '../utils/fecths';
+import { getAllBoards } from '../utils/fecths';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { serverSideRedirect } from '../utils/server-side-redirect';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { setBoards } from '../app/features/Boards/boardSlice';
 
 type TParamsComponents = {
   boards: TBoard[];
@@ -13,6 +15,8 @@ type TParamsComponents = {
 
 export default function Home({ boards }: TParamsComponents) {
   const { data: session, status } = useSession();
+  const dispatch = useAppDispatch();
+  const newBoards = useAppSelector((board) => board.boards);
 
   if (!session || !status) {
     return frontEndRedirect();
@@ -23,6 +27,12 @@ export default function Home({ boards }: TParamsComponents) {
   if (!session) {
     return <p>Voçê não está autenticado!</p>;
   }
+
+  useEffect(() => {
+    boards.map((board) => {
+      dispatch(setBoards(board));
+    });
+  }, []);
 
   return (
     <>
