@@ -9,13 +9,18 @@ export type MenuMobileProps = {
 };
 
 export const MenuMobile = ({ show }: MenuMobileProps) => {
-  const [rendering, setRendering] = useState(false);
   const boards = useAppSelector((board) => board.boards);
+  const [rendering, setRendering] = useState(false);
+  const [boardClicked, setboardClicked] = useState('');
 
   useEffect(() => {
     const time = setTimeout(() => {
       setRendering(true);
     }, 500);
+
+    const [primaryBoard] = boards;
+
+    setboardClicked(primaryBoard.id);
 
     return () => clearTimeout(time);
   }, []);
@@ -25,10 +30,14 @@ export const MenuMobile = ({ show }: MenuMobileProps) => {
       <S.Menu>
         <h2>Todos os quadros ({boards.length})</h2>
         {boards.map((board) => (
-          <li key={board.id}>
-            {' '}
+          <S.Li
+            key={board.id}
+            onClick={() => setboardClicked(board.id)}
+            board={boardClicked == board.id ? boardClicked : ''}
+            boardId={boardClicked == board.id ? board.id : ''}
+          >
             <MdOutlineSpaceDashboard /> <span>{board.boardName}</span>
-          </li>
+          </S.Li>
         ))}
       </S.Menu>
     </S.MenuMobile>

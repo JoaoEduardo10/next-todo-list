@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 const showMenu = (show: boolean, rendering: boolean) => css`
   ${show &&
@@ -35,6 +35,22 @@ const showMenu = (show: boolean, rendering: boolean) => css`
   `}
 `;
 
+const boardClicled = (
+  board: string,
+  boardId: string,
+  theme: DefaultTheme,
+) => css`
+  ${board == boardId &&
+  `
+    background-color: ${theme.colors.purpleColor};
+    transition: all 300ms ease-in-out;
+
+    span {
+      color: ${theme.colors.primaryColor};
+    }
+    `}
+`;
+
 export const MenuMobile = styled.div<{ show: boolean; rendering: boolean }>`
   ${({ theme, show, rendering }) => css`
     display: none;
@@ -67,28 +83,31 @@ export const Menu = styled.ul`
       margin: 2rem 0;
       padding: ${theme.padding.small};
     }
+  `}
+`;
 
-    li {
-      margin-bottom: ${theme.padding.small};
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background-color: ${theme.colors.purpleColor};
-      border-radius: 0 100px 100px 0;
-      width: 90%;
-      padding: 15px 24px;
+export const Li = styled.li<{ board: string; boardId: string }>`
+  ${({ theme, board, boardId }) => css`
+    margin-bottom: ${theme.padding.small};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: 0 100px 100px 0;
+    width: 90%;
+    padding: 15px 24px;
 
-      svg {
-        font-size: 2rem;
-        transform: translateY(8%);
-      }
-
-      span {
-        font-size: 1.7rem;
-        font-weight: bold;
-        color: ${theme.colors.primaryColor};
-      }
+    svg {
+      font-size: 2rem;
+      transform: translateY(8%);
     }
+
+    span {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: gray;
+    }
+
+    ${boardId.length > 1 && boardClicled(board, boardId, theme)}
   `}
 `;
