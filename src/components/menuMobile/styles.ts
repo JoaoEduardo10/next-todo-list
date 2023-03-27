@@ -60,5 +60,35 @@ export const Menu = styled.ul`
     background-color: ${theme.colors.primaryColor};
     transform: translateY(-7%);
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin: 2rem 0;
+      padding: ${theme.padding.small};
+    }
+
+    li {
+      margin-bottom: ${theme.padding.small};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background-color: ${theme.colors.purpleColor};
+      border-radius: 0 100px 100px 0;
+      width: 90%;
+      padding: 15px 24px;
+
+      svg {
+        font-size: 2rem;
+        transform: translateY(8%);
+      }
+
+      span {
+        font-size: 1.7rem;
+        font-weight: bold;
+        color: ${theme.colors.primaryColor};
+      }
+    }
   `}
 `;
