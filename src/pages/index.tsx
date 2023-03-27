@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { getSession, useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Header } from '../components/header';
 import { TBoard } from '../types';
 import { getAllBoards } from '../utils/fecths';
@@ -13,45 +13,10 @@ type TParamsComponents = {
   boards: TBoard[];
 };
 
-export default function Home({ boards }: TParamsComponents) {
-  const { data: session, status } = useSession();
-  const dispatch = useAppDispatch();
-  const newBoards = useAppSelector((board) => board.boards);
-
-  if (!session || !status) {
-    return frontEndRedirect();
-  }
-
-  if (typeof window == 'undefined' && status) return null;
-
-  if (!session) {
-    return <p>Voçê não está autenticado!</p>;
-  }
-
-  useEffect(() => {
-    boards.map((board) => {
-      dispatch(setBoards(board));
-    });
-  }, []);
-
-  return (
-    <>
-      <Header boardId="123" boardName="Board Test" logo="/images/logo.svg" />
-      <div
-        style={{
-          backgroundColor: '#F4F7FD',
-          height: '100vh',
-          width: '100%',
-        }}
-      ></div>
-    </>
-  );
-}
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
 
-  if (!session) {
+  if (!session || null) {
     return serverSideRedirect(ctx);
   }
 
@@ -73,3 +38,49 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 };
+
+export default function Home({ boards }: TParamsComponents) {
+  const { data: session, status } = useSession();
+  const dispatch = useAppDispatch();
+  const [render, setRender] = useState(false);
+
+  if (typeof window == 'undefined' && status) return null;
+
+  if (!session || !status) {
+    return frontEndRedirect();
+  }
+
+  if (!session) {
+    return <p>Voçê não está autenticado!</p>;
+  }
+
+  useEffect(() => {
+    setRender(true);
+  }, []);
+
+  useEffect(() => {
+    if (render) {
+      boards.map((board) => {
+        dispatch(setBoards(board));
+      });
+    }
+  }, [render]);
+
+  return (
+    <>
+      <Header boardId="123" boardName="Board Test" logo="/images/logo.svg" />
+      <div
+        style={{
+          backgroundColor: '#F4F7FD',
+          height: '100vh',
+          width: '100%',
+          color: '#000',
+        }}
+      >
+        {boards.map((item) => (
+          <span key={item.id}>{item.boardName}</span>
+        ))}
+      </div>
+    </>
+  );
+}
