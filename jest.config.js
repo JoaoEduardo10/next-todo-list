@@ -16,7 +16,12 @@ module.exports = {
 
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['<rootDir>/src/components/**/*.test.tsx'],
-  testPathIgnorePatterns: ['/node_modules/', '/.next/', '/.out/', '/public/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.next/',
+    '<rootDir>/.out/',
+    '/public/',
+  ],
 
   setupFilesAfterEnv: ['<rootDir>/.jest/setup-tests.ts'],
 };
