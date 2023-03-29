@@ -201,4 +201,10 @@ describe('<FormRegister />', () => {
       jest.advanceTimersByTime(5000);
     });
   });
+
+  it('should to match snapsho', async () => {
+    const { container } = renderTheme(<FormRegister />);
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
