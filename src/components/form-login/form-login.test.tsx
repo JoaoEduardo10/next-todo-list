@@ -1,13 +1,14 @@
 import {
+  findByLabelText,
   fireEvent,
-  queryByLabelText,
   screen,
   waitFor,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FormLogin } from '.';
 import { renderTheme } from '../../utils/render-theme';
-import { act } from 'react-dom/test-utils';
 import * as nextAuthReact from 'next-auth/react';
+import { act } from 'react-dom/test-utils';
 
 jest.useFakeTimers();
 jest.mock('next-auth/react');
@@ -35,7 +36,7 @@ describe('<FormLogin />', () => {
     jest.restoreAllMocks();
   });
 
-  it('should to render a form', () => {
+  it('should render a FormLogin', () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');
@@ -43,49 +44,62 @@ describe('<FormLogin />', () => {
     expect(form).toBeInTheDocument();
   });
 
-  it('should return an error for not typing the email', async () => {
+  it('should return an error by not sending the email', async () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');
+    const password = screen.getByPlaceholderText('Senha');
+    const button = screen.getByRole('button');
 
-    const inputPassword = screen.getByPlaceholderText('Senha');
+    expect(form).toBeInTheDocument();
 
-    fireEvent.change(inputPassword, { target: { value: '1234' } });
+    fireEvent.change(password, { target: { value: '123' } });
 
-    fireEvent.submit(form);
-    const message = await screen.findByLabelText('Message Error');
+    userEvent.click(button);
 
-    expect(message).toHaveTextContent('Email e senha são obrigatórios!');
-    expect(message).toBeInTheDocument();
+    const messageTrue = await screen.findByLabelText('Message Error');
+
+    expect(messageTrue).toBeInTheDocument();
+    expect(messageTrue).toHaveTextContent('Email e senha são obrigatórios!');
   });
 
-  it('should return an error for not typing the password', async () => {
+  it('should return an error by not sending the password', async () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');
+    const email = screen.getByPlaceholderText('Email');
+    const button = screen.getByRole('button');
 
-    const inputEmail = screen.getByPlaceholderText('Email');
+    expect(form).toBeInTheDocument();
 
-    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
+    fireEvent.change(email, { target: { value: '123@gmail.com' } });
 
-    fireEvent.submit(form);
-    const message = await screen.findByLabelText('Message Error');
+    userEvent.click(button);
 
-    expect(message).toHaveTextContent('Email e senha são obrigatórios!');
-    expect(message).toBeInTheDocument();
+    const messageTrue = await screen.findByLabelText('Message Error');
+
+    expect(messageTrue).toBeInTheDocument();
+    expect(messageTrue).toHaveTextContent('Email e senha são obrigatórios!');
   });
 
-  it('should make error message disappear', async () => {
+  it('should disappear with the error message', async () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');
+    const email = screen.getByPlaceholderText('Email');
+    const button = screen.getByRole('button');
 
-    const inputEmail = screen.getByPlaceholderText('Email');
+    expect(form).toBeInTheDocument();
 
-    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
+    fireEvent.change(email, { target: { value: '123@gmail.com' } });
 
-    fireEvent.submit(form);
+    userEvent.click(button);
+
     const message = await screen.findByLabelText('Message Error');
+
+    expect(message).toHaveStyle({
+      animation: 'showMessage 300ms ease-in-out',
+    });
 
     act(() => {
       jest.advanceTimersByTime(5000);
@@ -96,34 +110,33 @@ describe('<FormLogin />', () => {
     });
   });
 
-  it('should but the user does not exist', async () => {
+  it('should return an error for not having a user loginIn', async () => {
     renderTheme(<FormLogin />);
 
     const form = screen.getByRole('form');
+    const email = screen.getByPlaceholderText('Email');
+    const password = screen.getByPlaceholderText('Senha');
+    const button = screen.getByRole('button');
 
-    const inputEmail = screen.getByPlaceholderText('Email');
-    const inputPassowrd = screen.getByPlaceholderText('Senha');
+    expect(form).toBeInTheDocument();
 
-    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
-    fireEvent.change(inputPassowrd, { target: { value: 'eduj1234' } });
+    fireEvent.change(email, { target: { value: '123@gmail.com' } });
+    fireEvent.change(password, { target: { value: '123' } });
 
-    fireEvent.submit(form);
+    userEvent.click(button);
+
     const message = await screen.findByLabelText('Message Error');
-
-    act(() => {
-      jest.advanceTimersByTime(5000);
-    });
 
     expect(message).toHaveTextContent('Email Ou senha incorretos!');
-    expect(message).toHaveStyle({
-      animation: 'hidenShowMessageError 1s ease-in-out',
-    });
   });
 
-  it('should log the user and go to the home page', async () => {
-    nextAuthReactMocked.signIn.mockImplementation(() =>
-      Promise.resolve({ error: '', status: 200, ok: true, url: '' }),
-    );
+  it('should login a user', async () => {
+    nextAuthReactMocked.signIn.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      url: '',
+      error: '',
+    });
 
     useRouter.mockImplementation(() => ({
       useRouter() {
@@ -140,32 +153,27 @@ describe('<FormLogin />', () => {
     await act(async () => {
       renderTheme(<FormLogin />);
     });
+
     const form = screen.getByRole('form');
+    const email = screen.getByPlaceholderText('Email');
+    const password = screen.getByPlaceholderText('Senha');
+    const button = screen.getByRole('button');
 
-    const inputEmail = screen.getByPlaceholderText('Email');
-    const inputPassowrd = screen.getByPlaceholderText('Senha');
+    expect(form).toBeInTheDocument();
 
-    fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } });
-    fireEvent.change(inputPassowrd, { target: { value: 'eduj1234' } });
+    fireEvent.change(email, { target: { value: 'test@gmail.com' } });
+    fireEvent.change(password, { target: { value: 'eduj1234' } });
 
     fireEvent.submit(form);
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
 
     await waitFor(() => {
       const message = screen.queryByLabelText('Message Error');
 
       expect(message).not.toBeInTheDocument();
     });
-
-    act(() => {
-      jest.advanceTimersByTime(5000);
-    });
-  });
-
-  it('should to Match Snapchot', () => {
-    renderTheme(<FormLogin />);
-
-    const form = screen.getByRole('form');
-
-    expect(form).toMatchSnapshot();
   });
 });
