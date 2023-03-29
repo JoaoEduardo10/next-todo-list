@@ -96,6 +96,7 @@ export const Li = styled.li<{ board: string; boardId: string }>`
     border-radius: 0 100px 100px 0;
     width: 90%;
     padding: 15px 24px;
+    background-color: transparent;
 
     svg {
       font-size: 2rem;

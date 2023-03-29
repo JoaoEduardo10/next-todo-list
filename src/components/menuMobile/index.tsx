@@ -31,6 +31,7 @@ export const MenuMobile = ({ show }: MenuMobileProps) => {
         <h2>Todos os quadros ({boards.length})</h2>
         {boards.map((board) => (
           <S.Li
+            aria-label="Links"
             key={board.id}
             onClick={() => setboardClicked(board.id)}
             board={boardClicked == board.id ? boardClicked : ''}
