@@ -176,4 +176,10 @@ describe('<FormLogin />', () => {
       expect(message).not.toBeInTheDocument();
     });
   });
+
+  it('should to Match Snapshot', async () => {
+    const { container } = renderTheme(<FormLogin />);
+
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
