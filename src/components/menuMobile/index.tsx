@@ -9,7 +9,7 @@ export type MenuMobileProps = {
 };
 
 export const MenuMobile = ({ show }: MenuMobileProps) => {
-  const boards = useAppSelector((boards) => boards.boards);
+  const boards = useAppSelector((board) => board.boards);
   const [rendering, setRendering] = useState(false);
   const [boardClicked, setboardClicked] = useState('');
 
@@ -18,11 +18,11 @@ export const MenuMobile = ({ show }: MenuMobileProps) => {
       setRendering(true);
     }, 500);
 
-    const [primaryBoard] = boards;
-
-    setboardClicked(primaryBoard.id);
-
     return () => clearTimeout(time);
+  }, []);
+
+  useEffect(() => {
+    setboardClicked(boards[0].id);
   }, []);
 
   return (
