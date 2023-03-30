@@ -28,17 +28,19 @@ describe('<MenuMobile />', () => {
     jest.clearAllMocks();
   });
 
-  it('should render the Mobile menu with the links', () => {
+  it('should render the Mobile menu with the links', async () => {
     const props: MenuMobileProps = {
       show: true,
     };
 
-    render(
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <MenuMobile {...props} />
-        </ThemeProvider>
-      </Provider>,
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <MenuMobile {...props} />
+          </ThemeProvider>
+        </Provider>,
+      ),
     );
 
     act(() => {
@@ -50,6 +52,8 @@ describe('<MenuMobile />', () => {
 
     expect(menu).toBeInTheDocument();
     expect(links.length).toBe(mockResponse.length);
+
+    expect(useAppSelector((boads) => boads.boards)).toEqual(mockResponse);
   });
 
   it('should change background color of links when clicking on the', () => {
@@ -89,6 +93,26 @@ describe('<MenuMobile />', () => {
 
     expect(link1).toHaveStyle({
       'background-color': 'transparent',
+    });
+  });
+
+  it('should not render a menuMobile', async () => {
+    const props: MenuMobileProps = {
+      show: false,
+    };
+
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <MenuMobile {...props} />
+          </ThemeProvider>
+        </Provider>,
+      ),
+    );
+
+    act(() => {
+      jest.advanceTimersByTime(500);
     });
   });
 });

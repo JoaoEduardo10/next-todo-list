@@ -9,7 +9,7 @@ export type MenuMobileProps = {
 };
 
 export const MenuMobile = ({ show }: MenuMobileProps) => {
-  const boards = useAppSelector((board) => board.boards);
+  const boards = useAppSelector((boards) => boards.boards);
   const [rendering, setRendering] = useState(false);
   const [boardClicked, setboardClicked] = useState('');
 
