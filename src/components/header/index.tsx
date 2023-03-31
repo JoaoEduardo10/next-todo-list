@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Button } from '../button';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import { useEffect, useState } from 'react';
-import { MenuMobile } from '../menuMobile';
+import { MenuMobile } from '../menu/menuMobile';
 
 export type HeaderProps = {
   boardName: string;

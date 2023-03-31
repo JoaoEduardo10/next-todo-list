@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components';
+import { Button } from '../../button/styles';
 
 const showMenu = (show: boolean, rendering: boolean) => css`
   ${show &&
@@ -99,7 +100,7 @@ export const Li = styled.li<{ board: string; boardId: string }>`
     background-color: transparent;
 
     svg {
-      font-size: 2rem;
+      font-size: 3rem;
       transform: translateY(8%);
     }
 
@@ -110,5 +111,21 @@ export const Li = styled.li<{ board: string; boardId: string }>`
     }
 
     ${boardId.length > 1 && boardClicled(board, boardId, theme)}
+  `}
+`;
+
+export const ConteinerDiv = styled.div`
+  ${({ theme }) => css`
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: ${theme.padding.small};
+
+    ${Button} {
+      height: 10rem;
+      width: 100%;
+    }
   `}
 `;

@@ -1,13 +1,10 @@
 import { GetServerSideProps } from 'next';
 import { getSession, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { Header } from '../components/header';
 import { TBoard } from '../types';
 import { getAllBoards } from '../utils/fecths';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { serverSideRedirect } from '../utils/server-side-redirect';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setBoards } from '../app/features/Boards/boardSlice';
+import { HomeTemplate } from '../templates/Home';
 
 type TParamsComponents = {
   boards: TBoard[];
@@ -16,7 +13,7 @@ type TParamsComponents = {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
 
-  if (!session || null) {
+  if (session == (null || undefined)) {
     return serverSideRedirect(ctx);
   }
 
@@ -41,8 +38,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 export default function Home({ boards }: TParamsComponents) {
   const { data: session, status } = useSession();
-  const dispatch = useAppDispatch();
-  const [render, setRender] = useState(false);
 
   if (typeof window == 'undefined' && status) return null;
 
@@ -54,33 +49,5 @@ export default function Home({ boards }: TParamsComponents) {
     return <p>Voçê não está autenticado!</p>;
   }
 
-  useEffect(() => {
-    setRender(true);
-  }, []);
-
-  useEffect(() => {
-    if (render) {
-      boards.map((board) => {
-        dispatch(setBoards(board));
-      });
-    }
-  }, [render]);
-
-  return (
-    <>
-      <Header boardId="123" boardName="Board Test" logo="/images/logo.svg" />
-      <div
-        style={{
-          backgroundColor: '#F4F7FD',
-          height: '100vh',
-          width: '100%',
-          color: '#000',
-        }}
-      >
-        {boards.map((item) => (
-          <span key={item.id}>{item.boardName}</span>
-        ))}
-      </div>
-    </>
-  );
+  return <HomeTemplate boards={boards} />;
 }

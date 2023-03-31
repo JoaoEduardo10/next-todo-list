@@ -14,12 +14,13 @@ export const FormLogin = () => {
   const [valueEmail, setValueEmail] = useState('');
   const [error, setError] = useState(false);
   const [messageError, setMessageError] = useState('');
-  const [primaryRederition, setPrimaryRederition] = useState(false);
+  const [rederition, setRederition] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let timeError: NodeJS.Timeout;
 
+    // desaparecer com o erro
     if (error) {
       timeError = setTimeout(() => {
         setError(false);
@@ -32,9 +33,10 @@ export const FormLogin = () => {
   useEffect(() => {
     let timeError: NodeJS.Timeout;
 
+    // server para que o erro não aparece ao entra no site
     if (!error) {
       timeError = setTimeout(() => {
-        setPrimaryRederition(false);
+        setRederition(false);
       }, 5000);
     }
 
@@ -43,11 +45,11 @@ export const FormLogin = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setPrimaryRederition(false);
+    setRederition(false);
     setLoading(true);
 
     if (!valueEmail || !valuePassowrd) {
-      setPrimaryRederition(true);
+      setRederition(true);
       setError(true);
       setMessageError('Email e senha são obrigatórios!');
       setLoading(false);
@@ -61,7 +63,7 @@ export const FormLogin = () => {
     });
 
     if (!response?.ok) {
-      setPrimaryRederition(true);
+      setRederition(true);
       setError(true);
       setMessageError('Email Ou senha incorretos!');
       setLoading(false);
@@ -77,7 +79,7 @@ export const FormLogin = () => {
   return (
     <S.Form role={'form'} onSubmit={handleSubmit}>
       {loading && <Loading />}
-      {primaryRederition && <MessageError error={error} text={messageError} />}
+      {rederition && <MessageError error={error} text={messageError} />}
       <S.Heading>Login User</S.Heading>
 
       <Inpult

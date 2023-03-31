@@ -1,11 +1,18 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MenuMobile, MenuMobileProps } from '.';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../../styles/theme';
-import { mockResponse } from '../../../.jest/setup-tests';
-import { useAppSelector } from '../../app/hooks';
+import { theme } from '../../../styles/theme';
+import { mockResponse } from '../../../../.jest/setup-tests';
+import { useAppSelector } from '../../../app/hooks';
 import configureStore from 'redux-mock-store';
+import React from 'react';
 
 jest.useFakeTimers();
 
@@ -56,44 +63,60 @@ describe('<MenuMobile />', () => {
     expect(useAppSelector((boads) => boads.boards)).toEqual(mockResponse);
   });
 
-  it('should change background color of links when clicking on the', () => {
+  it('should change background color of links when clicking on the', async () => {
     const props: MenuMobileProps = {
       show: true,
     };
 
-    render(
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <MenuMobile {...props} />
-        </ThemeProvider>
-      </Provider>,
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <MenuMobile {...props} />
+          </ThemeProvider>
+        </Provider>,
+      ),
     );
+
+    const link1 = screen.getAllByLabelText('Links')[0];
+    const link2 = screen.getAllByLabelText('Links')[1];
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
 
-    const link1 = screen.getAllByLabelText('Links')[0];
-
-    const link2 = screen.getAllByLabelText('Links')[1];
-
-    expect(link1).toHaveStyle({
-      'background-color': theme.colors.purpleColor,
-    });
-
-    expect(link2).toHaveStyle({
-      'background-color': 'transparent',
-    });
+    expect(link1).toHaveStyleRule('background-color', theme.colors.purpleColor);
+    expect(link2).toHaveStyleRule('background-color', 'transparent');
 
     fireEvent.click(link2);
+    expect(link1).toHaveStyleRule('background-color', 'transparent');
+    expect(link2).toHaveStyleRule('background-color', theme.colors.purpleColor);
 
-    expect(link2).toHaveStyle({
-      'background-color': theme.colors.purpleColor,
-    });
+    const conteinerButton = screen.queryByLabelText('Conteiner Button');
 
-    expect(link1).toHaveStyle({
-      'background-color': 'transparent',
-    });
+    expect(conteinerButton).not.toBeInTheDocument();
+  });
+
+  it('should render a conteinerButton', async () => {
+    const props: MenuMobileProps = {
+      show: true,
+    };
+
+    (useAppSelector as jest.Mock).mockReturnValue([]);
+
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <MenuMobile {...props} />
+          </ThemeProvider>
+        </Provider>,
+      ),
+    );
+
+    const conteinerButton = screen.getByLabelText('Conteiner Button');
+
+    expect(conteinerButton).toBeInTheDocument();
   });
 
   it('should not render a menuMobile', async () => {

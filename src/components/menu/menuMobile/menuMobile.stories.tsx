@@ -1,8 +1,8 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { MenuMobile, MenuMobileProps } from '.';
-import { GlobalStyles } from '../../styles/globals-styles';
-import { theme } from '../../styles/theme';
+import { GlobalStyles } from '../../../styles/globals-styles';
+import { theme } from '../../../styles/theme';
 
 export default {
   title: 'MenuMobile',
