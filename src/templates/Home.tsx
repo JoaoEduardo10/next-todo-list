@@ -17,7 +17,7 @@ export const HomeTemplate = ({ boards }: TParamsComponents) => {
   }, []);
 
   useEffect(() => {
-    if (render) {
+    if (render && boards.length > 0) {
       boards.map((board) => {
         dispatch(setBoards(board));
       });
