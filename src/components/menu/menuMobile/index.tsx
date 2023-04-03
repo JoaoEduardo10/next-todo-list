@@ -11,45 +11,40 @@ export type MenuMobileProps = {
 };
 
 export const MenuMobile = ({ show }: MenuMobileProps) => {
-  const boards = useAppSelector((board) => board.boards);
+  const boards = useAppSelector((state) => state.boards);
   const [rendering, setRendering] = useState(false);
-  const [boardClicked, setboardClicked] = useState('');
-  const [primaryRederetionLink, setPrimaryRederitionLink] = useState(false);
+  const [selectedBoardId, setSelectedBoardId] = useState('');
 
-  //  não ativa a animação do menu ao entra no site.
+  // para não aparecer o menu ao renderizar o site
   useEffect(() => {
-    const time = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setRendering(true);
-      setPrimaryRederitionLink(true);
     }, 500);
-
-    return () => clearTimeout(time);
+    return () => clearTimeout(timeoutId);
   }, []);
 
-  //  por padrão fica na primeira board
+  // para ja fica selecionado um link ao redenrizar o site
   useEffect(() => {
-    if (boards && boards.length > 0 && primaryRederetionLink) {
-      setboardClicked(boards[0].id);
+    if (boards.length > 0) {
+      setSelectedBoardId(boards[0].id);
     }
-  }, [boards, primaryRederetionLink]);
+  }, [boards]);
 
-  const handleClick = (id: string) => {
-    setPrimaryRederitionLink(false);
-    setboardClicked(id);
-  };
+  function handleBoardClick(boardId: string) {
+    setSelectedBoardId(boardId);
+  }
 
   return (
     <S.MenuMobile aria-label="Menu" show={show} rendering={rendering}>
       <S.Menu>
         <h2>Todos os quadros ({boards.length})</h2>
-        {boards && boards.length > 0 ? (
+        {boards.length > 0 ? (
           boards.map((board) => (
             <S.Li
-              aria-label="Links"
               key={board.id}
-              onClick={() => handleClick(board.id)}
-              board={boardClicked == board.id ? boardClicked : ''}
-              boardId={boardClicked == board.id ? board.id : ''}
+              onClick={() => handleBoardClick(board.id)}
+              board={selectedBoardId === board.id ? selectedBoardId : ''}
+              boardId={selectedBoardId === board.id ? board.id : ''}
             >
               <MdOutlineSpaceDashboard /> <span>{board.boardName}</span>
             </S.Li>
