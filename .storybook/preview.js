@@ -1,4 +1,5 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -10,5 +11,8 @@ export const parameters = {
   },
   nextRouter: {
     Provider: RouterContext.Provider,
+  },
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
   },
 };

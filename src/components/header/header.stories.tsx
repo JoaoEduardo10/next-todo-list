@@ -4,6 +4,8 @@ import { Header, HeaderProps } from '.';
 import { GlobalStyles } from '../../styles/globals-styles';
 import { theme } from '../../styles/theme';
 import img from '../../../public/images/logo.svg';
+import { Provider } from 'react-redux';
+import { store } from '../../utils/mocks';
 
 export default {
   title: 'Header',
@@ -15,10 +17,12 @@ export default {
   } as HeaderProps,
   decorators: [
     (Story) => (
-      <ThemeProvider theme={theme}>
-        <Story />
-        <GlobalStyles />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Story />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>
     ),
   ],
 } as Meta;
