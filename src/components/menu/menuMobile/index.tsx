@@ -41,6 +41,7 @@ export const MenuMobile = ({ show }: MenuMobileProps) => {
         {boards.length > 0 ? (
           boards.map((board) => (
             <S.Li
+              aria-label="Link"
               key={board.id}
               onClick={() => handleBoardClick(board.id)}
               board={selectedBoardId === board.id ? selectedBoardId : ''}

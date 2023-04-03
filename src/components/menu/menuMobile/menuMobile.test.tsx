@@ -1,138 +1,136 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { MenuMobile, MenuMobileProps } from '.';
+import configureStore from 'redux-mock-store';
+import { MenuMobile } from '.';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../../styles/theme';
-import { mockResponse } from '../../../../.jest/setup-tests';
-import { useAppSelector } from '../../../app/hooks';
-import configureStore from 'redux-mock-store';
-import React from 'react';
-
-jest.useFakeTimers();
-
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: jest.fn(),
-}));
+import { GlobalStyles } from '../../../styles/globals-styles';
 
 const mockStore = configureStore([]);
-const store = mockStore({
-  boards: [...mockResponse],
-}) as any;
+jest.useFakeTimers();
 
-describe('<MenuMobile />', () => {
+describe('MenuMobile component', () => {
+  let store: any;
+
   beforeEach(() => {
-    (useAppSelector as jest.Mock).mockReturnValue(mockResponse);
+    store = mockStore({
+      boards: [
+        { id: 'board1', boardName: 'Board 1' },
+        { id: 'board2', boardName: 'Board 2' },
+      ],
+    });
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should render the Mobile menu with the links', async () => {
-    const props: MenuMobileProps = {
-      show: true,
-    };
-
-    await act(async () =>
-      render(
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <MenuMobile {...props} />
-          </ThemeProvider>
-        </Provider>,
-      ),
+  it('should redender a mobile menu with links', () => {
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <MenuMobile show={true} />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>,
     );
-
-    act(() => {
-      jest.advanceTimersByTime(500);
-    });
 
     const menu = screen.getByLabelText('Menu');
-    const links = screen.getAllByLabelText('Links');
+    const links = screen.getAllByLabelText('Link');
 
     expect(menu).toBeInTheDocument();
-    expect(links.length).toBe(mockResponse.length);
-
-    expect(useAppSelector((boads) => boads.boards)).toEqual(mockResponse);
+    expect(links.length).toBe(2);
   });
 
-  it('should change background color of links when clicking on the', async () => {
-    const props: MenuMobileProps = {
-      show: true,
-    };
-
-    await act(async () =>
-      render(
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <MenuMobile {...props} />
-          </ThemeProvider>
-        </Provider>,
-      ),
+  it('should would render the first link with being active', () => {
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <MenuMobile show={true} />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>,
     );
 
-    const link1 = screen.getAllByLabelText('Links')[0];
-    const link2 = screen.getAllByLabelText('Links')[1];
+    const links = screen.getAllByLabelText('Link');
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
 
-    expect(link1).toHaveStyleRule('background-color', theme.colors.purpleColor);
-    expect(link2).toHaveStyleRule('background-color', 'transparent');
-
-    fireEvent.click(link2);
-    expect(link1).toHaveStyleRule('background-color', 'transparent');
-    expect(link2).toHaveStyleRule('background-color', theme.colors.purpleColor);
-
-    const conteinerButton = screen.queryByLabelText('Conteiner Button');
-
-    expect(conteinerButton).not.toBeInTheDocument();
+    expect(links[0]).toHaveStyle({
+      'background-color': theme.colors.purpleColor,
+    });
+    expect(links[1]).toHaveStyle({
+      'background-color': 'transparent',
+    });
   });
 
-  it('should render a conteinerButton', async () => {
-    const props: MenuMobileProps = {
-      show: true,
-    };
-
-    (useAppSelector as jest.Mock).mockReturnValue([]);
-
-    await act(async () =>
-      render(
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <MenuMobile {...props} />
-          </ThemeProvider>
-        </Provider>,
-      ),
+  it('should make the link you click active', () => {
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <MenuMobile show={true} />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>,
     );
 
-    const conteinerButton = screen.getByLabelText('Conteiner Button');
+    const links = screen.getAllByLabelText('Link');
 
-    expect(conteinerButton).toBeInTheDocument();
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    fireEvent.click(links[1]);
+
+    expect(links[0]).toHaveStyle({
+      'background-color': 'transparent',
+    });
+
+    expect(links[1]).toHaveStyle({
+      'background-color': theme.colors.purpleColor,
+    });
   });
 
-  it('should not render a menuMobile', async () => {
-    const props: MenuMobileProps = {
-      show: false,
-    };
+  it('should redefine the buttao to create a board', () => {
+    const newstore = mockStore({
+      boards: [],
+    });
 
-    await act(async () =>
-      render(
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <MenuMobile {...props} />
-          </ThemeProvider>
-        </Provider>,
-      ),
+    render(
+      <Provider store={newstore}>
+        <ThemeProvider theme={theme}>
+          <MenuMobile show={true} />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>,
     );
+
+    const conteinerDivButton = screen.getByLabelText('Conteiner Button');
+
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+
+    expect(conteinerDivButton).toBeInTheDocument();
+  });
+
+  it('should not render a menuMobile', () => {
+    const newstore = mockStore({
+      boards: [],
+    });
+
+    render(
+      <Provider store={newstore}>
+        <ThemeProvider theme={theme}>
+          <MenuMobile show={false} />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>,
+    );
+
+    const menu = screen.getByLabelText('Menu');
 
     act(() => {
       jest.advanceTimersByTime(500);
