@@ -5,6 +5,7 @@ import { getAllBoards } from '../utils/fecths';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { serverSideRedirect } from '../utils/server-side-redirect';
 import { HomeTemplate } from '../templates/Home';
+import { useEffect } from 'react';
 
 type TParamsComponents = {
   boards: TBoard[];
@@ -38,16 +39,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 export default function Home({ boards }: TParamsComponents) {
   const { data: session, status } = useSession();
-
-  if (typeof window == 'undefined' && status) return null;
-
-  if (!session || !status) {
-    return frontEndRedirect();
-  }
-
-  if (!session) {
-    return <p>Voçê não está autenticado!</p>;
-  }
 
   return <HomeTemplate boards={boards} />;
 }

@@ -5,6 +5,7 @@ import { Button } from '../button';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
 import { MenuDropdownModal } from '../menu/MenuDropdownModal';
+import { MenuElipsis } from '../menu/MenuElipsis';
 
 export type HeaderProps = {
   boardName: string;
@@ -46,6 +47,7 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
         </S.BoardControllerHeader>
       </S.Conteiner>
       <MenuDropdownModal show={show} />
+      <MenuElipsis show={true} />
     </S.Header>
   );
 };
