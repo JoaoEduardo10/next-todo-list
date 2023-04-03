@@ -3,8 +3,8 @@ import { FaEllipsisV } from 'react-icons/fa';
 import Image from 'next/image';
 import { Button } from '../button';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
-import { useEffect, useState } from 'react';
-import { MenuMobile } from '../menu/menuMobile';
+import { useState } from 'react';
+import { MenuMobile } from '../menu/MenuDropdownModal';
 
 export type HeaderProps = {
   boardName: string;
