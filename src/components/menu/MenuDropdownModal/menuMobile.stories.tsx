@@ -5,9 +5,10 @@ import { GlobalStyles } from '../../../styles/globals-styles';
 import { theme } from '../../../styles/theme';
 import { Provider } from 'react-redux';
 import { mockBoards, store } from '../../../utils/mocks';
+import { store as storeUndefined } from '../../../app/store';
 
 export default {
-  title: 'MenuDropdownModalMobile',
+  title: 'menu/MenuDropdownModalMobile',
   component: MenuDropdownModal,
   args: {
     show: true,
@@ -33,10 +34,13 @@ export default {
         },
       },
     ],
+    viewport: {
+      defaultViewport: 'iphone6',
+    },
   },
 } as Meta;
 
-export const Tamplate: ComponentStory<typeof MenuDropdownModal> = (
+export const TamplateWithLinks: ComponentStory<typeof MenuDropdownModal> = (
   agrs: MenuDropdownModalProps,
 ) => {
   return (
@@ -52,8 +56,29 @@ export const Tamplate: ComponentStory<typeof MenuDropdownModal> = (
   );
 };
 
-Tamplate.parameters = {
-  viewport: {
-    defaultViewport: 'iphone6',
-  },
+export const TamplateNotLinks: ComponentStory<typeof MenuDropdownModal> = (
+  agrs: MenuDropdownModalProps,
+) => {
+  return (
+    <div
+      style={{
+        background: '#000',
+        height: '100vh',
+        width: '100%',
+      }}
+    >
+      <MenuDropdownModal {...agrs} />
+    </div>
+  );
 };
+
+TamplateNotLinks.decorators = [
+  (Story) => (
+    <Provider store={storeUndefined}>
+      <ThemeProvider theme={theme}>
+        <Story />
+        <GlobalStyles />
+      </ThemeProvider>
+    </Provider>
+  ),
+];
