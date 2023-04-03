@@ -1,7 +1,7 @@
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { MenuMobile } from '.';
+import { MenuDropdownModal } from '.';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../../styles/theme';
 import { GlobalStyles } from '../../../styles/globals-styles';
@@ -9,7 +9,7 @@ import { GlobalStyles } from '../../../styles/globals-styles';
 const mockStore = configureStore([]);
 jest.useFakeTimers();
 
-describe('MenuMobile component', () => {
+describe('MenuDropdownModal component', () => {
   let store: any;
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe('MenuMobile component', () => {
     render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <MenuMobile show={true} />
+          <MenuDropdownModal show={true} />
           <GlobalStyles />
         </ThemeProvider>
       </Provider>,
@@ -46,7 +46,7 @@ describe('MenuMobile component', () => {
     render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <MenuMobile show={true} />
+          <MenuDropdownModal show={true} />
           <GlobalStyles />
         </ThemeProvider>
       </Provider>,
@@ -70,7 +70,7 @@ describe('MenuMobile component', () => {
     render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <MenuMobile show={true} />
+          <MenuDropdownModal show={true} />
           <GlobalStyles />
         </ThemeProvider>
       </Provider>,
@@ -101,7 +101,7 @@ describe('MenuMobile component', () => {
     render(
       <Provider store={newstore}>
         <ThemeProvider theme={theme}>
-          <MenuMobile show={true} />
+          <MenuDropdownModal show={true} />
           <GlobalStyles />
         </ThemeProvider>
       </Provider>,
@@ -116,7 +116,7 @@ describe('MenuMobile component', () => {
     expect(conteinerDivButton).toBeInTheDocument();
   });
 
-  it('should not render a menuMobile', () => {
+  it('should not render a MenuDropdownModal', () => {
     const newstore = mockStore({
       boards: [],
     });
@@ -124,7 +124,7 @@ describe('MenuMobile component', () => {
     render(
       <Provider store={newstore}>
         <ThemeProvider theme={theme}>
-          <MenuMobile show={false} />
+          <MenuDropdownModal show={false} />
           <GlobalStyles />
         </ThemeProvider>
       </Provider>,

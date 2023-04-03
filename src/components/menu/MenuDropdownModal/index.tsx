@@ -6,11 +6,11 @@ import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { TBoard } from '@/src/types';
 import { Button } from '../../button';
 
-export type MenuMobileProps = {
+export type MenuDropdownModalProps = {
   show: boolean;
 };
 
-export const MenuMobile = ({ show }: MenuMobileProps) => {
+export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
   const boards = useAppSelector((state) => state.boards);
   const [rendering, setRendering] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState('');
@@ -35,7 +35,7 @@ export const MenuMobile = ({ show }: MenuMobileProps) => {
   }
 
   return (
-    <S.MenuMobile aria-label="Menu" show={show} rendering={rendering}>
+    <S.MenuDropdownModal aria-label="Menu" show={show} rendering={rendering}>
       <S.Menu>
         <h2>Todos os quadros ({boards.length})</h2>
         {boards.length > 0 ? (
@@ -56,6 +56,6 @@ export const MenuMobile = ({ show }: MenuMobileProps) => {
           </S.ConteinerDiv>
         )}
       </S.Menu>
-    </S.MenuMobile>
+    </S.MenuDropdownModal>
   );
 };

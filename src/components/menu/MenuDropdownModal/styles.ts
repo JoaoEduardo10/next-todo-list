@@ -52,7 +52,10 @@ const boardClicled = (
     `}
 `;
 
-export const MenuMobile = styled.div<{ show: boolean; rendering: boolean }>`
+export const MenuDropdownModal = styled.div<{
+  show: boolean;
+  rendering: boolean;
+}>`
   ${({ theme, show, rendering }) => css`
     display: none;
     background-color: rgba(0, 0, 0, 0.7);

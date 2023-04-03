@@ -1,15 +1,15 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { MenuMobile, MenuMobileProps } from '.';
+import { MenuDropdownModal, MenuDropdownModalProps } from '.';
 import { GlobalStyles } from '../../../styles/globals-styles';
 import { theme } from '../../../styles/theme';
 
 export default {
-  title: 'MenuMobile',
-  component: MenuMobile,
+  title: 'MenuDropdownModal',
+  component: MenuDropdownModal,
   args: {
     show: true,
-  } as MenuMobileProps,
+  } as MenuDropdownModalProps,
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
@@ -20,8 +20,8 @@ export default {
   ],
 } as Meta;
 
-export const Tamplate: ComponentStory<typeof MenuMobile> = (
-  agrs: MenuMobileProps,
+export const Tamplate: ComponentStory<typeof MenuDropdownModal> = (
+  agrs: MenuDropdownModalProps,
 ) => {
-  return <MenuMobile {...agrs} />;
+  return <MenuDropdownModal {...agrs} />;
 };

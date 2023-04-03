@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Button } from '../button';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
-import { MenuMobile } from '../menu/MenuDropdownModal';
+import { MenuDropdownModal } from '../menu/MenuDropdownModal';
 
 export type HeaderProps = {
   boardName: string;
@@ -45,7 +45,7 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
           </div>
         </S.BoardControllerHeader>
       </S.Conteiner>
-      <MenuMobile show={show} />
+      <MenuDropdownModal show={show} />
     </S.Header>
   );
 };
