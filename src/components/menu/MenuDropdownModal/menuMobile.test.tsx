@@ -1,11 +1,8 @@
-import { render, fireEvent, screen, act } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import { fireEvent, screen, act } from '@testing-library/react';
 import { MenuDropdownModal } from '.';
-import { ThemeProvider } from 'styled-components';
 import { theme } from '../../../styles/theme';
-import { GlobalStyles } from '../../../styles/globals-styles';
 import { renderTheme } from '../../../utils/render-theme';
+import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore([]);
 jest.useFakeTimers();

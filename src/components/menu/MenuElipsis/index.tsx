@@ -28,7 +28,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
 
   useEffect(() => {
     if (!Session) {
-      router.push('/');
+      router.push('/login');
     }
   }, [Session]);
 
@@ -46,10 +46,16 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
 
   return (
     <S.Conteiner aria-label="MenuElipsis" show={show} rendered={rendered}>
-      <S.Paragraph onClick={handleMenuElipsiEditClick}>
+      <S.Paragraph
+        aria-label="Editar Quadro"
+        onClick={handleMenuElipsiEditClick}
+      >
         Editar Quadro
       </S.Paragraph>
-      <S.Paragraph onClick={handleMenuElipsiDeleteClick}>
+      <S.Paragraph
+        aria-label="Deletar Quadro"
+        onClick={handleMenuElipsiDeleteClick}
+      >
         Deletar Quadro
       </S.Paragraph>
       <div aria-label="Conteiner Button">
