@@ -5,6 +5,7 @@ import { MenuDropdownModal } from '.';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../../styles/theme';
 import { GlobalStyles } from '../../../styles/globals-styles';
+import { renderTheme } from '../../../utils/render-theme';
 
 const mockStore = configureStore([]);
 jest.useFakeTimers();
@@ -26,14 +27,7 @@ describe('MenuDropdownModal component', () => {
   });
 
   it('should redender a mobile menu with links', () => {
-    render(
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <MenuDropdownModal show={true} />
-          <GlobalStyles />
-        </ThemeProvider>
-      </Provider>,
-    );
+    renderTheme(<MenuDropdownModal show={true} />, store);
 
     const menu = screen.getByLabelText('Menu');
     const links = screen.getAllByLabelText('Link');
@@ -43,14 +37,7 @@ describe('MenuDropdownModal component', () => {
   });
 
   it('should would render the first link with being active', () => {
-    render(
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <MenuDropdownModal show={true} />
-          <GlobalStyles />
-        </ThemeProvider>
-      </Provider>,
-    );
+    renderTheme(<MenuDropdownModal show={true} />, store);
 
     const links = screen.getAllByLabelText('Link');
 
@@ -67,14 +54,7 @@ describe('MenuDropdownModal component', () => {
   });
 
   it('should make the link you click active', () => {
-    render(
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <MenuDropdownModal show={true} />
-          <GlobalStyles />
-        </ThemeProvider>
-      </Provider>,
-    );
+    renderTheme(<MenuDropdownModal show={true} />, store);
 
     const links = screen.getAllByLabelText('Link');
 
@@ -94,18 +74,11 @@ describe('MenuDropdownModal component', () => {
   });
 
   it('should redefine the buttao to create a board', () => {
-    const newstore = mockStore({
+    const newStore = mockStore({
       boards: [],
     });
 
-    render(
-      <Provider store={newstore}>
-        <ThemeProvider theme={theme}>
-          <MenuDropdownModal show={true} />
-          <GlobalStyles />
-        </ThemeProvider>
-      </Provider>,
-    );
+    renderTheme(<MenuDropdownModal show={true} />, newStore);
 
     const conteinerDivButton = screen.getByLabelText('Conteiner Button');
 
@@ -117,23 +90,24 @@ describe('MenuDropdownModal component', () => {
   });
 
   it('should not render a MenuDropdownModal', () => {
-    const newstore = mockStore({
+    const newStore = mockStore({
       boards: [],
     });
 
-    render(
-      <Provider store={newstore}>
-        <ThemeProvider theme={theme}>
-          <MenuDropdownModal show={false} />
-          <GlobalStyles />
-        </ThemeProvider>
-      </Provider>,
-    );
+    renderTheme(<MenuDropdownModal show={false} />, newStore);
 
     const menu = screen.getByLabelText('Menu');
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
+  });
+
+  it('should to match snapshot', () => {
+    renderTheme(<MenuDropdownModal show={true} />, store);
+
+    const menu = screen.getByLabelText('Menu');
+
+    expect(menu).toMatchSnapshot();
   });
 });

@@ -14,10 +14,15 @@ export type HeaderProps = {
 };
 
 export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
-  const [show, setShow] = useState(false);
+  const [menuDropdownModalShow, setMenuDropdownModalShow] = useState(false);
+  const [menuElipsisShow, setMenuElipsis] = useState(false);
 
-  const handleClick = () => {
-    setShow((e) => !e);
+  const handleMenuDropdownModalShowClick = () => {
+    setMenuDropdownModalShow((e) => !e);
+  };
+
+  const handleMenuElipsisShowClick = () => {
+    setMenuElipsis((e) => !e);
   };
 
   return (
@@ -32,22 +37,31 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
         <S.BoardControllerHeader>
           <h2>
             <span>{boardName}</span>
-            {!show ? (
-              <IoMdMenu aria-label="Menu Open" onClick={handleClick} />
+            {!menuDropdownModalShow ? (
+              <IoMdMenu
+                aria-label="Menu Open"
+                onClick={handleMenuDropdownModalShowClick}
+              />
             ) : (
-              <IoMdClose aria-label="Menu Close" onClick={handleClick} />
+              <IoMdClose
+                aria-label="Menu Close"
+                onClick={handleMenuDropdownModalShowClick}
+              />
             )}
           </h2>
           <div>
             <Button>
               + <span>Adicionar uma Tarefa</span>
             </Button>
-            <FaEllipsisV />
+            <FaEllipsisV
+              aria-label="Menu Open/Close Elipsis"
+              onClick={handleMenuElipsisShowClick}
+            />
           </div>
         </S.BoardControllerHeader>
       </S.Conteiner>
-      <MenuDropdownModal show={show} />
-      <MenuElipsis show={true} />
+      <MenuDropdownModal show={menuDropdownModalShow} />
+      <MenuElipsis show={menuElipsisShow} setMenuElipsis={setMenuElipsis} />
     </S.Header>
   );
 };
