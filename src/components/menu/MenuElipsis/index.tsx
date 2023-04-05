@@ -3,6 +3,8 @@ import { Button } from '../../button';
 import * as S from './styles';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { act } from 'react-dom/test-utils';
+import { Session } from 'next-auth';
 
 export type MenuElipsisProps = {
   show: boolean;
@@ -10,27 +12,15 @@ export type MenuElipsisProps = {
 };
 
 export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
-  const router = useRouter();
   const [rendered, setRendered] = useState(false);
-  const { data: Session } = useSession();
 
   useEffect(() => {
-    let time: NodeJS.Timeout;
+    const time = setTimeout(() => {
+      setRendered(true);
+    }, 1000);
 
-    if (!show) {
-      time = setTimeout(() => {
-        setRendered(true);
-      }, 1000);
-    }
-
-    return () => clearTimeout(time);
+    return clearTimeout(time);
   }, []);
-
-  useEffect(() => {
-    if (!Session) {
-      router.push('/login');
-    }
-  }, [Session]);
 
   const handleMenuElipsiEditClick = () => {
     setMenuElipsis(false);
@@ -41,7 +31,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   };
 
   const handleSignOut = () => {
-    signOut({ redirect: false });
+    signOut({ redirect: true });
   };
 
   return (

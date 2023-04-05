@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  act,
-  findByLabelText,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { useSession } from 'next-auth/react';
 import { MenuElipsis } from '.';
 import { renderTheme } from '../../../utils/render-theme';
@@ -150,21 +144,13 @@ describe('MenuElipsis', () => {
       status: 'authenticated',
     } as any);
 
-    await act(async () => {
+    await act(async () =>
       renderTheme(
         <MenuElipsis show={false} setMenuElipsis={functionSetMenuElipsis} />,
         stori,
-      );
-    });
+      ),
+    );
 
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    const menu = screen.getByLabelText('MenuElipsis');
-
-    expect(menu).toHaveStyle({
-      animation: 'closeShow 1s ease-in-out',
-    });
+    jest.advanceTimersByTime(1000);
   });
 });

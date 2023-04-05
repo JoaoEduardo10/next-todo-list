@@ -35,9 +35,8 @@ export const HomeTemplate = ({ boards }: TParamsComponents) => {
           color: '#000',
         }}
       >
-        {boards.map((item) => (
-          <span key={item.id}>{item.boardName}</span>
-        ))}
+        {boards.length > 0 &&
+          boards.map((item) => <span key={item.id}>{item.boardName}</span>)}
       </div>
     </>
   );

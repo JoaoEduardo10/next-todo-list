@@ -14,7 +14,7 @@ type TParamsComponents = {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
 
-  if (session == (null || undefined)) {
+  if (!session) {
     return serverSideRedirect(ctx);
   }
 
