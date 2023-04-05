@@ -53,10 +53,17 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
             <Button>
               + <span>Adicionar uma Tarefa</span>
             </Button>
-            <FaEllipsisV
-              aria-label="Menu Open/Close Elipsis"
-              onClick={handleMenuElipsisShowClick}
-            />
+            {menuElipsisShow ? (
+              <IoMdClose
+                aria-label="Menu Open/Elipsis"
+                onClick={handleMenuElipsisShowClick}
+              />
+            ) : (
+              <FaEllipsisV
+                aria-label="Menu Close/Elipsis"
+                onClick={handleMenuElipsisShowClick}
+              />
+            )}
           </div>
         </S.BoardControllerHeader>
       </S.Conteiner>

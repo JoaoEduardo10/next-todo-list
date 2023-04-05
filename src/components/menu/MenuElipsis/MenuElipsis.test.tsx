@@ -1,6 +1,6 @@
 import React from 'react';
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { MenuElipsis } from '.';
 import { renderTheme } from '../../../utils/render-theme';
 import configureStore from 'redux-mock-store';
@@ -64,6 +64,8 @@ describe('MenuElipsis', () => {
     const button = screen.getByLabelText('Conteiner Button').firstChild;
 
     fireEvent.click(button as ChildNode);
+
+    expect(signOut).toBeCalled();
   });
 
   it('should hide menu when clicking edit frame', () => {
