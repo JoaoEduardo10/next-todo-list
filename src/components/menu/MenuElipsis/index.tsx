@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../../button';
 import * as S from './styles';
-import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { act } from 'react-dom/test-utils';
-import { Session } from 'next-auth';
+import { signOut } from 'next-auth/react';
 
 export type MenuElipsisProps = {
   show: boolean;
@@ -19,7 +16,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
       setRendered(true);
     }, 1000);
 
-    return clearTimeout(time);
+    return () => clearTimeout(time);
   }, []);
 
   const handleMenuElipsiEditClick = () => {
