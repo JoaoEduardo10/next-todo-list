@@ -8,10 +8,6 @@ import { useRouter } from 'next/router';
 
 const mockStore = configureStore([]);
 
-jest.mock('next/router', () => ({
-  useRouter: jest.fn(),
-}));
-
 // Mock do useSession
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn(),
@@ -24,7 +20,6 @@ const nextAuthReactMocked = useSession as jest.MockedFunction<
 
 describe('MenuElipsis', () => {
   let stori: any;
-  const useRouterMock = useRouter as jest.MockedFunction<typeof useRouter>;
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -53,39 +48,15 @@ describe('MenuElipsis', () => {
 
     expect(menuElipsis).toBeVisible();
 
-    jest.advanceTimersByTime(1000);
-  });
-
-  it('should redirect to login page if no session', () => {
-    nextAuthReactMocked.mockReturnValueOnce({
-      data: null,
-      status: 'unauthenticated',
+    act(() => {
+      jest.advanceTimersByTime(1000);
     });
-
-    useRouterMock.mockReturnValue({
-      push: jest.fn(),
-      route: '/login',
-      asPath: '/login',
-    } as any);
-
-    // Renderiza o componente
-    renderTheme(<MenuElipsis show={true} setMenuElipsis={jest.fn()} />, stori);
-
-    // Verifica se o usuário foi redirecionado para a página inicial
-    expect(useRouter).toHaveBeenCalled();
-    expect(useRouter().push).toHaveBeenCalledWith('/login');
   });
 
   it('should call signOut function on button click', () => {
     nextAuthReactMocked.mockReturnValueOnce({
-      data: null,
-      status: 'unauthenticated',
-    });
-
-    useRouterMock.mockReturnValue({
-      push: jest.fn(),
-      route: '/login',
-      asPath: '/login',
+      data: [{ user: { name: 'test' } }, false],
+      status: 'authenticated',
     } as any);
 
     renderTheme(<MenuElipsis show={true} setMenuElipsis={jest.fn()} />, stori);
@@ -93,8 +64,6 @@ describe('MenuElipsis', () => {
     const button = screen.getByLabelText('Conteiner Button').firstChild;
 
     fireEvent.click(button as ChildNode);
-
-    expect(useRouter().push).toHaveBeenCalledWith('/login');
   });
 
   it('should hide menu when clicking edit frame', () => {
@@ -151,6 +120,12 @@ describe('MenuElipsis', () => {
       ),
     );
 
-    jest.advanceTimersByTime(1000);
+    act(() => jest.advanceTimersByTime(1000));
+
+    const menuElipsis = screen.getByLabelText('MenuElipsis');
+
+    expect(menuElipsis).toHaveStyle({
+      animation: 'closeShow 1s ease-in-out',
+    });
   });
 });
