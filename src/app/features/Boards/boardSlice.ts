@@ -8,7 +8,7 @@ export const boardsSlice = createSlice({
   initialState,
   reducers: {
     setBoards: (state, action: PayloadAction<TBoard>) => {
-      state.push(action.payload);
+      state.allBoards.push(action.payload);
     },
   },
 });

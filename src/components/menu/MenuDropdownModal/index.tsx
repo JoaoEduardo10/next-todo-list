@@ -3,7 +3,6 @@ import * as S from './styles';
 
 import { useAppSelector } from '../../../app/hooks';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
-import { TBoard } from '@/src/types';
 import { Button } from '../../button';
 
 export type MenuDropdownModalProps = {
@@ -11,7 +10,7 @@ export type MenuDropdownModalProps = {
 };
 
 export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
-  const boards = useAppSelector((state) => state.boards);
+  const boards = useAppSelector((state) => state.boards.allBoards);
   const [rendering, setRendering] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState('');
 
