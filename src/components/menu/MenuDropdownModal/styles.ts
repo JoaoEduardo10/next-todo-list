@@ -95,7 +95,6 @@ export const Li = styled.li<{ board: string; boardId: string }>`
     margin-bottom: ${theme.padding.small};
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 1rem;
     border-radius: 0 100px 100px 0;
     width: 90%;

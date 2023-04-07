@@ -14,7 +14,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   useEffect(() => {
     const time = setTimeout(() => {
       setRendered(true);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(time);
   }, []);

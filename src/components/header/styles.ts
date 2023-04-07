@@ -83,8 +83,9 @@ export const BoardControllerHeader = styled.div`
 
         ${theme.media_screen_size.phone} {
           display: inline-block;
-          font-size: 2.7rem;
+          font-size: 3rem;
           color: ${theme.colors.lite_greenColor};
+          margin-right: 3rem;
         }
       }
 

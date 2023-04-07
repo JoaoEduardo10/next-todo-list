@@ -9,10 +9,13 @@ const mockBoards: TBoard[] = [
 ];
 
 const store = mockStore({
-  boards: [
-    { id: 'board1', boardName: 'Board 1' },
-    { id: 'board2', boardName: 'Board 2' },
-  ],
+  boards: {
+    allBoards: [
+      { id: 'board1', boardName: 'Board 1' },
+      { id: 'board2', boardName: 'Board 2' },
+    ],
+    actualBoard: { id: 'board1', boardName: 'Board 1' },
+  },
 });
 
 export { store, mockBoards };

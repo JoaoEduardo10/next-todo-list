@@ -11,8 +11,6 @@ export default {
   title: 'Header',
   component: Header,
   args: {
-    boardName: 'test',
-    boardId: '1234',
     logo: img,
   } as HeaderProps,
   decorators: [

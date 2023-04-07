@@ -3,20 +3,27 @@ import { FaEllipsisV } from 'react-icons/fa';
 import Image from 'next/image';
 import { Button } from '../button';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MenuDropdownModal } from '../menu/MenuDropdownModal';
 import { MenuElipsis } from '../menu/MenuElipsis';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { setActualBoard } from '../../app/features/Boards/boardSlice';
 
 export type HeaderProps = {
   logo: string;
 };
 
 export const Header = ({ logo }: HeaderProps) => {
-  const actualBoard = useAppSelector((board) => board.boards.actualBoard);
+  const dispatch = useAppDispatch();
+  const actualBoard = useAppSelector((store) => store.boards.actualBoard);
+  const boards = useAppSelector((store) => store.boards.allBoards);
   const [menuDropdownModalShow, setMenuDropdownModalShow] = useState(false);
   const [menuElipsisShow, setMenuElipsis] = useState(false);
+
+  useEffect(() => {
+    dispatch(setActualBoard(boards[0]));
+  }, []);
 
   const handleMenuDropdownModalShowClick = () => {
     setMenuDropdownModalShow((e) => !e);

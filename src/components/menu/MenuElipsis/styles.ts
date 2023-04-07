@@ -20,7 +20,7 @@ const handleShow = (show: boolean, rendered: boolean) => css`
       `
     : css`
         opacity: 0;
-        animation: closeShow 1s ease-in-out;
+        animation: closeShow 0.5s ease-in-out;
 
         @keyframes closeShow {
           0% {
@@ -29,7 +29,7 @@ const handleShow = (show: boolean, rendered: boolean) => css`
           }
 
           25% {
-            transform: translateX(-50%);
+            transform: translateX(-40%);
           }
 
           100% {
@@ -43,7 +43,7 @@ export const Conteiner = styled.div<{ show: boolean; rendered: boolean }>`
   ${({ theme, show, rendered }) => css`
     position: fixed;
     right: 2%;
-    top: 10%;
+    top: 15%;
     width: 15.5rem;
     background-color: ${theme.colors.primaryColor};
     padding: ${theme.padding.small};
