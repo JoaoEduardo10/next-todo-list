@@ -60,7 +60,6 @@ export const MenuDropdownModal = styled.div<{
   rendering: boolean;
 }>`
   ${({ theme, show, rendering }) => css`
-    display: none;
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100vh;
@@ -72,6 +71,18 @@ export const MenuDropdownModal = styled.div<{
       opacity: 0;
 
       ${showMenu(show, rendering)}
+    }
+
+    ${theme.media_screen_size.lapTop} {
+      display: flex;
+      height: 100%;
+      width: 40rem;
+    }
+
+    ${theme.media_screen_size.tablet} {
+      display: flex;
+      height: 100%;
+      width: 40rem;
     }
   `}
 `;
@@ -90,6 +101,18 @@ export const Menu = styled.ul`
       margin: 2rem 0;
       padding: ${theme.padding.small};
     }
+
+    ${theme.media_screen_size.lapTop} {
+      transform: translateY(0);
+      height: 100%;
+      width: 40rem;
+    }
+
+    ${theme.media_screen_size.tablet} {
+      transform: translateY(0);
+      height: 100%;
+      width: 40rem;
+    }
   `}
 `;
 
@@ -103,6 +126,7 @@ export const Li = styled.li<{ board: string; boardId: string }>`
     width: 90%;
     padding: 15px 24px;
     background-color: transparent;
+    cursor: pointer;
 
     svg {
       font-size: 3rem;

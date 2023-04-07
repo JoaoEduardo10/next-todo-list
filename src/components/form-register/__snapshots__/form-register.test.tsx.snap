@@ -23,7 +23,7 @@ exports[`<FormRegister /> should to match snapsho 1`] = `
 }
 
 .c6:disabled {
-  background-color: #F4F7FD;
+  background-color: rgb(244,247,253);
   cursor: not-allowed;
   color: #000;
   -webkit-transform: scale(1);
@@ -73,7 +73,7 @@ exports[`<FormRegister /> should to match snapsho 1`] = `
 
 .c0 {
   position: relative;
-  background-color: #F4F7FD;
+  background-color: rgb(244,247,253);
   width: 40%;
   height: 95%;
   padding: 4.8rem;

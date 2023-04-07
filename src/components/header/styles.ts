@@ -3,9 +3,6 @@ import { Button } from '../button/styles';
 
 export const Header = styled.header`
   ${({ theme }) => css`
-    position: fixed;
-    top: 0%;
-    left: 0%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -25,6 +22,16 @@ export const Conteiner = styled.div`
     ${theme.media_screen_size.phone} {
       font-size: 1.6rem;
       gap: 0;
+    }
+  `}
+`;
+
+export const ConteinerMenus = styled.div`
+  ${({ theme }) => css`
+    display: none;
+
+    ${theme.media_screen_size.phone} {
+      display: block;
     }
   `}
 `;

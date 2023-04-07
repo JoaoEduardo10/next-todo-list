@@ -1,8 +1,11 @@
+import * as S from './styles';
+
 import { useEffect, useState } from 'react';
 import { setBoards } from '../app/features/Boards/boardSlice';
 import { useAppDispatch } from '../app/hooks';
 import { Header } from '../components/header';
 import { TBoard } from '../types';
+import { MenuDropdownModal } from '../components/menu/MenuDropdownModal';
 
 type TParamsComponents = {
   boards: TBoard[];
@@ -25,19 +28,11 @@ export const HomeTemplate = ({ boards }: TParamsComponents) => {
   }, [render]);
 
   return (
-    <>
+    <S.Conteiner>
       <Header logo="/images/logo.svg" />
-      <div
-        style={{
-          backgroundColor: '#F4F7FD',
-          height: '100vh',
-          width: '100%',
-          color: '#000',
-        }}
-      >
-        {boards.length > 0 &&
-          boards.map((item) => <span key={item.id}>{item.boardName}</span>)}
-      </div>
-    </>
+      <S.Main>
+        <MenuDropdownModal show={render} />
+      </S.Main>
+    </S.Conteiner>
   );
 };

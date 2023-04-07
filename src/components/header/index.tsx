@@ -81,7 +81,9 @@ export const Header = ({ logo }: HeaderProps) => {
           </div>
         </S.BoardControllerHeader>
       </S.Conteiner>
-      <MenuDropdownModal show={menuDropdownModalShow} />
+      <S.ConteinerMenus>
+        <MenuDropdownModal show={menuDropdownModalShow} />
+      </S.ConteinerMenus>
       <MenuElipsis show={menuElipsisShow} setMenuElipsis={setMenuElipsis} />
     </S.Header>
   );

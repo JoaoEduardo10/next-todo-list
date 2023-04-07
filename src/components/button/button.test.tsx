@@ -69,7 +69,7 @@ describe('<Button />', () => {
       }
 
       .c0:disabled {
-        background-color: #F4F7FD;
+        background-color: rgb(244,247,253);
         cursor: not-allowed;
         color: #000;
         -webkit-transform: scale(1);

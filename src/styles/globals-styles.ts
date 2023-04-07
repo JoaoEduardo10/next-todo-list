@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: ${({ theme }) => theme.font.family.primary};
     font-size: 1.6rem;
+    background-color: ${({ theme }) => theme.colors.secondaryColor};
   }
 
   ul, ol {
