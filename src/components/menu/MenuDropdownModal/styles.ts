@@ -21,16 +21,19 @@ const showMenu = (show: boolean, rendering: boolean) => css`
   ${!show &&
   css`
     animation: hiddenShow 300ms ease-in-out;
+    visibility: hidden;
 
     @keyframes hiddenShow {
       0% {
         transform: translateX(0);
         ${rendering ? 'opacity: 1;' : 'opacity: 0;'}
+        visibility: visible;
       }
 
       100% {
         transform: translateX(-100%);
         opacity: 0;
+        visibility: hidden;
       }
     }
   `}

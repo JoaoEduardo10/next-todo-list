@@ -127,7 +127,7 @@ describe('MenuElipsis', () => {
     const menuElipsis = screen.getByLabelText('MenuElipsis');
 
     expect(menuElipsis).toHaveStyle({
-      animation: 'closeShow 1s ease-in-out',
+      animation: 'closeShow 0.5s ease-in-out',
     });
   });
 });

@@ -21,19 +21,25 @@ const handleShow = (show: boolean, rendered: boolean) => css`
     : css`
         opacity: 0;
         animation: closeShow 0.5s ease-in-out;
+        visibility: hidden;
 
         @keyframes closeShow {
           0% {
             transform: translateX(0);
             opacity: ${rendered ? '1' : '0'};
+            visibility: visible;
           }
 
           25% {
             transform: translateX(-40%);
           }
 
+          99% {
+          }
+
           100% {
             transform: translate(100%);
+            visibility: hidden;
           }
         }
       `}

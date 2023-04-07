@@ -22,7 +22,9 @@ export const Header = ({ logo }: HeaderProps) => {
   const [menuElipsisShow, setMenuElipsis] = useState(false);
 
   useEffect(() => {
-    dispatch(setActualBoard(boards[0]));
+    if (boards.length > 0) {
+      dispatch(setActualBoard(boards[0]));
+    }
   }, []);
 
   const handleMenuDropdownModalShowClick = () => {
@@ -44,15 +46,19 @@ export const Header = ({ logo }: HeaderProps) => {
         </S.Logo>
         <S.BoardControllerHeader>
           <h2>
-            <span>{actualBoard ? actualBoard.boardName : ''}</span>
+            <span aria-label="Nome do Quadro atual">
+              {actualBoard.boardName.length > 0
+                ? actualBoard.boardName
+                : 'não ha quadros criados!'}
+            </span>
             {!menuDropdownModalShow ? (
               <IoMdMenu
-                aria-label="Menu Open"
+                aria-label="Menu Open/DropdownModal"
                 onClick={handleMenuDropdownModalShowClick}
               />
             ) : (
               <IoMdClose
-                aria-label="Menu Close"
+                aria-label="Menu Close/DropdownModal"
                 onClick={handleMenuDropdownModalShowClick}
               />
             )}
@@ -63,12 +69,12 @@ export const Header = ({ logo }: HeaderProps) => {
             </Button>
             {menuElipsisShow ? (
               <IoMdClose
-                aria-label="Menu Open/Elipsis"
+                aria-label="Close/Elipsis"
                 onClick={handleMenuElipsisShowClick}
               />
             ) : (
               <FaEllipsisV
-                aria-label="Menu Close/Elipsis"
+                aria-label="Open/Elipsis"
                 onClick={handleMenuElipsisShowClick}
               />
             )}

@@ -3,7 +3,6 @@ import { MenuDropdownModal } from '.';
 import { theme } from '../../../styles/theme';
 import { renderTheme } from '../../../utils/render-theme';
 import configureStore from 'redux-mock-store';
-import { link } from 'fs';
 
 const mockStore = configureStore([]);
 jest.useFakeTimers();
