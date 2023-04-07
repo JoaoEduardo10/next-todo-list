@@ -15,7 +15,7 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
   const dispatch = useAppDispatch();
   const [rendering, setRendering] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState('');
-  const [actualBoard, setActualBoard] = useState<TBoard>(boards[0]);
+  const [actualBoard, setActualBoard] = useState<TBoard>();
 
   // para não aparecer o menu ao renderizar o site
   useEffect(() => {
@@ -34,7 +34,9 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
   }, [boards]);
 
   useEffect(() => {
-    dispatch(setcatualBoardDispatch(actualBoard));
+    if (actualBoard) {
+      dispatch(setcatualBoardDispatch(actualBoard));
+    }
   }, [actualBoard]);
 
   function handleBoardClick(boardId: string) {

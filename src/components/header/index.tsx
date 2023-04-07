@@ -37,7 +37,7 @@ export const Header = ({ logo }: HeaderProps) => {
         </S.Logo>
         <S.BoardControllerHeader>
           <h2>
-            <span>{actualBoard.boardName}</span>
+            <span>{actualBoard ? actualBoard.boardName : ''}</span>
             {!menuDropdownModalShow ? (
               <IoMdMenu
                 aria-label="Menu Open"

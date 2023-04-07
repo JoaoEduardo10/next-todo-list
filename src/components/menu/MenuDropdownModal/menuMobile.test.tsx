@@ -3,6 +3,7 @@ import { MenuDropdownModal } from '.';
 import { theme } from '../../../styles/theme';
 import { renderTheme } from '../../../utils/render-theme';
 import configureStore from 'redux-mock-store';
+import { link } from 'fs';
 
 const mockStore = configureStore([]);
 jest.useFakeTimers();
@@ -12,10 +13,12 @@ describe('MenuDropdownModal component', () => {
 
   beforeEach(() => {
     store = mockStore({
-      boards: [
-        { id: 'board1', boardName: 'Board 1' },
-        { id: 'board2', boardName: 'Board 2' },
-      ],
+      boards: {
+        allBoards: [
+          { id: 'board1', boardName: 'Board 1' },
+          { id: 'board2', boardName: 'Board 2' },
+        ],
+      },
     });
   });
 
@@ -33,15 +36,32 @@ describe('MenuDropdownModal component', () => {
     expect(links.length).toBe(2);
   });
 
-  it('should would render the first link with being active', () => {
-    renderTheme(<MenuDropdownModal show={true} />, store);
+  it('should does not show the animation when entering the site', () => {
+    renderTheme(<MenuDropdownModal show={false} />, store);
 
+    const menu = screen.getByLabelText('Menu');
     const links = screen.getAllByLabelText('Link');
+
+    expect(menu).toBeInTheDocument();
+    expect(links[0]).toHaveStyle({
+      'background-color': theme.colors.purpleColor,
+    });
+    expect(links[1]).toHaveStyle({
+      'background-color': 'transparent',
+    });
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
+  });
 
+  it('should leave the first link already rendered', () => {
+    renderTheme(<MenuDropdownModal show={true} />, store);
+
+    const menu = screen.getByLabelText('Menu');
+    const links = screen.getAllByLabelText('Link');
+
+    expect(menu).toBeInTheDocument();
     expect(links[0]).toHaveStyle({
       'background-color': theme.colors.purpleColor,
     });
@@ -50,13 +70,18 @@ describe('MenuDropdownModal component', () => {
     });
   });
 
-  it('should make the link you click active', () => {
+  it('should change link on click', () => {
     renderTheme(<MenuDropdownModal show={true} />, store);
 
+    const menu = screen.getByLabelText('Menu');
     const links = screen.getAllByLabelText('Link');
 
-    act(() => {
-      jest.advanceTimersByTime(500);
+    expect(menu).toBeInTheDocument();
+    expect(links[0]).toHaveStyle({
+      'background-color': theme.colors.purpleColor,
+    });
+    expect(links[1]).toHaveStyle({
+      'background-color': 'transparent',
     });
 
     fireEvent.click(links[1]);
@@ -64,47 +89,26 @@ describe('MenuDropdownModal component', () => {
     expect(links[0]).toHaveStyle({
       'background-color': 'transparent',
     });
-
     expect(links[1]).toHaveStyle({
       'background-color': theme.colors.purpleColor,
     });
   });
 
-  it('should redefine the buttao to create a board', () => {
+  it('should contain a bottan if it not listen for links', () => {
     const newStore = mockStore({
-      boards: [],
+      boards: {
+        allBoards: [],
+      },
     });
 
     renderTheme(<MenuDropdownModal show={true} />, newStore);
 
-    const conteinerDivButton = screen.getByLabelText('Conteiner Button');
-
-    act(() => {
-      jest.advanceTimersByTime(500);
-    });
-
-    expect(conteinerDivButton).toBeInTheDocument();
-  });
-
-  it('should not render a MenuDropdownModal', () => {
-    const newStore = mockStore({
-      boards: [],
-    });
-
-    renderTheme(<MenuDropdownModal show={false} />, newStore);
-
     const menu = screen.getByLabelText('Menu');
+    const links = screen.queryAllByLabelText('Link');
+    const button = screen.getByLabelText('Conteiner Button').firstChild;
 
-    act(() => {
-      jest.advanceTimersByTime(500);
-    });
-  });
-
-  it('should to match snapshot', () => {
-    renderTheme(<MenuDropdownModal show={true} />, store);
-
-    const menu = screen.getByLabelText('Menu');
-
-    expect(menu).toMatchSnapshot();
+    expect(menu).toBeInTheDocument();
+    expect(links.length).toBe(0);
+    expect(button).toBeInTheDocument();
   });
 });
