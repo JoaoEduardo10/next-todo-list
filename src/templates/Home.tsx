@@ -26,7 +26,7 @@ export const HomeTemplate = ({ boards }: TParamsComponents) => {
 
   return (
     <>
-      <Header boardId="123" boardName="Board Test" logo="/images/logo.svg" />
+      <Header logo="/images/logo.svg" />
       <div
         style={{
           backgroundColor: '#F4F7FD',

@@ -10,9 +10,12 @@ export const boardsSlice = createSlice({
     setBoards: (state, action: PayloadAction<TBoard>) => {
       state.allBoards.push(action.payload);
     },
+    setActualBoard: (state, action: PayloadAction<TBoard>) => {
+      state.actualBoard = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setBoards } = boardsSlice.actions;
+export const { setBoards, setActualBoard } = boardsSlice.actions;
 export default boardsSlice.reducer;

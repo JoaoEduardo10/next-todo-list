@@ -1,25 +1,16 @@
-import { TBoard, TTasks } from '@/src/types';
-
-export type TBoardWithTasks = {
-  boardName: string;
-  id: string | number;
-  taskConnect: string;
-  userId: string | number;
-  tasks: TTasks[];
-};
+import { TBoard } from '@/src/types';
 
 interface IInitialState {
   allBoards: TBoard[];
-  actualBoardWithTask: TBoardWithTasks;
+  actualBoard: TBoard;
 }
 
 export const initialState: IInitialState = {
-  actualBoardWithTask: {
+  allBoards: [],
+  actualBoard: {
     boardName: '',
     id: '',
     taskConnect: '',
-    tasks: [],
     userId: '',
   },
-  allBoards: [],
 };

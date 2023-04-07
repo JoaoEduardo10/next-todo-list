@@ -72,7 +72,7 @@ export const BoardControllerHeader = styled.div`
 
     h2 {
       font-weight: 500;
-      font-size: 2rem;
+      font-size: 1.6rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -85,6 +85,12 @@ export const BoardControllerHeader = styled.div`
           display: inline-block;
           font-size: 2.7rem;
           color: ${theme.colors.lite_greenColor};
+        }
+      }
+
+      ${theme.media_screen_size.phone} {
+        span {
+          font-size: 1.7rem;
         }
       }
     }

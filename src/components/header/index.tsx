@@ -7,13 +7,14 @@ import { useState } from 'react';
 import { MenuDropdownModal } from '../menu/MenuDropdownModal';
 import { MenuElipsis } from '../menu/MenuElipsis';
 
+import { useAppSelector } from '../../app/hooks';
+
 export type HeaderProps = {
-  boardName: string;
-  boardId: string;
   logo: string;
 };
 
-export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
+export const Header = ({ logo }: HeaderProps) => {
+  const actualBoard = useAppSelector((board) => board.boards.actualBoard);
   const [menuDropdownModalShow, setMenuDropdownModalShow] = useState(false);
   const [menuElipsisShow, setMenuElipsis] = useState(false);
 
@@ -36,7 +37,7 @@ export const Header = ({ boardName, boardId, logo }: HeaderProps) => {
         </S.Logo>
         <S.BoardControllerHeader>
           <h2>
-            <span>{boardName}</span>
+            <span>{actualBoard.boardName}</span>
             {!menuDropdownModalShow ? (
               <IoMdMenu
                 aria-label="Menu Open"

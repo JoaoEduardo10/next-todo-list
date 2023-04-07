@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import * as S from './styles';
-
-import { useAppSelector } from '../../../app/hooks';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { Button } from '../../button';
+import { TBoard } from '@/src/types';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { setActualBoard as setcatualBoardDispatch } from '../../../app/features/Boards/boardSlice';
 
 export type MenuDropdownModalProps = {
   show: boolean;
@@ -11,8 +12,10 @@ export type MenuDropdownModalProps = {
 
 export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
   const boards = useAppSelector((state) => state.boards.allBoards);
+  const dispatch = useAppDispatch();
   const [rendering, setRendering] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState('');
+  const [actualBoard, setActualBoard] = useState<TBoard>(boards[0]);
 
   // para não aparecer o menu ao renderizar o site
   useEffect(() => {
@@ -26,11 +29,22 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
   useEffect(() => {
     if (boards.length > 0) {
       setSelectedBoardId(boards[0].id);
+      setActualBoard(boards[0]);
     }
   }, [boards]);
 
+  useEffect(() => {
+    dispatch(setcatualBoardDispatch(actualBoard));
+  }, [actualBoard]);
+
   function handleBoardClick(boardId: string) {
     setSelectedBoardId(boardId);
+
+    boards.map((board) => {
+      if (boardId == board.id) {
+        setActualBoard(board);
+      }
+    });
   }
 
   return (
