@@ -6,6 +6,10 @@ export const Header = styled.header`
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    svg {
+      cursor: pointer;
+    }
   `}
 `;
 
