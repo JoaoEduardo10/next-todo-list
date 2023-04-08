@@ -1,4 +1,4 @@
-import { TBoard } from '../types';
+import { TBoard, TBoardWithTasks, TTasks } from '../types';
 
 export type TDataProps = {
   email: string;
@@ -69,4 +69,18 @@ const getBoard = async (token: string, id: string) => {
   return data;
 };
 
-export { loginUser, createUser, getAllBoards, getBoard };
+const getBoardWithTasks = async (token: string, id: string) => {
+  const response = await fetch(`${urlApi}/boards/${id}`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data: TBoardWithTasks = await response.json();
+
+  return data;
+};
+
+export { loginUser, createUser, getAllBoards, getBoard, getBoardWithTasks };

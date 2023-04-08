@@ -1,4 +1,4 @@
-import { TBoard } from '@/src/types';
+import { TBoard, TBoardWithTasks, TTasks } from '@/src/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initalState';
@@ -13,9 +13,23 @@ export const boardsSlice = createSlice({
     setActualBoard: (state, action: PayloadAction<TBoard>) => {
       state.actualBoard = action.payload;
     },
+    setActualBoardWithTasks: (
+      state,
+      action: PayloadAction<TBoardWithTasks>,
+    ) => {
+      state.actualBoardWithTasks = action.payload;
+    },
+    postNewTasksInBoard: (state, action: PayloadAction<TTasks>) => {
+      state.actualBoardWithTasks.tasks.push(action.payload);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setBoards, setActualBoard } = boardsSlice.actions;
+export const {
+  setBoards,
+  setActualBoard,
+  setActualBoardWithTasks,
+  postNewTasksInBoard,
+} = boardsSlice.actions;
 export default boardsSlice.reducer;

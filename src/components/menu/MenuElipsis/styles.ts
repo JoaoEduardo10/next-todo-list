@@ -60,7 +60,7 @@ export const Conteiner = styled.div<{ show: boolean; rendered: boolean }>`
     border: 0.2rem solid ${theme.colors.secondaryColor};
     box-shadow: 0rem 0rem 4.9rem ${theme.colors.blackColor};
     opacity: 0;
-    z-index: 3;
+    z-index: 10;
 
     & div {
       width: 100%;

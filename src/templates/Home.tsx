@@ -6,6 +6,7 @@ import { useAppDispatch } from '../app/hooks';
 import { Header } from '../components/header';
 import { TBoard } from '../types';
 import { MenuDropdownModal } from '../components/menu/MenuDropdownModal';
+import { Modal } from '../components/modal';
 
 type TParamsComponents = {
   boards: TBoard[];
@@ -32,6 +33,7 @@ export const HomeTemplate = ({ boards }: TParamsComponents) => {
       <Header logo="/images/logo.svg" />
       <S.Main>
         <MenuDropdownModal show={render} />
+        <Modal />
       </S.Main>
     </S.Conteiner>
   );

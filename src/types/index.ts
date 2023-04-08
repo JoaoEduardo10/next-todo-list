@@ -26,3 +26,11 @@ export type TBoard = {
   taskConnect: string;
   userId: string;
 };
+
+export type TBoardWithTasks = {
+  boardName: string;
+  id: string | number;
+  taskConnect: string;
+  userId: string;
+  tasks: TTasks[];
+};
