@@ -65,10 +65,13 @@ export const MenuDropdownModal = styled.div<{
     height: 100vh;
 
     ${theme.media_screen_size.phone} {
+      position: fixed;
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
+      z-index: 10;
+      top: 9.9%;
 
       ${showMenu(show, rendering)}
     }
@@ -82,7 +85,7 @@ export const MenuDropdownModal = styled.div<{
     ${theme.media_screen_size.tablet} {
       display: flex;
       height: 100%;
-      width: 40rem;
+      width: 30rem;
     }
   `}
 `;
