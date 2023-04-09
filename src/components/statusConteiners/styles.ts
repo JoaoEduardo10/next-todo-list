@@ -5,7 +5,10 @@ export const Conteiner = styled.div`
     border-right: 0.1rem solid gray;
     border-top-right-radius: 0.5rem;
     width: 30%;
-    gap: 1.6rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.9rem;
 
     ${theme.media_screen_size.phone} {
       width: 100%;

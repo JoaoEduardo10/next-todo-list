@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { setActualBoardWithTasks } from '../../app/features/Boards/boardSlice';
 import { StatusConteiner } from '../statusConteiners';
+import { TTasks } from '@/src/types';
 
 export type ModalProps = {
   children: ReactNode;
@@ -26,13 +27,16 @@ export type TSession = {
 };
 
 export const Modal = () => {
+  const { data: Session } = useSession() as TSession;
   const dispatch = useAppDispatch();
   const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const actualBoardWithTasks = useAppSelector(
     (store) => store.boards.actualBoardWithTasks,
   );
   const [loading, setLoading] = useState(false);
-  const { data: Session } = useSession() as TSession;
+  const [tasksConcluided, setTasksConcluided] = useState<TTasks[]>([]);
+  const [tasksPending, setTasksPending] = useState<TTasks[]>([]);
+  const [tasksProgress, setTasksProgress] = useState<TTasks[]>([]);
 
   useEffect(() => {
     if (Session) {
@@ -52,23 +56,42 @@ export const Modal = () => {
     }
   }, [actualBoard, Session]);
 
-  const tasksConcluded = actualBoardWithTasks.tasks.filter((task) => {
-    return task.status == 'concluded';
-  });
+  useEffect(() => {
+    if (actualBoardWithTasks && actualBoardWithTasks.tasks) {
+      const tasksConcluidedFilter = actualBoardWithTasks.tasks.filter(
+        (task) => {
+          return task.status == 'concluded';
+        },
+      );
 
-  const tasksPending = actualBoardWithTasks.tasks.filter((task) => {
-    return task.status == 'pending';
-  });
-  const tasksprogress = actualBoardWithTasks.tasks.filter((task) => {
-    return task.status == 'progress';
-  });
+      const tasksPendingFilter = actualBoardWithTasks.tasks.filter((task) => {
+        return task.status == 'pending';
+      });
+
+      const tasksProgressFilter = actualBoardWithTasks.tasks.filter((task) => {
+        return task.status == 'progress';
+      });
+
+      setTasksConcluided(tasksConcluidedFilter);
+      setTasksPending(tasksPendingFilter);
+      setTasksProgress(tasksProgressFilter);
+    }
+  }, [actualBoardWithTasks]);
+
+  if (actualBoard.id == '') {
+    return (
+      <S.NotBoard>
+        <h2>Não há quadros!</h2>
+      </S.NotBoard>
+    );
+  }
 
   return (
     <S.Conteiner>
       {loading && <Loading />}
-      <StatusConteiner heading="concluido" tasks={tasksConcluded} />
       <StatusConteiner heading="pending" tasks={tasksPending} />
-      <StatusConteiner heading="progress" tasks={tasksprogress} />
+      <StatusConteiner heading="progress" tasks={tasksProgress} />
+      <StatusConteiner heading="concluido" tasks={tasksConcluided} />
     </S.Conteiner>
   );
 };
