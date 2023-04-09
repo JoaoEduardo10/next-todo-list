@@ -65,7 +65,7 @@ export const Modal = () => {
       {loading && <Loading />}
       <StatusConteiner heading="pending" tasks={actualBoardWithTasks.tasks} />
       <StatusConteiner heading="progress" tasks={actualBoardWithTasks.tasks} />
-      <StatusConteiner heading="concluido" tasks={actualBoardWithTasks.tasks} />
+      <StatusConteiner heading="concluded" tasks={actualBoardWithTasks.tasks} />
     </S.Conteiner>
   );
 };

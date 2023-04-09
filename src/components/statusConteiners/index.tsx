@@ -4,7 +4,7 @@ import { Task } from '../task';
 import { useEffect, useState } from 'react';
 
 export type StatusConteinerProps = {
-  heading: 'pending' | 'concluido' | 'progress';
+  heading: 'pending' | 'concluded' | 'progress';
   tasks: TTasks[];
 };
 
