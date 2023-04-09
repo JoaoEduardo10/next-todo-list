@@ -14,6 +14,17 @@ export type ModalProps = {
   children: ReactNode;
 };
 
+export type TSession = {
+  data: {
+    user: {
+      name: string;
+    };
+    acessToken: string;
+    expires: string;
+  };
+  status: 'authenticated' | 'loading' | 'unauthenticated';
+};
+
 export const Modal = () => {
   const dispatch = useAppDispatch();
   const actualBoard = useAppSelector((store) => store.boards.actualBoard);
@@ -21,26 +32,30 @@ export const Modal = () => {
     (store) => store.boards.actualBoardWithTasks,
   );
   const [loading, setLoading] = useState(false);
-  const { data: Session } = useSession() as any;
+  const { data: Session } = useSession() as TSession;
 
   useEffect(() => {
-    const request = async () => {
-      setLoading(true);
-      const response = await getBoardWithTasks(
-        Session.acessToken,
-        actualBoard.id,
-      );
+    if (Session) {
+      const request = async () => {
+        setLoading(true);
 
-      dispatch(setActualBoardWithTasks(response));
-      setLoading(false);
-    };
+        const response = await getBoardWithTasks(
+          Session.acessToken,
+          actualBoard.id,
+        );
 
-    request();
-  }, [actualBoard]);
+        dispatch(setActualBoardWithTasks(response));
+        setLoading(false);
+      };
+
+      request();
+    }
+  }, [actualBoard, Session]);
 
   const tasksConcluded = actualBoardWithTasks.tasks.filter((task) => {
     return task.status == 'concluded';
   });
+
   const tasksPending = actualBoardWithTasks.tasks.filter((task) => {
     return task.status == 'pending';
   });
