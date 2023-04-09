@@ -8,20 +8,4 @@ const returnedSubTasksConcluded = (task: TTasks) => {
   return allSubTaskConcluded.length;
 };
 
-const returnTasksByStatus = (tasks: TTasks[]) => {
-  const tasksConcluidedFilter = tasks.filter((task) => {
-    return task.status == 'concluded';
-  });
-
-  const tasksPendingFilter = tasks.filter((task) => {
-    return task.status == 'pending';
-  });
-
-  const tasksProgressFilter = tasks.filter((task) => {
-    return task.status == 'progress';
-  });
-
-  return { tasksConcluidedFilter, tasksPendingFilter, tasksProgressFilter };
-};
-
-export { returnedSubTasksConcluded, returnTasksByStatus };
+export { returnedSubTasksConcluded };

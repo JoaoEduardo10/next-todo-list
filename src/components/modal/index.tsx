@@ -9,8 +9,6 @@ import { useSession } from 'next-auth/react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { setActualBoardWithTasks } from '../../app/features/Boards/boardSlice';
 import { StatusConteiner } from '../statusConteiners';
-import { TTasks } from '@/src/types';
-import { returnTasksByStatus } from '@/src/utils/utilsFactions';
 
 export type ModalProps = {
   children: ReactNode;
@@ -30,14 +28,11 @@ export type TSession = {
 export const Modal = () => {
   const { data: Session } = useSession() as TSession;
   const dispatch = useAppDispatch();
-  const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const actualBoardWithTasks = useAppSelector(
     (store) => store.boards.actualBoardWithTasks,
   );
+  const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const [loading, setLoading] = useState(false);
-  const [tasksConcluided, setTasksConcluided] = useState<TTasks[]>([]);
-  const [tasksPending, setTasksPending] = useState<TTasks[]>([]);
-  const [tasksProgress, setTasksProgress] = useState<TTasks[]>([]);
 
   useEffect(() => {
     if (Session) {
@@ -57,17 +52,6 @@ export const Modal = () => {
     }
   }, [actualBoard, Session]);
 
-  useEffect(() => {
-    if (actualBoardWithTasks && actualBoardWithTasks.tasks) {
-      const { tasksConcluidedFilter, tasksPendingFilter, tasksProgressFilter } =
-        returnTasksByStatus(actualBoardWithTasks.tasks);
-
-      setTasksConcluided(tasksConcluidedFilter);
-      setTasksPending(tasksPendingFilter);
-      setTasksProgress(tasksProgressFilter);
-    }
-  }, [actualBoardWithTasks]);
-
   if (actualBoard.id == '') {
     return (
       <S.NotBoard>
@@ -79,9 +63,9 @@ export const Modal = () => {
   return (
     <S.Conteiner>
       {loading && <Loading />}
-      <StatusConteiner heading="pending" tasks={tasksPending} />
-      <StatusConteiner heading="progress" tasks={tasksProgress} />
-      <StatusConteiner heading="concluido" tasks={tasksConcluided} />
+      <StatusConteiner heading="pending" tasks={actualBoardWithTasks.tasks} />
+      <StatusConteiner heading="progress" tasks={actualBoardWithTasks.tasks} />
+      <StatusConteiner heading="concluido" tasks={actualBoardWithTasks.tasks} />
     </S.Conteiner>
   );
 };
