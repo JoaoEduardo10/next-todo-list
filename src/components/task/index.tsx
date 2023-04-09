@@ -10,7 +10,7 @@ export const Task = ({ tasks }: TaskProps) => {
   return (
     <S.TasksConteiner>
       {tasks.map((task) => (
-        <S.Tasks key={task.id + task.boardConnect}>
+        <S.Tasks aria-label="Task" key={task.id + task.boardConnect}>
           <S.Heading>{task.text}</S.Heading>
           <S.SubText>
             <span aria-label="Subtarefas concluidas">
