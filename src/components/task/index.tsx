@@ -1,6 +1,6 @@
-import { TTasks } from '@/src/types';
+import { TTasks } from '../../types';
 import * as S from './styles';
-import { returnedSubTasksConcluded } from '@/src/utils/utilsFactions';
+import { returnedSubTasksConcluded } from '../../utils/utilsFactions';
 
 export type TaskProps = {
   tasks: TTasks[];
@@ -13,8 +13,10 @@ export const Task = ({ tasks }: TaskProps) => {
         <S.Tasks key={task.id + task.boardConnect}>
           <S.Heading>{task.text}</S.Heading>
           <S.SubText>
-            {returnedSubTasksConcluded(task)} para {task.subTasks.length}{' '}
-            subTarefas
+            <span aria-label="Subtarefas concluidas">
+              {returnedSubTasksConcluded(task)}
+            </span>{' '}
+            para {task.subTasks.length} subTarefas
           </S.SubText>
         </S.Tasks>
       ))}

@@ -1,4 +1,3 @@
-import { Tasks } from '../components/task/styles';
 import { TTasks } from '../types';
 
 const returnedSubTasksConcluded = (task: TTasks) => {

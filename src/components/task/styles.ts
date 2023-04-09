@@ -4,6 +4,9 @@ export const TasksConteiner = styled.ul`
   ${({ theme }) => css`
     background-color: transparent;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: ${theme.padding.small};
   `}
 `;
 
