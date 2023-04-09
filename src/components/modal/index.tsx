@@ -10,6 +10,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { setActualBoardWithTasks } from '../../app/features/Boards/boardSlice';
 import { StatusConteiner } from '../statusConteiners';
 import { TTasks } from '@/src/types';
+import { returnTasksByStatus } from '@/src/utils/utilsFactions';
 
 export type ModalProps = {
   children: ReactNode;
@@ -58,19 +59,8 @@ export const Modal = () => {
 
   useEffect(() => {
     if (actualBoardWithTasks && actualBoardWithTasks.tasks) {
-      const tasksConcluidedFilter = actualBoardWithTasks.tasks.filter(
-        (task) => {
-          return task.status == 'concluded';
-        },
-      );
-
-      const tasksPendingFilter = actualBoardWithTasks.tasks.filter((task) => {
-        return task.status == 'pending';
-      });
-
-      const tasksProgressFilter = actualBoardWithTasks.tasks.filter((task) => {
-        return task.status == 'progress';
-      });
+      const { tasksConcluidedFilter, tasksPendingFilter, tasksProgressFilter } =
+        returnTasksByStatus(actualBoardWithTasks.tasks);
 
       setTasksConcluided(tasksConcluidedFilter);
       setTasksPending(tasksPendingFilter);

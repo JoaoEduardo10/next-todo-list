@@ -1,3 +1,4 @@
+import { Tasks } from '../components/task/styles';
 import { TTasks } from '../types';
 
 const returnedSubTasksConcluded = (task: TTasks) => {
@@ -8,4 +9,20 @@ const returnedSubTasksConcluded = (task: TTasks) => {
   return allSubTaskConcluded.length;
 };
 
-export { returnedSubTasksConcluded };
+const returnTasksByStatus = (tasks: TTasks[]) => {
+  const tasksConcluidedFilter = tasks.filter((task) => {
+    return task.status == 'concluded';
+  });
+
+  const tasksPendingFilter = tasks.filter((task) => {
+    return task.status == 'pending';
+  });
+
+  const tasksProgressFilter = tasks.filter((task) => {
+    return task.status == 'progress';
+  });
+
+  return { tasksConcluidedFilter, tasksPendingFilter, tasksProgressFilter };
+};
+
+export { returnedSubTasksConcluded, returnTasksByStatus };
