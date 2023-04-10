@@ -10,10 +10,6 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { setActualBoardWithTasks } from '../../app/features/Boards/boardSlice';
 import { StatusConteiner } from '../statusConteiners';
 
-export type ModalProps = {
-  children: ReactNode;
-};
-
 export type TSession = {
   data: {
     user: {

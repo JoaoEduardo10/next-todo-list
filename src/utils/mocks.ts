@@ -1,5 +1,6 @@
 import configureStore from 'redux-mock-store';
 import { TBoard } from '../types';
+import { mockTask } from '../components/task/mock';
 
 const mockStore = configureStore([]);
 
@@ -15,6 +16,13 @@ const store = mockStore({
       { id: 'board2', boardName: 'Board 2' },
     ],
     actualBoard: { id: 'board1', boardName: 'Board 1' },
+    actualBoardWithTasks: {
+      boardName: 'Board 1',
+      id: '1234',
+      taskConnect: '1234',
+      tasks: mockTask,
+      userId: '1234',
+    },
   },
 });
 
