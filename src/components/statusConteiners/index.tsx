@@ -12,18 +12,19 @@ export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
   const [actualTask, setActualTask] = useState<TTasks[]>([]);
 
   useEffect(() => {
-    if (tasks) {
-      const actualTaskFilter = tasks.filter((task) => {
-        return task.status == heading;
-      });
+    const actualTaskFilter =
+      tasks?.length > 0 && tasks
+        ? tasks.filter((task) => {
+            return task.status == heading;
+          })
+        : [];
 
-      setActualTask(actualTaskFilter);
-    }
+    setActualTask(actualTaskFilter);
   }, [tasks]);
 
   return (
-    <S.Conteiner>
-      <S.Heading>
+    <S.Conteiner aria-label="Conteiners Tasks">
+      <S.Heading aria-label="Status">
         {heading} ({actualTask.length})
       </S.Heading>
       <Task tasks={actualTask} />
