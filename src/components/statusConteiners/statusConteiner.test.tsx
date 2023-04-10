@@ -42,7 +42,7 @@ describe('<StatusConteiner />', () => {
     expect(heading).toHaveTextContent(`progress (${tasks.length})`);
   });
   it('should not render any tasks', () => {
-    renderTheme(<StatusConteiner heading="progress" tasks={[]} />);
+    renderTheme(<StatusConteiner heading="progress" />);
 
     const heading = screen.getByLabelText('Status');
     const tasks = screen.queryAllByLabelText('Task');

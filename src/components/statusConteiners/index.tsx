@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export type StatusConteinerProps = {
   heading: 'pending' | 'concluded' | 'progress';
-  tasks: TTasks[];
+  tasks?: TTasks[];
 };
 
 export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
@@ -13,11 +13,11 @@ export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
 
   useEffect(() => {
     const actualTaskFilter =
-      tasks?.length > 0 && tasks
-        ? tasks.filter((task) => {
-            return task.status == heading;
-          })
-        : [];
+      (tasks &&
+        tasks.filter((task) => {
+          return task.status == heading;
+        })) ||
+      [];
 
     setActualTask(actualTaskFilter);
   }, [tasks]);
@@ -25,7 +25,7 @@ export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
   return (
     <S.Conteiner aria-label="Conteiners Tasks">
       <S.Heading aria-label="Status">
-        {heading} ({actualTask.length})
+        {heading} ({actualTask && actualTask.length})
       </S.Heading>
       <Task tasks={actualTask} />
     </S.Conteiner>
