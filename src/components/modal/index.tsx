@@ -50,14 +50,14 @@ export const Modal = () => {
 
   if (actualBoard.id == '') {
     return (
-      <S.NotBoard>
+      <S.NotBoard aria-label="Sem Quadros">
         <h2>Não há quadros!</h2>
       </S.NotBoard>
     );
   }
 
   return (
-    <S.Conteiner>
+    <S.Conteiner aria-label="Modal">
       {loading && <Loading />}
       <StatusConteiner heading="pending" tasks={actualBoardWithTasks.tasks} />
       <StatusConteiner heading="progress" tasks={actualBoardWithTasks.tasks} />
