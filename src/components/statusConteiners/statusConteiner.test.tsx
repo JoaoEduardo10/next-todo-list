@@ -41,6 +41,7 @@ describe('<StatusConteiner />', () => {
     expect(heading).toHaveTextContent(/progress/g);
     expect(heading).toHaveTextContent(`progress (${tasks.length})`);
   });
+
   it('should not render any tasks', () => {
     renderTheme(<StatusConteiner heading="progress" />);
 
