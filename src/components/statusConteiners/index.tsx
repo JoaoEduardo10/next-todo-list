@@ -13,16 +13,13 @@ export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
 
   useEffect(() => {
     if (tasks) {
-      const pushTasks: TTasks[] = [];
-
-      tasks.map((task) => {
-        if (task.status == heading) {
-          pushTasks.push(task);
-          setActualTask(pushTasks);
-        }
+      const actualTaskFilter = tasks.filter((task) => {
+        return task.status == heading;
       });
+
+      setActualTask(actualTaskFilter);
     }
-  }, [tasks]);
+  }, [tasks, heading]);
 
   return (
     <S.Conteiner aria-label="Conteiners Tasks">
