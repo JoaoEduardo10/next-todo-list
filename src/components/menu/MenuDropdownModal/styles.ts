@@ -142,6 +142,17 @@ export const Li = styled.li<{ board: string; boardId: string }>`
       color: gray;
     }
 
+    & > div.Create_Board {
+      color: ${theme.colors.purpleColor};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        color: ${theme.colors.purpleColor};
+      }
+    }
+
     ${boardId.length > 1 && boardClicled(board, boardId, theme)}
   `}
 `;

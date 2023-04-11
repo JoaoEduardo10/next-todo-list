@@ -54,17 +54,24 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
       <S.Menu>
         <h2>Todos os quadros ({boards.length})</h2>
         {boards.length > 0 ? (
-          boards.map((board) => (
-            <S.Li
-              aria-label="Link"
-              key={board.id}
-              onClick={() => handleBoardClick(board.id)}
-              board={selectedBoardId === board.id ? selectedBoardId : ''}
-              boardId={selectedBoardId === board.id ? board.id : ''}
-            >
-              <MdOutlineSpaceDashboard /> <span>{board.boardName}</span>
+          <>
+            {boards.map((board) => (
+              <S.Li
+                aria-label="Link"
+                key={board.id}
+                onClick={() => handleBoardClick(board.id)}
+                board={selectedBoardId === board.id ? selectedBoardId : ''}
+                boardId={selectedBoardId === board.id ? board.id : ''}
+              >
+                <MdOutlineSpaceDashboard /> <span>{board.boardName}</span>
+              </S.Li>
+            ))}
+            <S.Li board="" boardId="" aria-label="Creie um Quadro">
+              <div className="Create_Board">
+                <MdOutlineSpaceDashboard /> <span>+ Criar um Quadro</span>
+              </div>
             </S.Li>
-          ))
+          </>
         ) : (
           <S.ConteinerDiv aria-label="Conteiner Button">
             <Button>Criar um quadro</Button>
