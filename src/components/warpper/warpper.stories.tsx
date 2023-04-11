@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { Warpper, WarpperProps } from '.';
 import { GlobalStyles } from '../../styles/globals-styles';
 import { theme } from '../../styles/theme';
-import { FormLogin } from '../form-login';
+import { FormLogin } from '../forms/form-login';
 
 export default {
   title: 'Warpper',

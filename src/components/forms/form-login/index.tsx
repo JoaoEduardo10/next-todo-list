@@ -2,10 +2,10 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Button } from '../button';
-import { Inpult } from '../inpult/inpult';
-import { Loading } from '../loading';
-import { MessageError } from '../messageError';
+import { Button } from '../../button';
+import { Inpult } from '../../inpult/inpult';
+import { Loading } from '../../loading';
+import { MessageError } from '../../messageError';
 import * as S from './styles';
 
 export const FormLogin = () => {

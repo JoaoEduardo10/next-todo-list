@@ -1,12 +1,12 @@
-import { createUser } from '../../utils/fecths';
+import { createUser } from '../../../utils/fecths';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Button } from '../button';
+import { Button } from '../../button';
 import * as S from '../form-login/styles';
-import { Inpult } from '../inpult/inpult';
-import { MessageError } from '../messageError';
+import { Inpult } from '../../inpult/inpult';
+import { MessageError } from '../../messageError';
 import { useRouter } from 'next/router';
-import { Loading } from '../loading';
+import { Loading } from '../../loading';
 
 export const FormRegister = () => {
   const router = useRouter();

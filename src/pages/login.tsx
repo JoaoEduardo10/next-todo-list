@@ -1,4 +1,4 @@
-import { FormLogin } from '../components/form-login';
+import { FormLogin } from '../components/forms/form-login';
 import { Warpper } from '../components/warpper';
 import { GetServerSideProps } from 'next';
 

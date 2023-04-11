@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { Label } from '../inpult/styles';
-import { Button } from '../button/styles';
+import { Label } from '../../inpult/styles';
+import { Button } from '../../button/styles';
 
 export const Form = styled.form`
   ${({ theme }) => css`

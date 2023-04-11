@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FormLogin } from '.';
-import { renderTheme } from '../../utils/render-theme';
+import { renderTheme } from '../../../utils/render-theme';
 import * as nextAuthReact from 'next-auth/react';
 import { act } from 'react-dom/test-utils';
 

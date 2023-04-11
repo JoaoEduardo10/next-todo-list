@@ -1,5 +1,5 @@
 import { FormRegister } from './form-register';
-import { renderTheme } from '../../utils/render-theme';
+import { renderTheme } from '../../../utils/render-theme';
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import fetchMock from 'jest-fetch-mock';
 

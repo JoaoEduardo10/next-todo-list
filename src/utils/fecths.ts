@@ -83,4 +83,26 @@ const getBoardWithTasks = async (token: string, id: string) => {
   return data;
 };
 
-export { loginUser, createUser, getAllBoards, getBoard, getBoardWithTasks };
+const createBoard = async (token: string, boardName: string) => {
+  const response = await fetch(`${urlApi}/boards`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ boardName }),
+  });
+
+  const data: TBoard = await response.json();
+
+  return data;
+};
+
+export {
+  loginUser,
+  createUser,
+  getAllBoards,
+  getBoard,
+  getBoardWithTasks,
+  createBoard,
+};
