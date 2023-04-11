@@ -4,10 +4,23 @@ import { store } from '../../utils/mocks';
 import { fireEvent, screen } from '@testing-library/react';
 import 'jest-styled-components';
 import configureStore from 'redux-mock-store';
+import { useSession } from 'next-auth/react';
 
 const mockStore = configureStore([]);
+jest.mock('next-auth/react');
 
 describe('<Header  />', () => {
+  const nextUseSessionMock = useSession as jest.MockedFunction<
+    typeof useSession
+  >;
+
+  beforeEach(() => {
+    nextUseSessionMock.mockReturnValue({
+      data: [{ user: 'test' }],
+      status: 'authenticated',
+    } as any);
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -15,7 +28,7 @@ describe('<Header  />', () => {
   it('should render a Header componet', () => {
     renderTheme(<Header logo={'test.svg'} />, store);
 
-    const header = screen.getByLabelText('Cabeçalho');
+    const header = screen.getByLabelText('Cabeçalho do site');
     const logoImg = screen.getByRole('img', { name: 'test.svg' });
     const logoName = screen.getByRole('heading', { name: 'kanban' });
     const CurrentBoardName = screen.getByLabelText('Nome do Quadro atual');

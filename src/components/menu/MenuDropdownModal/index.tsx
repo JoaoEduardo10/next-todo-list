@@ -5,7 +5,6 @@ import { Button } from '../../button';
 import { TBoard } from '@/src/types';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { setActualBoard as setcatualBoardDispatch } from '../../../app/features/Boards/boardSlice';
-import { Inpult } from '../../inpult/inpult';
 import { CreateBoard } from '../../forms/createBoard';
 
 export type MenuDropdownModalProps = {

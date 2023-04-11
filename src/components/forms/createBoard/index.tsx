@@ -62,12 +62,22 @@ export const CreateBoard = ({
   };
 
   return (
-    <S.ShowCreateBoardConteiner rendering={rendering} show={show}>
+    <S.ShowCreateBoardConteiner
+      aria-label="Criação de Quadro"
+      rendering={rendering}
+      show={show}
+    >
       {rendering && <MessageError text={messageError} error={error} />}
       {loading && <Loading />}
-      <S.FormCreateBoard onSubmit={handleShowCreateBoardSubmit}>
-        <AiOutlineClose onClick={() => setShow(false)} />
-        <h2>{text}</h2>
+      <S.FormCreateBoard
+        aria-label="Form"
+        onSubmit={handleShowCreateBoardSubmit}
+      >
+        <AiOutlineClose
+          aria-label="Close Board"
+          onClick={() => setShow(false)}
+        />
+        <h2 aria-label="Cabeçalho">{text}</h2>
         <Inpult
           placeholder="Nome do Quadro"
           type="text"

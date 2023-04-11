@@ -37,7 +37,7 @@ export const Header = ({ logo }: HeaderProps) => {
 
   return (
     <S.Header>
-      <S.Conteiner aria-label="Cabeçalho">
+      <S.Conteiner aria-label="Cabeçalho do site">
         <S.Logo>
           <div>
             <Image src={logo} alt={logo} width={100} height={100} />

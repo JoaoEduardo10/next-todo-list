@@ -3,12 +3,15 @@ import { MenuDropdownModal } from '.';
 import { theme } from '../../../styles/theme';
 import { renderTheme } from '../../../utils/render-theme';
 import configureStore from 'redux-mock-store';
+import { useSession } from 'next-auth/react';
 
 const mockStore = configureStore([]);
 jest.useFakeTimers();
+jest.mock('next-auth/react');
 
 describe('MenuDropdownModal component', () => {
   let store: any;
+  const useSessionMock = useSession as jest.MockedFunction<typeof useSession>;
 
   beforeEach(() => {
     store = mockStore({
@@ -19,6 +22,11 @@ describe('MenuDropdownModal component', () => {
         ],
       },
     });
+
+    useSessionMock.mockReturnValue({
+      data: [{ user: 'test' }],
+      status: 'authenticated',
+    } as any);
   });
 
   afterEach(() => {
