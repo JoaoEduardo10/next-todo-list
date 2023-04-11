@@ -5,7 +5,7 @@ import { GlobalStyles } from '../../../styles/globals-styles';
 import { theme } from '../../../styles/theme';
 
 export default {
-  title: 'FormLogin',
+  title: 'fomrs/FormLogin',
   component: FormLogin,
   decorators: [
     (Story) => (

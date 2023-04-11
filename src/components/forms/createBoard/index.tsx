@@ -3,7 +3,7 @@ import { Inpult } from '../../inpult/inpult';
 import { Button } from '../../button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FormEvent, useEffect, useState } from 'react';
-import { createBoard } from '@/src/utils/fecths';
+import { createBoard } from '../../../utils/fecths';
 import { useSession } from 'next-auth/react';
 import { TSession } from '../../modal';
 

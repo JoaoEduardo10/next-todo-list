@@ -62,7 +62,7 @@ export const FormCreateBoard = styled.form`
   ${({ theme }) => css`
     position: relative;
     background-color: ${theme.colors.primaryColor};
-    height: 40%;
+    height: 60%;
     width: 50%;
     display: flex;
     flex-direction: column;
