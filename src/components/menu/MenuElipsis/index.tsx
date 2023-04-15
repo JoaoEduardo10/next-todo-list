@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Button } from '../../button';
 import * as S from './styles';
 import { signOut } from 'next-auth/react';
+import { ConteinerDelete } from '../../forms/conteinerDelete';
+import { useAppSelector } from '@/src/app/hooks';
 
 export type MenuElipsisProps = {
   show: boolean;
@@ -9,7 +11,9 @@ export type MenuElipsisProps = {
 };
 
 export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
+  const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const [rendered, setRendered] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
 
   useEffect(() => {
     const time = setTimeout(() => {
@@ -24,15 +28,27 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   };
 
   const handleMenuElipsiDeleteClick = () => {
-    setMenuElipsis(false);
+    setShowDelete(true);
   };
 
   const handleSignOut = () => {
     signOut({ redirect: true });
   };
 
+  const handleButtonCancelDelete = () => {};
+
+  const handleButtonDelete = async () => {};
+
   return (
     <S.Conteiner aria-label="MenuElipsis" show={show} rendered={rendered}>
+      <ConteinerDelete
+        showDelete={showDelete}
+        rendered={rendered}
+        textHeading="Excluir este quadro?"
+        textParagraph={`Tem certeza de que deseja excluir o quadro " ${actualBoard.boardName} "? Esta ação removerá todas as colunas e tarefas e não pode ser revertida.`}
+        onClickButtonCancel={handleButtonCancelDelete}
+        onClickButtonDelete={handleButtonDelete}
+      />
       <S.Paragraph
         aria-label="Editar Quadro"
         onClick={handleMenuElipsiEditClick}

@@ -100,10 +100,10 @@ describe('MenuElipsis', () => {
       stori,
     );
 
-    const deleteBoard = screen.getByLabelText('Deletar Quadro');
+    const conteinerDelete = screen.getByLabelText('Deletar Quadro');
 
-    expect(deleteBoard).toBeInTheDocument();
-    fireEvent.click(deleteBoard);
+    expect(conteinerDelete).toBeInTheDocument();
+    fireEvent.click(conteinerDelete);
 
     expect(functionSetMenuElipsis).toHaveBeenCalledWith(false);
   });
