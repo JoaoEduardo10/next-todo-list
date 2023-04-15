@@ -4,16 +4,11 @@ import { renderTheme } from '../../../utils/render-theme';
 import fetchMock from 'jest-fetch-mock';
 import { useSession } from 'next-auth/react';
 import { store } from '../../../utils/mocks';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 import { TBoard } from '@/src/types';
 
 jest.mock('next-auth/react');
-
-const board: TBoard = {
-  boardName: 'test',
-  id: '123',
-  taskConnect: '123',
-  userId: '123',
-};
 
 describe('<CreateBoard />', () => {
   const fn = jest.fn();
@@ -23,7 +18,7 @@ describe('<CreateBoard />', () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
-    jest.enableAutomock();
+    fetchMock.enableMocks();
 
     nextAuthUseSessionMock.mockReturnValue({
       data: [{ user: 'test' }],
@@ -91,6 +86,11 @@ describe('<CreateBoard />', () => {
   it('should successfully create a board', async () => {
     const showMock = jest.fn();
 
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as any);
+
     await act(async () =>
       renderTheme(
         <CreateBoard
@@ -104,14 +104,41 @@ describe('<CreateBoard />', () => {
       ),
     );
 
+    const form = screen.getByLabelText('Form');
     const input = screen.getByPlaceholderText('Nome do Quadro');
-    const button = screen.getByRole('button', { name: 'Criar Board' });
-
-    act(() => {
-      jest.advanceTimersByTime(4000);
-    });
 
     fireEvent.change(input, { target: { value: 'test' } });
-    fireEvent.click(button);
+
+    fireEvent.submit(form);
+  });
+
+  it('should close create a board', async () => {
+    const showMock = jest.fn();
+
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as any);
+
+    await act(async () =>
+      renderTheme(
+        <CreateBoard
+          buttonName="Criar Board"
+          rendering={true}
+          setShow={showMock}
+          show={true}
+          text="Crie Uma board"
+        />,
+        store,
+      ),
+    );
+
+    const closeBoard = screen.getByLabelText('Close Board');
+
+    expect(closeBoard).toBeInTheDocument();
+
+    fireEvent.click(closeBoard);
+
+    expect(showMock).toHaveBeenCalledWith(false);
   });
 });

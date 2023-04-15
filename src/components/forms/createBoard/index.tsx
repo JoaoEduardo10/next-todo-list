@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { setBoards } from '../../../app/features/Boards/boardSlice';
 import { Loading } from '../../loading';
 import { MessageError } from '../../messageError';
+import { act } from 'react-dom/test-utils';
 
 export type CreateBoardProps = {
   rendering: boolean;
@@ -57,7 +58,10 @@ export const CreateBoard = ({
 
     dispatch(setBoards(response));
 
-    setLoading(false);
+    act(() => {
+      setLoading(false);
+    });
+
     setShow(false);
   };
 
