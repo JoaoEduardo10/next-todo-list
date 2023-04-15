@@ -118,4 +118,20 @@ describe('MenuDropdownModal component', () => {
     expect(links.length).toBe(0);
     expect(button).toBeInTheDocument();
   });
+
+  it('should open createBoard componment', () => {
+    renderTheme(<MenuDropdownModal show={true} />, store);
+
+    const createBoardOpenButton = screen.getByLabelText(
+      'Conteiner Text Create',
+    );
+
+    expect(createBoardOpenButton).toBeInTheDocument();
+
+    fireEvent.click(createBoardOpenButton);
+
+    const createBoard = screen.getByLabelText('Criação de Quadro');
+
+    expect(createBoard).toBeInTheDocument();
+  });
 });
