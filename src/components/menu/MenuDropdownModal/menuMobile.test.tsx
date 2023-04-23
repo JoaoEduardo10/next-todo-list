@@ -128,7 +128,7 @@ describe('MenuDropdownModal component', () => {
 
     fireEvent.click(boardOpenButton);
 
-    const board = screen.getByLabelText('Criação de Quadro');
+    const board = screen.getByLabelText('Quadro');
 
     expect(board).toBeInTheDocument();
   });

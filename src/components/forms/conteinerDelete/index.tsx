@@ -22,7 +22,11 @@ export const ConteinerDelete = ({
   loading,
 }: ConteinerDeleteProps) => {
   return (
-    <S.Conteiner show={showDelete} rendered={rendered}>
+    <S.Conteiner
+      aria-label="conteinerDelete"
+      show={showDelete}
+      rendered={rendered}
+    >
       {loading && <Loading />}
       <S.ConteinerDelete>
         <S.Heading>{textHeading}</S.Heading>
