@@ -3,10 +3,10 @@ import { Button } from '../../button';
 import * as S from './styles';
 import { signOut, useSession } from 'next-auth/react';
 import { ConteinerDelete } from '../../forms/conteinerDelete';
-import { deleteBoard } from '@/src/utils/fecths';
+import { deleteBoard } from '../../../utils/fecths';
 import { TSession } from '../../modal';
 
-import { useAppSelector, useAppDispatch } from '@/src/app/hooks';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { deleteBoard as deleteBoardSlice } from '../../../app/features/Boards/boardSlice';
 
 export type MenuElipsisProps = {
