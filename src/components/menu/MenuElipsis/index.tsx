@@ -8,6 +8,7 @@ import { TSession } from '../../modal';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { deleteBoard as deleteBoardSlice } from '../../../app/features/Boards/boardSlice';
+import { act } from 'react-dom/test-utils';
 
 export type MenuElipsisProps = {
   show: boolean;
@@ -47,13 +48,14 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   };
 
   const handleButtonDelete = async () => {
-    if (Session) {
-      setLoading(true);
-      await deleteBoard(Session.acessToken, actualBoard.id);
-      dispatch(deleteBoardSlice({ id: actualBoard.id }));
+    setLoading(true);
+    await deleteBoard(Session.acessToken, actualBoard.id);
+    dispatch(deleteBoardSlice({ id: actualBoard.id }));
+
+    act(() => {
       setLoading(false);
       setShowDelete(false);
-    }
+    });
   };
 
   return (
