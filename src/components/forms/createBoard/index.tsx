@@ -13,7 +13,7 @@ import { Loading } from '../../loading';
 import { MessageError } from '../../messageError';
 import { act } from 'react-dom/test-utils';
 
-export type DynamicGridBoardProps = {
+export type CreateBoardProps = {
   rendering: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   show: boolean;
@@ -21,13 +21,13 @@ export type DynamicGridBoardProps = {
   buttonName: string;
 };
 
-export const DynamicGridBoard = ({
+export const CreateBoard = ({
   rendering,
   setShow,
   show,
   buttonName,
   text,
-}: DynamicGridBoardProps) => {
+}: CreateBoardProps) => {
   const dispatch = useAppDispatch();
   const { data: Session } = useSession() as TSession;
   const [valueBoardName, setValueBoardName] = useState('');

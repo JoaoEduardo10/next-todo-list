@@ -1,12 +1,12 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { DynamicGridBoard } from '.';
+import { CreateBoard } from '.';
 import { renderTheme } from '../../../utils/render-theme';
 import { useSession } from 'next-auth/react';
 import fetchMock from 'jest-fetch-mock';
 
 jest.mock('next-auth/react');
 
-describe('<DynamicGridBoard />', () => {
+describe('<CreateBoard />', () => {
   const setShow = jest.fn();
   const useSessionMock = useSession as jest.MockedFunction<typeof useSession>;
 
@@ -26,9 +26,9 @@ describe('<DynamicGridBoard />', () => {
     fetchMock.resetMocks();
   });
 
-  it('should render a DynamicGridBoard component', () => {
+  it('should render a CreateBoard component', () => {
     renderTheme(
-      <DynamicGridBoard
+      <CreateBoard
         buttonName="Create Board"
         rendering={true}
         setShow={setShow}
@@ -47,9 +47,9 @@ describe('<DynamicGridBoard />', () => {
     expect(heading).toHaveTextContent('create Board');
   });
 
-  it('should close the daynamicBoard', () => {
+  it('should close the createBoard', () => {
     renderTheme(
-      <DynamicGridBoard
+      <CreateBoard
         buttonName="Create Board"
         rendering={true}
         setShow={setShow}
@@ -69,7 +69,7 @@ describe('<DynamicGridBoard />', () => {
 
   it('should show an error message for not adding a boardname', () => {
     renderTheme(
-      <DynamicGridBoard
+      <CreateBoard
         buttonName="Create Board"
         rendering={true}
         setShow={setShow}
@@ -107,7 +107,7 @@ describe('<DynamicGridBoard />', () => {
 
     await act(async () =>
       renderTheme(
-        <DynamicGridBoard
+        <CreateBoard
           buttonName="Create Board"
           rendering={true}
           setShow={setShow}

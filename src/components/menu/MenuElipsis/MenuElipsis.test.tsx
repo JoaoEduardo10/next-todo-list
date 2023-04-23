@@ -49,7 +49,7 @@ describe('<MenuElipsis />', () => {
     expect(buttonSignOut).toBeInTheDocument();
   });
 
-  it('should show the DynamicGridBoard for the board on click', () => {
+  it('should show the CreateBoard for the board on click', () => {
     renderTheme(
       <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
       store,

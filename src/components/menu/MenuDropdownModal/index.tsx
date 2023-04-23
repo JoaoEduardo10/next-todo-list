@@ -5,7 +5,7 @@ import { Button } from '../../button';
 import { TBoard } from '@/src/types';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { setActualBoard as setcatualBoardDispatch } from '../../../app/features/Boards/boardSlice';
-import { DynamicGridBoard } from '../../forms/DynamicGridBoard';
+import { CreateBoard } from '../../forms/createBoard';
 
 export type MenuDropdownModalProps = {
   show: boolean;
@@ -53,7 +53,7 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
 
   return (
     <>
-      <DynamicGridBoard
+      <CreateBoard
         text="Adicionar quadros"
         rendering={rendering}
         setShow={setShowBoard}

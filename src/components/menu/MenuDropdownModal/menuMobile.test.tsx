@@ -133,7 +133,7 @@ describe('MenuDropdownModal component', () => {
     expect(dynamicBoard).toBeInTheDocument();
   });
 
-  it('should show DynamicGridBoard', () => {
+  it('should show CreateBoard', () => {
     renderTheme(<MenuDropdownModal show={true} />);
 
     const button = screen.getByRole('button', { name: 'Criar um quadro' });

@@ -21,6 +21,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   const dispatch = useAppDispatch();
   const [rendered, setRendered] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   }, []);
 
   const handleMenuElipsiEditClick = () => {
-    setMenuElipsis(false);
+    setShowEdit(true);
   };
 
   const handleMenuElipsiDeleteClick = () => {
