@@ -132,4 +132,18 @@ describe('MenuDropdownModal component', () => {
 
     expect(dynamicBoard).toBeInTheDocument();
   });
+
+  it('should show DynamicGridBoard', () => {
+    renderTheme(<MenuDropdownModal show={true} />);
+
+    const button = screen.getByRole('button', { name: 'Criar um quadro' });
+    const dynamicBoard = screen.getByLabelText('Dynamic Board');
+
+    expect(button).toBeInTheDocument();
+
+    fireEvent.click(button);
+    expect(dynamicBoard).toHaveStyle({
+      opacity: '1',
+    });
+  });
 });
