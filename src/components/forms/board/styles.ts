@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Button } from '../../button/styles';
 import { Label } from '../../inpult/styles';
 
-const ShowCreateBoard = (rendering: boolean, show: boolean) => css`
+const ShowBoard = (rendering: boolean, show: boolean) => css`
   ${show
     ? css`
         animation: openShow 300ms ease-in-out;
@@ -39,7 +39,7 @@ const ShowCreateBoard = (rendering: boolean, show: boolean) => css`
       `}
 `;
 
-export const ShowCreateBoardConteiner = styled.div<{
+export const ShowBoardConteiner = styled.div<{
   rendering: boolean;
   show: boolean;
 }>`
@@ -54,11 +54,11 @@ export const ShowCreateBoardConteiner = styled.div<{
     align-items: center;
     z-index: 10;
 
-    ${ShowCreateBoard(rendering, show)}
+    ${ShowBoard(rendering, show)}
   `}
 `;
 
-export const FormCreateBoard = styled.form`
+export const FormBoard = styled.form`
   ${({ theme }) => css`
     position: relative;
     background-color: ${theme.colors.primaryColor};

@@ -3,7 +3,7 @@ import { Inpult } from '../../inpult/inpult';
 import { Button } from '../../button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FormEvent, useEffect, useState } from 'react';
-import { createBoard } from '../../../utils/fecths';
+import { board } from '../../../utils/fecths';
 import { useSession } from 'next-auth/react';
 import { TSession } from '../../modal';
 
@@ -13,7 +13,7 @@ import { Loading } from '../../loading';
 import { MessageError } from '../../messageError';
 import { act } from 'react-dom/test-utils';
 
-export type CreateBoardProps = {
+export type BoardProps = {
   rendering: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   show: boolean;
@@ -21,13 +21,13 @@ export type CreateBoardProps = {
   buttonName: string;
 };
 
-export const CreateBoard = ({
+export const Board = ({
   rendering,
   setShow,
   show,
   buttonName,
   text,
-}: CreateBoardProps) => {
+}: BoardProps) => {
   const dispatch = useAppDispatch();
   const { data: Session } = useSession() as TSession;
   const [valueBoardName, setValueBoardName] = useState('');
@@ -43,7 +43,7 @@ export const CreateBoard = ({
     return () => clearTimeout(time);
   }, [error]);
 
-  const handleShowCreateBoardSubmit = async (event: FormEvent) => {
+  const handleShowBoardSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     if (!valueBoardName) {
@@ -54,7 +54,7 @@ export const CreateBoard = ({
 
     setLoading(true);
 
-    const response = await createBoard(Session.acessToken, valueBoardName);
+    const response = await board(Session.acessToken, valueBoardName);
 
     dispatch(setBoards(response));
 
@@ -63,20 +63,14 @@ export const CreateBoard = ({
     });
 
     setShow(false);
+    setValueBoardName('');
   };
 
   return (
-    <S.ShowCreateBoardConteiner
-      aria-label="Criação de Quadro"
-      rendering={rendering}
-      show={show}
-    >
+    <S.ShowBoardConteiner aria-label="Quadro" rendering={rendering} show={show}>
       {rendering && <MessageError text={messageError} error={error} />}
       {loading && <Loading />}
-      <S.FormCreateBoard
-        aria-label="Form"
-        onSubmit={handleShowCreateBoardSubmit}
-      >
+      <S.FormBoard aria-label="Form" onSubmit={handleShowBoardSubmit}>
         <AiOutlineClose
           aria-label="Close Board"
           onClick={() => setShow(false)}
@@ -89,7 +83,7 @@ export const CreateBoard = ({
           value={valueBoardName}
         />
         <Button>{buttonName}</Button>
-      </S.FormCreateBoard>
-    </S.ShowCreateBoardConteiner>
+      </S.FormBoard>
+    </S.ShowBoardConteiner>
   );
 };

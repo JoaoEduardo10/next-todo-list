@@ -1,5 +1,5 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { CreateBoard } from '.';
+import { Board } from '.';
 import { renderTheme } from '../../../utils/render-theme';
 import fetchMock from 'jest-fetch-mock';
 import { useSession } from 'next-auth/react';
@@ -10,7 +10,7 @@ import { TBoard } from '@/src/types';
 
 jest.mock('next-auth/react');
 
-describe('<CreateBoard />', () => {
+describe('<Board />', () => {
   const fn = jest.fn();
   const nextAuthUseSessionMock = useSession as jest.MockedFunction<
     typeof useSession
@@ -31,9 +31,9 @@ describe('<CreateBoard />', () => {
     jest.clearAllMocks();
   });
 
-  it('should a render CreateBoard component with Childrens', () => {
+  it('should a render Board component with Childrens', () => {
     renderTheme(
-      <CreateBoard
+      <Board
         buttonName="Criar Board"
         rendering={true}
         setShow={fn}
@@ -43,16 +43,16 @@ describe('<CreateBoard />', () => {
       store,
     );
 
-    const conteinerCreateBoard = screen.getByLabelText('Criação de Quadro');
+    const conteinerBoard = screen.getByLabelText('Criação de Quadro');
     const form = screen.getByLabelText('Form');
-    const closeCreateBoard = screen.getByLabelText('Close Board');
+    const closeBoard = screen.getByLabelText('Close Board');
     const heading = screen.getByLabelText('Cabeçalho');
     const input = screen.getByPlaceholderText('Nome do Quadro');
     const button = screen.getByRole('button', { name: 'Criar Board' });
 
-    expect(conteinerCreateBoard).toBeInTheDocument();
+    expect(conteinerBoard).toBeInTheDocument();
     expect(form).toBeInTheDocument();
-    expect(closeCreateBoard).toBeInTheDocument();
+    expect(closeBoard).toBeInTheDocument();
     expect(heading).toBeInTheDocument();
     expect(input).toBeInTheDocument();
     expect(button).toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('<CreateBoard />', () => {
 
   it('should trigger the error message for not typing a board name', () => {
     renderTheme(
-      <CreateBoard
+      <Board
         buttonName="Criar Board"
         rendering={true}
         setShow={fn}
@@ -93,7 +93,7 @@ describe('<CreateBoard />', () => {
 
     await act(async () =>
       renderTheme(
-        <CreateBoard
+        <Board
           buttonName="Criar Board"
           rendering={true}
           setShow={showMock}
@@ -122,7 +122,7 @@ describe('<CreateBoard />', () => {
 
     await act(async () =>
       renderTheme(
-        <CreateBoard
+        <Board
           buttonName="Criar Board"
           rendering={true}
           setShow={showMock}

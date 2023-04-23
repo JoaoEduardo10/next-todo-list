@@ -5,7 +5,7 @@ import { Button } from '../../button';
 import { TBoard } from '@/src/types';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { setActualBoard as setcatualBoardDispatch } from '../../../app/features/Boards/boardSlice';
-import { CreateBoard } from '../../forms/createBoard';
+import { Board } from '../../forms/board';
 
 export type MenuDropdownModalProps = {
   show: boolean;
@@ -17,7 +17,7 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
   const [rendering, setRendering] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState('');
   const [actualBoard, setActualBoard] = useState<TBoard>();
-  const [showCreateBoard, setShowCreateBoard] = useState(false);
+  const [showBoard, setShowBoard] = useState(false);
 
   // para não aparecer o menu ao renderizar o site
   useEffect(() => {
@@ -53,11 +53,11 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
 
   return (
     <>
-      <CreateBoard
+      <Board
         text="Adicionar quadros"
         rendering={rendering}
-        setShow={setShowCreateBoard}
-        show={showCreateBoard}
+        setShow={setShowBoard}
+        show={showBoard}
         buttonName="Criar novo Quadro"
       />
       <S.MenuDropdownModal aria-label="Menu" show={show} rendering={rendering}>
@@ -80,7 +80,7 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
                 <div
                   aria-label="Conteiner Text Create"
                   className="Create_Board"
-                  onClick={() => setShowCreateBoard(true)}
+                  onClick={() => setShowBoard(true)}
                 >
                   <MdOutlineSpaceDashboard /> <span>+ Criar um Quadro</span>
                 </div>
@@ -88,7 +88,7 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
             </>
           ) : (
             <S.ConteinerDiv aria-label="Conteiner Button">
-              <Button handleOnClick={() => setShowCreateBoard(true)}>
+              <Button handleOnClick={() => setShowBoard(true)}>
                 Criar um quadro
               </Button>
             </S.ConteinerDiv>

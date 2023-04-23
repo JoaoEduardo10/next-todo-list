@@ -55,6 +55,7 @@ export const Conteiner = styled.div<{ show: boolean; rendered: boolean }>`
 
 export const ConteinerDelete = styled.section`
   ${({ theme }) => css`
+    position: relative;
     background-color: ${theme.colors.primaryColor};
     width: 40%;
     border-radius: 0.5rem;

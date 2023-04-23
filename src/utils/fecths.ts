@@ -83,7 +83,7 @@ const getBoardWithTasks = async (token: string, id: string) => {
   return data;
 };
 
-const createBoard = async (token: string, boardName: string) => {
+const board = async (token: string, boardName: string) => {
   const response = await fetch(`${urlApi}/boards`, {
     method: 'POST',
     headers: {
@@ -118,6 +118,6 @@ export {
   getAllBoards,
   getBoard,
   getBoardWithTasks,
-  createBoard,
+  board,
   deleteBoard,
 };

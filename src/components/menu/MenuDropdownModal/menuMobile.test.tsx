@@ -119,19 +119,17 @@ describe('MenuDropdownModal component', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('should open createBoard componment', () => {
+  it('should open board componment', () => {
     renderTheme(<MenuDropdownModal show={true} />, store);
 
-    const createBoardOpenButton = screen.getByLabelText(
-      'Conteiner Text Create',
-    );
+    const boardOpenButton = screen.getByLabelText('Conteiner Text Create');
 
-    expect(createBoardOpenButton).toBeInTheDocument();
+    expect(boardOpenButton).toBeInTheDocument();
 
-    fireEvent.click(createBoardOpenButton);
+    fireEvent.click(boardOpenButton);
 
-    const createBoard = screen.getByLabelText('Criação de Quadro');
+    const board = screen.getByLabelText('Criação de Quadro');
 
-    expect(createBoard).toBeInTheDocument();
+    expect(board).toBeInTheDocument();
   });
 });

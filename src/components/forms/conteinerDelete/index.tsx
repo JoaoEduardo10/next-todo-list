@@ -1,5 +1,6 @@
 import * as S from './styles';
 import { Button } from '../../button';
+import { Loading } from '../../loading';
 
 export type ConteinerDeleteProps = {
   showDelete: boolean;
@@ -8,6 +9,7 @@ export type ConteinerDeleteProps = {
   textParagraph: string;
   onClickButtonCancel: () => void;
   onClickButtonDelete: () => void;
+  loading: boolean;
 };
 
 export const ConteinerDelete = ({
@@ -17,9 +19,11 @@ export const ConteinerDelete = ({
   textParagraph,
   onClickButtonCancel,
   onClickButtonDelete,
+  loading,
 }: ConteinerDeleteProps) => {
   return (
     <S.Conteiner show={showDelete} rendered={rendered}>
+      {loading && <Loading />}
       <S.ConteinerDelete>
         <S.Heading>{textHeading}</S.Heading>
         <S.Paragraph>{textParagraph}</S.Paragraph>

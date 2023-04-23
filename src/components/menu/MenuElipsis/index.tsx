@@ -15,11 +15,12 @@ export type MenuElipsisProps = {
 };
 
 export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
+  const { data: Session } = useSession() as TSession;
   const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const dispatch = useAppDispatch();
   const [rendered, setRendered] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const { data: Session } = useSession() as TSession;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const time = setTimeout(() => {
@@ -47,8 +48,10 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
 
   const handleButtonDelete = async () => {
     if (Session) {
+      setLoading(true);
       await deleteBoard(Session.acessToken, actualBoard.id);
       dispatch(deleteBoardSlice({ id: actualBoard.id }));
+      setLoading(false);
       setShowDelete(false);
     }
   };
@@ -56,6 +59,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   return (
     <S.Conteiner aria-label="MenuElipsis" show={show} rendered={rendered}>
       <ConteinerDelete
+        loading={loading}
         showDelete={showDelete}
         rendered={rendered}
         textHeading="Excluir este quadro?"

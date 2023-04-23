@@ -1,20 +1,20 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { CreateBoard, CreateBoardProps } from '.';
+import { Board, BoardProps } from '.';
 import { GlobalStyles } from '../../../styles/globals-styles';
 import { theme } from '../../../styles/theme';
 import { Provider } from 'react-redux';
 import { store } from '../../../utils/mocks';
 
 export default {
-  title: 'fomrs/CreateBoard',
-  component: CreateBoard,
+  title: 'fomrs/Board',
+  component: Board,
   args: {
     buttonName: 'Create teste StoryBook',
     rendering: true,
     show: true,
     text: 'Teste StoryBoo',
-  } as CreateBoardProps,
+  } as BoardProps,
   decorators: [
     (Story) => (
       <Provider store={store}>
@@ -27,12 +27,10 @@ export default {
   ],
 } as Meta;
 
-export const Tamplate: ComponentStory<typeof CreateBoard> = (
-  agrs: CreateBoardProps,
-) => {
+export const Tamplate: ComponentStory<typeof Board> = (agrs: BoardProps) => {
   return (
     <div style={{ height: '100vh' }}>
-      <CreateBoard {...agrs} />
+      <Board {...agrs} />
     </div>
   );
 };
