@@ -10,6 +10,17 @@ export const boardsSlice = createSlice({
     setBoards: (state, action: PayloadAction<TBoard>) => {
       state.allBoards.push(action.payload);
     },
+    deleteBoard: (state, action: PayloadAction<{ id: string }>) => {
+      const idToRemove = action.payload.id;
+
+      const indexArreyRemove = state.allBoards.findIndex(
+        (board) => board.id == idToRemove,
+      );
+
+      if (indexArreyRemove !== -1) {
+        state.allBoards.splice(indexArreyRemove, 1);
+      }
+    },
     setActualBoard: (state, action: PayloadAction<TBoard>) => {
       state.actualBoard = action.payload;
     },
@@ -25,11 +36,11 @@ export const boardsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   setBoards,
   setActualBoard,
   setActualBoardWithTasks,
   postNewTasksInBoard,
+  deleteBoard,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;

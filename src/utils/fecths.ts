@@ -98,6 +98,20 @@ const createBoard = async (token: string, boardName: string) => {
   return data;
 };
 
+const deleteBoard = async (token: string, boardId: string) => {
+  const response = await fetch(`${urlApi}/boards/${boardId}`, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data: TBoard = await response.json();
+
+  return data;
+};
+
 export {
   loginUser,
   createUser,
@@ -105,4 +119,5 @@ export {
   getBoard,
   getBoardWithTasks,
   createBoard,
+  deleteBoard,
 };

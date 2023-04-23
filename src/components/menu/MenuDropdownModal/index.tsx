@@ -88,7 +88,9 @@ export const MenuDropdownModal = ({ show }: MenuDropdownModalProps) => {
             </>
           ) : (
             <S.ConteinerDiv aria-label="Conteiner Button">
-              <Button>Criar um quadro</Button>
+              <Button handleOnClick={() => setShowCreateBoard(true)}>
+                Criar um quadro
+              </Button>
             </S.ConteinerDiv>
           )}
         </S.Menu>

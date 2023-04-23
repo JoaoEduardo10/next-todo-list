@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../../button';
 import * as S from './styles';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { ConteinerDelete } from '../../forms/conteinerDelete';
-import { useAppSelector } from '@/src/app/hooks';
+import { deleteBoard } from '@/src/utils/fecths';
+import { TSession } from '../../modal';
+
+import { useAppSelector, useAppDispatch } from '@/src/app/hooks';
+import { deleteBoard as deleteBoardSlice } from '../../../app/features/Boards/boardSlice';
 
 export type MenuElipsisProps = {
   show: boolean;
@@ -12,8 +16,10 @@ export type MenuElipsisProps = {
 
 export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   const actualBoard = useAppSelector((store) => store.boards.actualBoard);
+  const dispatch = useAppDispatch();
   const [rendered, setRendered] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const { data: Session } = useSession() as TSession;
 
   useEffect(() => {
     const time = setTimeout(() => {
@@ -35,9 +41,17 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
     signOut({ redirect: true });
   };
 
-  const handleButtonCancelDelete = () => {};
+  const handleButtonCancelDelete = () => {
+    setShowDelete(false);
+  };
 
-  const handleButtonDelete = async () => {};
+  const handleButtonDelete = async () => {
+    if (Session) {
+      await deleteBoard(Session.acessToken, actualBoard.id);
+      dispatch(deleteBoardSlice({ id: actualBoard.id }));
+      setShowDelete(false);
+    }
+  };
 
   return (
     <S.Conteiner aria-label="MenuElipsis" show={show} rendered={rendered}>
