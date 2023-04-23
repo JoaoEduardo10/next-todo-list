@@ -128,8 +128,8 @@ describe('MenuDropdownModal component', () => {
 
     fireEvent.click(boardOpenButton);
 
-    const board = screen.getByLabelText('Quadro');
+    const dynamicBoard = screen.getByLabelText('Dynamic Board');
 
-    expect(board).toBeInTheDocument();
+    expect(dynamicBoard).toBeInTheDocument();
   });
 });

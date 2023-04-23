@@ -13,7 +13,7 @@ import { Loading } from '../../loading';
 import { MessageError } from '../../messageError';
 import { act } from 'react-dom/test-utils';
 
-export type BoardProps = {
+export type DynamicGridBoardProps = {
   rendering: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   show: boolean;
@@ -21,13 +21,13 @@ export type BoardProps = {
   buttonName: string;
 };
 
-export const Board = ({
+export const DynamicGridBoard = ({
   rendering,
   setShow,
   show,
   buttonName,
   text,
-}: BoardProps) => {
+}: DynamicGridBoardProps) => {
   const dispatch = useAppDispatch();
   const { data: Session } = useSession() as TSession;
   const [valueBoardName, setValueBoardName] = useState('');
@@ -59,23 +59,26 @@ export const Board = ({
     dispatch(setBoards(response));
 
     act(() => {
+      setValueBoardName('');
       setLoading(false);
     });
-
     setShow(false);
-    setValueBoardName('');
   };
 
   return (
-    <S.ShowBoardConteiner aria-label="Quadro" rendering={rendering} show={show}>
+    <S.ShowBoardConteiner
+      aria-label="Dynamic Board"
+      rendering={rendering}
+      show={show}
+    >
       {rendering && <MessageError text={messageError} error={error} />}
       {loading && <Loading />}
-      <S.FormBoard aria-label="Form" onSubmit={handleShowBoardSubmit}>
+      <S.FormBoard role="form" onSubmit={handleShowBoardSubmit}>
         <AiOutlineClose
-          aria-label="Close Board"
+          aria-label="Close DynamicBoard"
           onClick={() => setShow(false)}
         />
-        <h2 aria-label="Cabeçalho">{text}</h2>
+        <h2 role="heading">{text}</h2>
         <Inpult
           placeholder="Nome do Quadro"
           type="text"

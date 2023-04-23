@@ -1,6 +1,6 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { Board, BoardProps } from '.';
+import { DynamicGridBoard, DynamicGridBoardProps } from '.';
 import { GlobalStyles } from '../../../styles/globals-styles';
 import { theme } from '../../../styles/theme';
 import { Provider } from 'react-redux';
@@ -8,13 +8,13 @@ import { store } from '../../../utils/mocks';
 
 export default {
   title: 'fomrs/Board',
-  component: Board,
+  component: DynamicGridBoard,
   args: {
     buttonName: 'Create teste StoryBook',
     rendering: true,
     show: true,
     text: 'Teste StoryBoo',
-  } as BoardProps,
+  } as DynamicGridBoardProps,
   decorators: [
     (Story) => (
       <Provider store={store}>
@@ -27,10 +27,12 @@ export default {
   ],
 } as Meta;
 
-export const Tamplate: ComponentStory<typeof Board> = (agrs: BoardProps) => {
+export const Tamplate: ComponentStory<typeof DynamicGridBoard> = (
+  agrs: DynamicGridBoardProps,
+) => {
   return (
     <div style={{ height: '100vh' }}>
-      <Board {...agrs} />
+      <DynamicGridBoard {...agrs} />
     </div>
   );
 };
