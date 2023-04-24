@@ -49,17 +49,25 @@ describe('<MenuElipsis />', () => {
     expect(buttonSignOut).toBeInTheDocument();
   });
 
-  it('should show the CreateBoard for the board on click', () => {
+  it('should show the updateBoard for the board on click', () => {
     renderTheme(
       <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
       store,
     );
 
     const buttonEdit = screen.getByLabelText('Editar Quadro');
+    const updateBoard = screen.getByLabelText('Update Board');
 
     expect(buttonEdit).toBeInTheDocument();
+    expect(updateBoard).toHaveStyle({
+      opacity: '0',
+    });
 
     fireEvent.click(buttonEdit);
+
+    expect(updateBoard).toHaveStyle({
+      opacity: '1',
+    });
   });
 
   it('should show the containerDelete for the board on click', () => {
