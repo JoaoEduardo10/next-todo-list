@@ -112,6 +112,25 @@ const deleteBoard = async (token: string, boardId: string) => {
   return data;
 };
 
+const updateBoard = async (
+  token: string,
+  boardId: string,
+  boardName: string,
+) => {
+  const response = await fetch(`${urlApi}/boards/${boardId}`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ boardName }),
+  });
+
+  const data: TBoard = await response.json();
+
+  return data;
+};
+
 export {
   loginUser,
   createUser,
@@ -120,4 +139,5 @@ export {
   getBoardWithTasks,
   board,
   deleteBoard,
+  updateBoard,
 };
