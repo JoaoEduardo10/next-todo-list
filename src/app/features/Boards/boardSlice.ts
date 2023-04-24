@@ -21,6 +21,20 @@ export const boardsSlice = createSlice({
         state.allBoards.splice(indexArreyRemove, 1);
       }
     },
+    updateBoard: (
+      state,
+      action: PayloadAction<{ id: string; boardName: string }>,
+    ) => {
+      const idToRemove = action.payload.id;
+
+      const indexArreyRemove = state.allBoards.findIndex(
+        (board) => board.id == idToRemove,
+      );
+
+      if (indexArreyRemove !== -1) {
+        state.actualBoard.boardName = action.payload.boardName;
+      }
+    },
     setActualBoard: (state, action: PayloadAction<TBoard>) => {
       state.actualBoard = action.payload;
     },
@@ -42,5 +56,6 @@ export const {
   setActualBoardWithTasks,
   postNewTasksInBoard,
   deleteBoard,
+  updateBoard,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;
