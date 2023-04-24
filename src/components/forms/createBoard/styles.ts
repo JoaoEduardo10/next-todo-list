@@ -46,13 +46,14 @@ export const ShowBoardConteiner = styled.div<{
   ${({ theme, rendering, show }) => css`
     position: fixed;
     top: 0%;
+    left: 0%;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 20;
 
     ${ShowBoard(rendering, show)}
   `}
@@ -62,7 +63,7 @@ export const FormBoard = styled.form`
   ${({ theme }) => css`
     position: relative;
     background-color: ${theme.colors.primaryColor};
-    height: 60%;
+    height: 50%;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -83,10 +84,39 @@ export const FormBoard = styled.form`
 
     ${Button} {
       width: 50%;
+      height: 5rem;
     }
 
     ${Label} {
       width: 80%;
+    }
+
+    ${theme.media_screen_size.phone} {
+      width: 90%;
+      height: 50%;
+
+      ${Label} {
+        width: 100%;
+      }
+
+      ${Button} {
+        height: 7rem;
+        width: 80%;
+      }
+    }
+  `}
+`;
+
+export const ConteinerButton = styled.div`
+  ${({ theme }) => css`
+    height: 5rem;
+    width: 40% !important;
+    margin-top: 5rem;
+
+    & > ${Button} {
+      margin-top: 0;
+      width: 100%;
+      height: 100%;
     }
   `}
 `;

@@ -63,6 +63,10 @@ export const ConteinerDelete = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    ${theme.media_screen_size.phone} {
+      width: 95%;
+    }
   `}
 `;
 

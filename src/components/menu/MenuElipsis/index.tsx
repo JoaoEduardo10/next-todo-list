@@ -9,6 +9,7 @@ import { TSession } from '../../modal';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { deleteBoard as deleteBoardSlice } from '../../../app/features/Boards/boardSlice';
 import { act } from 'react-dom/test-utils';
+import { UpdateBoard } from '../../forms/updateBoard';
 
 export type MenuElipsisProps = {
   show: boolean;
@@ -85,6 +86,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
       <div aria-label="Conteiner Button">
         <Button handleOnClick={handleSignOut}>Sair</Button>
       </div>
+      <UpdateBoard rendering={rendered} setShow={setShowEdit} show={showEdit} />
     </S.Conteiner>
   );
 };
