@@ -32,7 +32,11 @@ export const boardsSlice = createSlice({
       );
 
       if (indexArreyRemove !== -1) {
-        state.actualBoard.boardName = action.payload.boardName;
+        state.allBoards.map((board) => {
+          if (board.id == idToRemove) {
+            board.boardName = action.payload.boardName;
+          }
+        });
       }
     },
     setActualBoard: (state, action: PayloadAction<TBoard>) => {
