@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
+
 import { Button } from '../../button/styles';
 import { Label } from '../../inpult/styles';
+import { MessageError } from '../../messageError/styles';
+import { LoadingCicle1, LoadingCicle2 } from '../../loading/styles';
 
 const ShowBoard = (rendering: boolean, show: boolean) => css`
   ${show
@@ -56,6 +59,10 @@ export const ShowBoardConteiner = styled.div<{
     z-index: 20;
 
     ${ShowBoard(rendering, show)}
+
+    ${MessageError} {
+      width: 30%;
+    }
   `}
 `;
 
@@ -72,6 +79,16 @@ export const FormBoard = styled.form`
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
+
+    ${LoadingCicle1} {
+      width: 7rem;
+      height: 7rem;
+
+      ${LoadingCicle2} {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+    }
 
     & > svg {
       position: absolute;

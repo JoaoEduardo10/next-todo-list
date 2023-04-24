@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../../button/styles';
+import { LoadingCicle1, LoadingCicle2 } from '../../loading/styles';
 
 const showDelete = (show: boolean, rendered: boolean) => css`
   ${show
@@ -63,6 +64,16 @@ export const ConteinerDelete = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    ${LoadingCicle1} {
+      width: 7rem;
+      height: 7rem;
+
+      ${LoadingCicle2} {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+    }
 
     ${theme.media_screen_size.phone} {
       width: 95%;

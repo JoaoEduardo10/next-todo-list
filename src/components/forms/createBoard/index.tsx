@@ -72,8 +72,8 @@ export const CreateBoard = ({
       show={show}
     >
       {rendering && <MessageError text={messageError} error={error} />}
-      {loading && <Loading />}
       <S.FormBoard role="form" onSubmit={handleShowBoardSubmit}>
+        {loading && <Loading />}
         <AiOutlineClose
           aria-label="Close DynamicBoard"
           onClick={() => setShow(false)}

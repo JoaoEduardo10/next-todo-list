@@ -27,8 +27,8 @@ export const ConteinerDelete = ({
       show={showDelete}
       rendered={rendered}
     >
-      {loading && <Loading />}
       <S.ConteinerDelete>
+        {loading && <Loading />}
         <S.Heading>{textHeading}</S.Heading>
         <S.Paragraph>{textParagraph}</S.Paragraph>
         <S.ConteinerButton>
