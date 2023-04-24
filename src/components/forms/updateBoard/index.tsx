@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from '../createBoard/styles';
 import { MessageError } from '../../messageError';
 import { Loading } from '../../loading';
@@ -11,6 +11,7 @@ import { updateBoard as updateBoardSlice } from '../../../app/features/Boards/bo
 import { updateBoard } from '../../../utils/fecths';
 import { useSession } from 'next-auth/react';
 import { TSession } from '../../modal';
+import { act } from 'react-dom/test-utils';
 
 export type UpdateBoardProps = {
   rendering: boolean;
@@ -31,6 +32,7 @@ export const UpdateBoard = ({ rendering, show, setShow }: UpdateBoardProps) => {
     const time = setTimeout(() => {
       if (error) {
         setError(false);
+        setMessageError('');
       }
     }, 4000);
 
@@ -46,7 +48,8 @@ export const UpdateBoard = ({ rendering, show, setShow }: UpdateBoardProps) => {
 
     if (!valueBoardName) {
       setError(true);
-      setMessageError('adicione um nome par alterar');
+      setMessageError('adicione um nome para alterar');
+      return;
     }
 
     setLoading(true);
@@ -60,14 +63,15 @@ export const UpdateBoard = ({ rendering, show, setShow }: UpdateBoardProps) => {
       updateBoardSlice({ boardName: newBoard.boardName, id: actuaBoard.id }),
     );
 
-    setLoading(false);
-    setValueBoardName(newBoard.boardName);
-    setShow(false);
+    act(() => {
+      setLoading(false);
+      setShow(false);
+    });
   };
 
   return (
     <S.ShowBoardConteiner
-      aria-label="Dynamic Board"
+      aria-label="Update Board"
       rendering={rendering}
       show={show}
     >
@@ -75,7 +79,7 @@ export const UpdateBoard = ({ rendering, show, setShow }: UpdateBoardProps) => {
       <S.FormBoard role="form" onSubmit={handleShowBoardSubmit}>
         {loading && <Loading />}
         <AiOutlineClose
-          aria-label="Close DynamicBoard"
+          aria-label="Close UpdateBoard"
           onClick={() => setShow(false)}
         />
         <h2 role="heading">Editar quadro</h2>
