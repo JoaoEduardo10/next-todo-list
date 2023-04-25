@@ -1,4 +1,4 @@
-import { TSubTasks } from '@/src/types';
+import { TSubTasks } from '../../types';
 import * as S from './styles';
 import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
