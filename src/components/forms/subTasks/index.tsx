@@ -1,14 +1,14 @@
 import { TSubTasks } from '@/src/types';
 import * as S from './styles';
-import { Inpult } from '../../inpult/inpult';
 import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 export type SubTasksProps = {
   setSubTasks: React.Dispatch<React.SetStateAction<TSubTasks[]>>;
+  clearInput: boolean;
 };
 
-export const SubTasks = ({ setSubTasks }: SubTasksProps) => {
+export const SubTasks = ({ setSubTasks, clearInput }: SubTasksProps) => {
   const [inputs, setInputs] = useState<string[]>(['']);
 
   const handleInputChange = (
@@ -32,11 +32,11 @@ export const SubTasks = ({ setSubTasks }: SubTasksProps) => {
   const handleCloseInput = (index: number) => {
     const newInput = [...inputs];
 
-    const getInputId = newInput.findIndex((_input, indexF) => {
-      return indexF == index;
+    const getInputIndex = newInput.findIndex((_input, indexFunction) => {
+      return indexFunction == index;
     });
 
-    newInput.splice(getInputId, 1);
+    newInput.splice(getInputIndex, 1);
     setInputs([...newInput]);
   };
 
@@ -48,6 +48,12 @@ export const SubTasks = ({ setSubTasks }: SubTasksProps) => {
     setSubTasks(subTasks);
   }, [inputs, setSubTasks]);
 
+  useEffect(() => {
+    if (clearInput) {
+      setInputs(['']);
+    }
+  }, [clearInput]);
+
   return (
     <S.Conteiner>
       <S.ConteinerAllInputs>
@@ -58,6 +64,7 @@ export const SubTasks = ({ setSubTasks }: SubTasksProps) => {
               name={input}
               type="text"
               onChange={(Event) => handleInputChange(Event, index)}
+              value={input}
             />
             <span onClick={() => handleCloseInput(index)}>
               <AiOutlineClose aria-label="Delete SubTarefa" />
