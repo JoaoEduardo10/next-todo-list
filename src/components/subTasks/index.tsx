@@ -55,10 +55,10 @@ export const SubTasks = ({ setSubTasks, clearInput }: SubTasksProps) => {
   }, [clearInput]);
 
   return (
-    <S.Conteiner>
-      <S.ConteinerAllInputs>
+    <S.Conteiner role="listbox">
+      <S.ConteinerAllInputs role="list">
         {inputs.map((input, index) => (
-          <S.ConteinerInput key={index}>
+          <S.ConteinerInput key={index} role="listitem">
             <S.Input
               placeholder="Nome da tarefa"
               name={input}
