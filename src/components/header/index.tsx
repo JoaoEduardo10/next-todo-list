@@ -9,6 +9,7 @@ import { MenuElipsis } from '../menu/MenuElipsis';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { setActualBoard } from '../../app/features/Boards/boardSlice';
+import { CreateTasks } from '../forms/createTask';
 
 export type HeaderProps = {
   logo: string;
@@ -20,11 +21,19 @@ export const Header = ({ logo }: HeaderProps) => {
   const boards = useAppSelector((store) => store.boards.allBoards);
   const [menuDropdownModalShow, setMenuDropdownModalShow] = useState(false);
   const [menuElipsisShow, setMenuElipsis] = useState(false);
+  const [showCreateTask, setShowCreateTask] = useState(false);
+  const [rendering, setRendering] = useState(false);
 
   useEffect(() => {
     if (boards.length > 0) {
       dispatch(setActualBoard(boards[0]));
     }
+
+    const time = setTimeout(() => {
+      setRendering(true);
+    }, 500);
+
+    return () => clearTimeout(time);
   }, []);
 
   const handleMenuDropdownModalShowClick = () => {
@@ -35,8 +44,17 @@ export const Header = ({ logo }: HeaderProps) => {
     setMenuElipsis((e) => !e);
   };
 
+  const handleCreateTask = () => {
+    setShowCreateTask(true);
+  };
+
   return (
     <S.Header>
+      <CreateTasks
+        show={showCreateTask}
+        setShowCreateTask={setShowCreateTask}
+        rendering={rendering}
+      />
       <S.Conteiner aria-label="Cabeçalho do site">
         <S.Logo>
           <div>
@@ -64,7 +82,7 @@ export const Header = ({ logo }: HeaderProps) => {
             )}
           </h2>
           <div>
-            <Button>
+            <Button handleOnClick={handleCreateTask}>
               + <span>Adicionar uma Tarefa</span>
             </Button>
             {menuElipsisShow ? (
