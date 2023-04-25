@@ -63,7 +63,7 @@ export default NextAuth({
       const jwtHash = compareJwt(user as unknown as string);
       const isSignIN = !!jwtHash;
       const actualDateInSeconds = Math.floor(Date.now() / 1000); // data atual em segundos
-      const tokenExpirationInSeconds = Math.floor(7 * 24 * 60 * 60); // da 7 dias
+      const tokenExpirationInSeconds = Math.floor(24 * 60 * 60); // da 24 horas
 
       // usuario logado
       if (isSignIN) {
