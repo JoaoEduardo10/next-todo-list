@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { Label as ConteinerLabel } from '../../inpult/styles';
+
 const ShowTask = (rendering: boolean, show: boolean) => css`
   ${show
     ? css`
@@ -41,7 +43,7 @@ export const ConteinerCreateTask = styled.div<{
   show: boolean;
   rendering: boolean;
 }>`
-  ${({ theme, show, rendering }) => css`
+  ${({ show, rendering }) => css`
     position: fixed;
     top: 0%;
     left: 0%;
@@ -63,13 +65,55 @@ export const CreateTaskForm = styled.form`
     height: 90%;
     border-radius: 0.5rem;
     background-color: ${theme.colors.primaryColor};
+    padding: ${theme.padding.extra_small};
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: center;
+
+    ${ConteinerLabel} {
+      box-shadow: none;
+      border: 0.1rem solid #222;
+    }
   `}
 `;
 
 export const Heading = styled.h2`
-  ${({ theme }) => css``}
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & span {
+      color: ${theme.colors.lite_greenColor};
+      display: inline-block;
+      font-size: 3.5rem;
+      transform: translateY(13%);
+    }
+  `}
+`;
+
+export const ConteinerInput = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 1.6rem 0;
+  `}
+`;
+
+export const Label = styled.label`
+  ${({ theme }) => css`
+    margin-bottom: 1rem;
+  `}
 `;
 
 export const TextArea = styled.textarea`
-  ${({ theme }) => css``}
+  ${({ theme }) => css`
+    height: 20rem;
+    outline: none;
+    border: 0.1rem solid #222;
+    padding: 0.6rem;
+  `}
 `;
