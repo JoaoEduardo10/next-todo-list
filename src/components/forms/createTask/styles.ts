@@ -53,7 +53,7 @@ export const ConteinerCreateTask = styled.div<{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 25;
 
     ${ShowTask(rendering, show)}
   `}
@@ -74,6 +74,10 @@ export const CreateTaskForm = styled.form`
     ${ConteinerLabel} {
       box-shadow: none;
       border: 0.1rem solid #222;
+    }
+
+    ${theme.media_screen_size.phone} {
+      width: 95%;
     }
   `}
 `;
