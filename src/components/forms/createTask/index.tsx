@@ -151,7 +151,7 @@ export const CreateTasks = ({
         <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>Descrição</S.Label>
           <S.TextArea
-            role="textbox"
+            aria-label="Text Area"
             onChange={({ target }) => setValueDescription(target.value)}
             value={valueDescription}
           />
