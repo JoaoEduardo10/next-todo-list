@@ -61,6 +61,7 @@ export const ConteinerCreateTask = styled.div<{
 
 export const CreateTaskForm = styled.form`
   ${({ theme }) => css`
+    position: relative;
     width: 40%;
     height: 90%;
     border-radius: 0.5rem;
