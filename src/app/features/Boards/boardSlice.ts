@@ -48,6 +48,9 @@ export const boardsSlice = createSlice({
     ) => {
       state.actualBoardWithTasks = action.payload;
     },
+    setTasksInBoard: (state, action: PayloadAction<TTasks>) => {
+      state.actualBoardWithTasks.tasks.push(action.payload);
+    },
     postNewTasksInBoard: (state, action: PayloadAction<TTasks>) => {
       state.actualBoardWithTasks.tasks.push(action.payload);
     },
@@ -61,5 +64,6 @@ export const {
   postNewTasksInBoard,
   deleteBoard,
   updateBoard,
+  setTasksInBoard,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;
