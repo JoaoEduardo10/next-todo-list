@@ -1,7 +1,7 @@
 export type TSubTasks = {
   text: string;
-  concluded: boolean;
-  uuid: string;
+  concluded?: boolean;
+  uuid?: string;
 };
 
 export type TUser = {
@@ -12,11 +12,11 @@ export type TUser = {
 };
 
 export type TTasks = {
-  id: string;
+  id?: string;
   text: string;
-  description: string;
-  subTasks: TSubTasks[];
-  status: 'pending' | 'progress' | 'concluded';
+  description?: string;
+  subTasks?: TSubTasks[];
+  status?: 'pending' | 'progress' | 'concluded';
   boardConnect: string;
 };
 
