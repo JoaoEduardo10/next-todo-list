@@ -16,6 +16,7 @@ import { useSession } from 'next-auth/react';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { setTasksInBoard } from '../../../app/features/Boards/boardSlice';
 import { Loading } from '../../loading';
+import { act } from 'react-dom/test-utils';
 
 export type CreateTasksProps = {
   setShowCreateTask: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,7 +58,7 @@ export const CreateTasks = ({
     }
 
     if (valueDescription && valueDescription.length < 6) {
-      setErrorMessage('adicione no minimo 6 letras a description');
+      setErrorMessage('adicione no minimo 6 letras a descrição');
       setError(true);
 
       return;
@@ -83,19 +84,20 @@ export const CreateTasks = ({
       boardConnect: actualBoard.taskConnect,
       text: valueTaskName,
       subTasks: subTasks,
-      description: valueDescription ?? '',
+      description: valueDescription,
     };
 
     setLoading(true);
     const task = await createTask(Session.acessToken, formTask);
-    setLoading(false);
     dispatch(setTasksInBoard(task));
-    console.log(task);
 
-    setSubTasks([]);
-    setValueDescription('');
-    setValueTaskName('');
-    setClearInput(true);
+    act(() => {
+      setLoading(false);
+      setSubTasks([]);
+      setValueTaskName('');
+      setValueDescription('');
+      setClearInput(true);
+    });
     setShowCreateTask(false);
   };
 
