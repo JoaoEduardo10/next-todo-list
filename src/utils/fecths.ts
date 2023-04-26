@@ -131,6 +131,21 @@ const updateBoard = async (
   return data;
 };
 
+const createTask = async (token: string, tasks: TTasks) => {
+  const response = await fetch(`${urlApi}/tasks`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ ...tasks }),
+  });
+
+  const data: TTasks = await response.json();
+
+  return data;
+};
+
 export {
   loginUser,
   createUser,
@@ -140,4 +155,5 @@ export {
   board,
   deleteBoard,
   updateBoard,
+  createTask,
 };
