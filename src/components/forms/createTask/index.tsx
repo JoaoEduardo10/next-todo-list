@@ -15,7 +15,6 @@ import { useSession } from 'next-auth/react';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { setTasksInBoard } from '../../../app/features/Boards/boardSlice';
-import { Tasks } from '../../task/styles';
 import { Loading } from '../../loading';
 
 export type CreateTasksProps = {
@@ -126,17 +125,21 @@ export const CreateTasks = ({
   }, [clearInput]);
 
   return (
-    <S.ConteinerCreateTask show={show} rendering={rendering}>
-      <S.CreateTaskForm onSubmit={handleSubmitFormTask}>
+    <S.ConteinerCreateTask
+      show={show}
+      rendering={rendering}
+      aria-label="CreateTask Form/Conteiner"
+    >
+      <S.CreateTaskForm role="form" onSubmit={handleSubmitFormTask}>
         {rendering && <MessageError error={error} text={errorMessage} />}
         {loading && <Loading />}
         <S.Heading>
           Adicionar nova tarefa{' '}
           <span onClick={handleCloseMenu}>
-            <AiOutlineClose aria-label="Close DynamicBoard" />
+            <AiOutlineClose aria-label="Close CreateTask" />
           </span>
         </S.Heading>
-        <S.ConteinerInput>
+        <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>Nome da tarefa</S.Label>
           <Inpult
             placeholder="Por exemplo: faça uma pausa para café"
@@ -145,14 +148,15 @@ export const CreateTasks = ({
             value={valueTaskName}
           />
         </S.ConteinerInput>
-        <S.ConteinerInput>
+        <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>Descrição</S.Label>
           <S.TextArea
+            role="textbox"
             onChange={({ target }) => setValueDescription(target.value)}
             value={valueDescription}
           />
         </S.ConteinerInput>
-        <S.ConteinerInput>
+        <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>SubTarefas</S.Label>
           <SubTasks setSubTasks={setSubTasks} clearInput={clearInput} />
         </S.ConteinerInput>
