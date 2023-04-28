@@ -3,17 +3,17 @@ import * as S from './styles';
 import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-export type SubTasksProps = {
+export type SubTasksInputsProps = {
   setSubTasks: React.Dispatch<React.SetStateAction<TSubTasks[]>>;
   clearInput: boolean;
   actualSubTasks?: TSubTasks[];
 };
 
-export const SubTasks = ({
+export const SubTasksInputs = ({
   setSubTasks,
   clearInput,
   actualSubTasks,
-}: SubTasksProps) => {
+}: SubTasksInputsProps) => {
   const [inputs, setInputs] = useState<string[]>(['']);
 
   const handleInputChange = (
