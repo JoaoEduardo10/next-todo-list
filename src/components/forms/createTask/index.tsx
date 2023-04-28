@@ -4,7 +4,7 @@ import * as S from './styles';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Inpult } from '../../inpult/inpult';
 import { Button } from '../../button';
-import { SubTasks } from '../../subTasks';
+import { SubTasksInputs } from '../../subTasksInputs';
 import { MessageError } from '../../messageError';
 
 import { TSubTasks, TTasks } from '../../../types';
@@ -160,7 +160,7 @@ export const CreateTasks = ({
         </S.ConteinerInput>
         <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>SubTarefas</S.Label>
-          <SubTasks setSubTasks={setSubTasks} clearInput={clearInput} />
+          <SubTasksInputs setSubTasks={setSubTasks} clearInput={clearInput} />
         </S.ConteinerInput>
         <Button>Criar tarefa</Button>
       </S.CreateTaskForm>
