@@ -1,16 +1,16 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { SubTasks, SubTasksProps } from '.';
+import { SubTasksInputs, SubTasksInputsProps } from '.';
 import { GlobalStyles } from '../../styles/globals-styles';
 import { theme } from '../../styles/theme';
 
 export default {
-  title: 'SubTasks',
-  component: SubTasks,
+  title: 'SubTasksInputs',
+  component: SubTasksInputs,
   args: {
     clearInput: false,
     setSubTasks: () => [],
-  } as SubTasksProps,
+  } as SubTasksInputsProps,
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
@@ -21,8 +21,8 @@ export default {
   ],
 } as Meta;
 
-export const Tamplate: ComponentStory<typeof SubTasks> = (
-  agrs: SubTasksProps,
+export const Tamplate: ComponentStory<typeof SubTasksInputs> = (
+  agrs: SubTasksInputsProps,
 ) => {
-  return <SubTasks {...agrs} />;
+  return <SubTasksInputs {...agrs} />;
 };
