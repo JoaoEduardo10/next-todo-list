@@ -51,8 +51,7 @@ export default NextAuth({
           }
 
           return token;
-        } catch (error: any) {
-          console.error(error.message);
+        } catch (_error: any) {
           return null;
         }
       },
@@ -92,7 +91,7 @@ export default NextAuth({
       return Promise.resolve(token);
     },
     async session({ session, token }) {
-      if (!token) {
+      if (!token || !token.jwt || !session) {
         return null;
       }
 
