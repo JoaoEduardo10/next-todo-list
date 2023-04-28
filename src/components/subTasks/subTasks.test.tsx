@@ -1,8 +1,15 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { SubTasks } from '.';
 import { renderTheme } from '../../utils/render-theme';
-import exp from 'constants';
 
+const actualSubTaskMock = [
+  {
+    text: 'test1',
+  },
+  {
+    text: 'test2',
+  },
+];
 describe('<SubTasks />', () => {
   const setSybTasks = jest.fn();
 
@@ -89,5 +96,22 @@ describe('<SubTasks />', () => {
 
     expect(inputs[0].value).toEqual('');
     expect(inputs[1].value).toEqual('');
+  });
+
+  it('should return the inputls already prenexed', () => {
+    renderTheme(
+      <SubTasks
+        clearInput={false}
+        actualSubTasks={actualSubTaskMock}
+        setSubTasks={setSybTasks}
+      />,
+    );
+
+    const inputs: any[] = screen.getAllByPlaceholderText('Nome da tarefa');
+
+    expect(inputs.length).toBe(2);
+
+    expect(inputs[0].value).toEqual('test1');
+    expect(inputs[1].value).toEqual('test2');
   });
 });
