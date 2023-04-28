@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { SubTasks } from '.';
+import { SubTasksInputs } from '.';
 import { renderTheme } from '../../utils/render-theme';
 
 const actualSubTaskMock = [
@@ -10,11 +10,13 @@ const actualSubTaskMock = [
     text: 'test2',
   },
 ];
-describe('<SubTasks />', () => {
+describe('<SubTasksInputs />', () => {
   const setSybTasks = jest.fn();
 
-  it('should render a subTasks', () => {
-    renderTheme(<SubTasks clearInput={false} setSubTasks={setSybTasks} />);
+  it('should render a SubTasksInputs', () => {
+    renderTheme(
+      <SubTasksInputs clearInput={false} setSubTasks={setSybTasks} />,
+    );
 
     const conteiner = screen.getByRole('listbox');
     const conteinerList = screen.getByRole('list');
@@ -30,7 +32,9 @@ describe('<SubTasks />', () => {
   });
 
   it('should add a new input', () => {
-    renderTheme(<SubTasks clearInput={false} setSubTasks={setSybTasks} />);
+    renderTheme(
+      <SubTasksInputs clearInput={false} setSubTasks={setSybTasks} />,
+    );
 
     const inputs = screen.getAllByPlaceholderText('Nome da tarefa');
     const button = screen.getByRole('button', {
@@ -46,7 +50,9 @@ describe('<SubTasks />', () => {
   });
 
   it('should delete an input', () => {
-    renderTheme(<SubTasks clearInput={false} setSubTasks={setSybTasks} />);
+    renderTheme(
+      <SubTasksInputs clearInput={false} setSubTasks={setSybTasks} />,
+    );
 
     const button = screen.getByRole('button', {
       name: 'Adicionar Nova SubTarefa',
@@ -66,7 +72,9 @@ describe('<SubTasks />', () => {
   });
 
   it('should get value from the inputs', () => {
-    renderTheme(<SubTasks clearInput={false} setSubTasks={setSybTasks} />);
+    renderTheme(
+      <SubTasksInputs clearInput={false} setSubTasks={setSybTasks} />,
+    );
 
     const button = screen.getByRole('button', {
       name: 'Adicionar Nova SubTarefa',
@@ -84,7 +92,7 @@ describe('<SubTasks />', () => {
   });
 
   it('should reset all inputs', () => {
-    renderTheme(<SubTasks clearInput={true} setSubTasks={setSybTasks} />);
+    renderTheme(<SubTasksInputs clearInput={true} setSubTasks={setSybTasks} />);
 
     const button = screen.getByRole('button', {
       name: 'Adicionar Nova SubTarefa',
@@ -100,7 +108,7 @@ describe('<SubTasks />', () => {
 
   it('should return the inputls already prenexed', () => {
     renderTheme(
-      <SubTasks
+      <SubTasksInputs
         clearInput={false}
         actualSubTasks={actualSubTaskMock}
         setSubTasks={setSybTasks}
