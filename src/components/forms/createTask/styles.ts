@@ -61,7 +61,6 @@ export const ConteinerCreateTask = styled.div<{
 
 export const CreateTaskForm = styled.form`
   ${({ theme }) => css`
-    position: relative;
     width: 40%;
     height: 90%;
     border-radius: 0.5rem;
@@ -100,7 +99,7 @@ export const Heading = styled.h2`
 `;
 
 export const ConteinerInput = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -109,13 +108,13 @@ export const ConteinerInput = styled.div`
 `;
 
 export const Label = styled.label`
-  ${({ theme }) => css`
+  ${() => css`
     margin-bottom: 1rem;
   `}
 `;
 
 export const TextArea = styled.textarea`
-  ${({ theme }) => css`
+  ${() => css`
     height: 20rem;
     outline: none;
     border: 0.1rem solid #222;
