@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { Label as ConteinerLabel } from '../../inpult/styles';
 
-const ShowTask = (rendering: boolean, show: boolean) => css`
+export const ShowTask = (rendering: boolean, show: boolean) => css`
   ${show
     ? css`
         animation: openShow 300ms ease-in-out;
