@@ -6,9 +6,14 @@ import { AiOutlineClose } from 'react-icons/ai';
 export type SubTasksProps = {
   setSubTasks: React.Dispatch<React.SetStateAction<TSubTasks[]>>;
   clearInput: boolean;
+  actualSubTasks?: TSubTasks[];
 };
 
-export const SubTasks = ({ setSubTasks, clearInput }: SubTasksProps) => {
+export const SubTasks = ({
+  setSubTasks,
+  clearInput,
+  actualSubTasks,
+}: SubTasksProps) => {
   const [inputs, setInputs] = useState<string[]>(['']);
 
   const handleInputChange = (
@@ -41,6 +46,18 @@ export const SubTasks = ({ setSubTasks, clearInput }: SubTasksProps) => {
   };
 
   useEffect(() => {
+    if (actualSubTasks && actualSubTasks.length > 0) {
+      const subTasksText: string[] = [];
+
+      actualSubTasks.map((subTask) => {
+        subTasksText.push(subTask.text);
+      });
+
+      setInputs([...subTasksText]);
+    }
+  }, []);
+
+  useEffect(() => {
     const subTasks = inputs.map((input) => ({
       text: input,
     }));
@@ -58,7 +75,7 @@ export const SubTasks = ({ setSubTasks, clearInput }: SubTasksProps) => {
     <S.Conteiner role="listbox">
       <S.ConteinerAllInputs role="list">
         {inputs.map((input, index) => (
-          <S.ConteinerInput key={index} role="listitem">
+          <S.ConteinerInput key={`input ${index}`} role="listitem">
             <S.Input
               placeholder="Nome da tarefa"
               name={input}
