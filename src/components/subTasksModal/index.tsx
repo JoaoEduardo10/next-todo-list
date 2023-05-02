@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as S from './styles';
 import { TSubTasks } from '@/src/types';
+import { returnedSubTasksConcluded } from '@/src/utils/utilsFactions';
 
 export type SubTasksModalProps = {
   subTasks: TSubTasks[];
@@ -35,7 +36,10 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
 
   return (
     <S.Conteiner>
-      <S.Heading role="heading">SubTasks</S.Heading>
+      <S.Heading role="heading">
+        SubTasks ({returnedSubTasksConcluded(subTaskCheckBox)} de{' '}
+        {subTaskCheckBox.length})
+      </S.Heading>
       {subTaskCheckBox.map((subTask, index) => (
         <S.ConteinerInput key={subTask.uuid + subTask.text} role="listbox">
           <S.Input
