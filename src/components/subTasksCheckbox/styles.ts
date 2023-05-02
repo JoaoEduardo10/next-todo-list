@@ -10,7 +10,7 @@ export const Conteiner = styled.div`
 
 export const Heading = styled.h3`
   ${({ theme }) => css`
-    margin-bottom: ${theme.padding.small};
+    margin: ${theme.padding.small} 0;
     color: gray;
     font-size: 1.6rem;
   `}
