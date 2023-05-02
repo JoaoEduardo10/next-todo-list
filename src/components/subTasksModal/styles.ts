@@ -43,6 +43,7 @@ export const Input = styled.input`
 export const Label = styled.label`
   ${({ theme }) => css`
     font-weight: bold;
+    text-decoration: none;
 
     ${Input}:checked ~ & {
       text-decoration: line-through;

@@ -35,16 +35,16 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
 
   return (
     <S.Conteiner>
-      <S.Heading>SubTasks</S.Heading>
+      <S.Heading role="heading">SubTasks</S.Heading>
       {subTaskCheckBox.map((subTask, index) => (
-        <S.ConteinerInput key={subTask.uuid + subTask.text}>
+        <S.ConteinerInput key={subTask.uuid + subTask.text} role="listbox">
           <S.Input
             name={subTask.text}
             type="checkbox"
             onChange={(event) => handleChangeInput(event, index)}
             checked={subTask.concluded}
           />
-          <S.Label>{subTask.text}</S.Label>
+          <S.Label aria-label="SubtaskName">{subTask.text}</S.Label>
         </S.ConteinerInput>
       ))}
     </S.Conteiner>
