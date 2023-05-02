@@ -22,23 +22,21 @@ export const TasksModal = ({
     setShowTaskModal(false);
   };
 
-  if (actualTasks && actualTasks.subTasks) {
-    return (
-      <S.Conteiner show={show} rendering={rendering}>
-        <S.TaskModal>
-          <Heading>
-            {actualTasks.text}{' '}
-            <span>
-              <FaEllipsisV aria-label="Open/Elipsis" />
-              <AiOutlineClose
-                aria-label="Close CreateTask"
-                onClick={handleCloseTaskModal}
-              />
-            </span>
-          </Heading>
-          <SubTasksModal subTasks={actualTasks.subTasks} />
-        </S.TaskModal>
-      </S.Conteiner>
-    );
-  }
+  return (
+    <S.Conteiner show={show} rendering={rendering}>
+      <S.TaskModal>
+        <Heading>
+          {actualTasks?.text ?? ''}{' '}
+          <span>
+            <FaEllipsisV aria-label="Open/Elipsis" />
+            <AiOutlineClose
+              aria-label="Close CreateTask"
+              onClick={handleCloseTaskModal}
+            />
+          </span>
+        </Heading>
+        <SubTasksModal subTasks={actualTasks?.subTasks ?? []} />
+      </S.TaskModal>
+    </S.Conteiner>
+  );
 };

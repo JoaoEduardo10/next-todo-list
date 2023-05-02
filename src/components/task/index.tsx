@@ -54,7 +54,7 @@ export const Task = ({ tasks }: TaskProps) => {
           <S.Heading>{task.text}</S.Heading>
           <S.SubText>
             <span aria-label="Subtarefas concluidas">
-              {returnedSubTasksConcluded(task)}
+              {returnedSubTasksConcluded(task.subTasks ?? [])}
             </span>{' '}
             para {task.subTasks && task.subTasks.length} subTarefas
           </S.SubText>
