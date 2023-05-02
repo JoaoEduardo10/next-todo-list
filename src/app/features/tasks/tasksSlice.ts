@@ -7,7 +7,7 @@ export const boardsSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    actualTask: (state, action: PayloadAction<TTasks>) => {
+    setActualTask: (state, action: PayloadAction<TTasks>) => {
       state.actualTask = action.payload;
     },
     setNewSubTaskConcluded: (
