@@ -1,7 +1,7 @@
 import { TBoard, TBoardWithTasks, TTasks } from '@/src/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { initialState } from './initalState';
+import { initialState } from '../initalState';
 
 export const boardsSlice = createSlice({
   name: 'counter',
