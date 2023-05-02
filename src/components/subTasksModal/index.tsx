@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import * as S from './styles';
 import { TSubTasks } from '@/src/types';
 
-export type SubTasksCheckBoxProps = {
+export type SubTasksModalProps = {
   subTasks: TSubTasks[];
 };
 
-export const SubTasksCheckBox = ({ subTasks }: SubTasksCheckBoxProps) => {
+export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
   const [subTaskCheckBox, setSubTaskCheckBox] = useState<TSubTasks[]>([]);
 
   useEffect(() => {

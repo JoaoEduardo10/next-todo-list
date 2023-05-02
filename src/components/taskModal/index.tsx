@@ -3,7 +3,7 @@ import * as S from './styles';
 import { Heading } from '../forms/createTask/styles';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaEllipsisV } from 'react-icons/fa';
-import { SubTasksCheckBox } from '../subTasksCheckbox';
+import { SubTasksModal } from '../subTasksModal';
 
 export type TasksModalProps = {
   actualTasks: TTasks;
@@ -36,7 +36,7 @@ export const TasksModal = ({
               />
             </span>
           </Heading>
-          <SubTasksCheckBox subTasks={actualTasks.subTasks} />
+          <SubTasksModal subTasks={actualTasks.subTasks} />
         </S.TaskModal>
       </S.Conteiner>
     );
