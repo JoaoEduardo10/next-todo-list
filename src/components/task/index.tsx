@@ -4,22 +4,15 @@ import { returnedSubTasksConcluded } from '../../utils/utilsFactions';
 import { TasksModal } from '../taskModal';
 import { useEffect, useState } from 'react';
 
+import { useAppDispatch } from '@/src/app/hooks';
+import { setActualTask } from '../../app/features/tasks/tasksSlice';
+
 export type TaskProps = {
   tasks: TTasks[];
 };
 
-const test: TTasks = {
-  text: 'test',
-  boardConnect: '123',
-  description: 'amigo',
-  subTasks: [
-    {
-      text: 'amigo',
-    },
-  ],
-};
-
 export const Task = ({ tasks }: TaskProps) => {
+  const dispatch = useAppDispatch();
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [rendering, setRendering] = useState(false);
   const [getTask, setGetTask] = useState<any>();
@@ -35,6 +28,7 @@ export const Task = ({ tasks }: TaskProps) => {
   const handleShowTaskModalClisk = (task: TTasks) => {
     setShowTaskModal(true);
     setGetTask(task);
+    dispatch(setActualTask({ ...task }));
   };
 
   return (
