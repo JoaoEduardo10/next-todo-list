@@ -4,7 +4,6 @@ interface IInitialState {
   allBoards: TBoard[];
   actualBoard: TBoard;
   actualBoardWithTasks: TBoardWithTasks;
-  actualTask: TTasks;
 }
 
 export const initialState: IInitialState = {
@@ -21,13 +20,5 @@ export const initialState: IInitialState = {
     taskConnect: '',
     tasks: [],
     userId: '',
-  },
-  actualTask: {
-    boardConnect: '',
-    text: '',
-    description: '',
-    id: '',
-    status: 'concluded',
-    subTasks: [],
   },
 };
