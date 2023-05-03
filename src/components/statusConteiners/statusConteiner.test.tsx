@@ -2,8 +2,22 @@ import { screen } from '@testing-library/react';
 import { StatusConteiner } from '.';
 import { renderTheme } from '../../utils/render-theme';
 import { mockTask } from '../task/mock';
+import { useSession } from 'next-auth/react';
+
+jest.mock('next-auth/react');
 
 describe('<StatusConteiner />', () => {
+  const useSessionMock = useSession as jest.MockedFunction<typeof useSession>;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    useSessionMock.mockReturnValue({
+      data: [{ user: 'test 4' }],
+      status: 'authenticated',
+    } as any);
+  });
+
   it('should a render statusConteiner component', () => {
     renderTheme(<StatusConteiner heading="concluded" tasks={mockTask} />);
 
