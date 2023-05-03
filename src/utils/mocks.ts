@@ -24,6 +24,23 @@ const store = mockStore({
       userId: '1234',
     },
   },
+  task: {
+    actualTask: {
+      boardConnect: '1234',
+      text: 'test 4',
+      _id: 12348576,
+      description: 'never',
+      id: '123',
+      status: 'pending',
+      subTasks: [
+        {
+          text: 'test 2',
+          concluded: false,
+          uuid: '1234',
+        },
+      ],
+    },
+  },
 });
 
 export { store, mockBoards };
