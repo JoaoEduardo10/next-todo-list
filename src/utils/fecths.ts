@@ -1,4 +1,4 @@
-import { TBoard, TBoardWithTasks, TTasks } from '../types';
+import { TBoard, TBoardWithTasks, TSubTasks, TTasks } from '../types';
 
 export type TDataProps = {
   email: string;
@@ -146,6 +146,26 @@ const createTask = async (token: string, tasks: TTasks) => {
   return data;
 };
 
+const updateSubTask = async (
+  token: string,
+  subTask: TSubTasks[],
+  taskId: string,
+) => {
+  const response = await fetch(`${urlApi}/tasks/${taskId}/subtask`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify([...subTask]),
+  });
+
+  const data: TTasks = await response.json();
+
+  console.log(data);
+  return data;
+};
+
 export {
   loginUser,
   createUser,
@@ -156,4 +176,5 @@ export {
   deleteBoard,
   updateBoard,
   createTask,
+  updateSubTask,
 };
