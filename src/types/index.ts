@@ -12,6 +12,7 @@ export type TUser = {
 };
 
 export type TTasks = {
+  _id?: string;
   id?: string;
   text: string;
   description?: string;
