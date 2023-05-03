@@ -162,7 +162,6 @@ const updateSubTask = async (
 
   const data: TTasks = await response.json();
 
-  console.log(data);
   return data;
 };
 

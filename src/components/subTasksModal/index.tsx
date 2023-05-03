@@ -27,7 +27,7 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
   }, [subTasks]);
 
   useEffect(() => {
-    if (subTaskCheckBox.length > 0) {
+    if (subTasks.length > 0) {
       const time = setTimeout(async () => {
         await updateSubTask(
           Session.acessToken,
@@ -38,7 +38,7 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
 
       return () => clearTimeout(time);
     }
-  }, [tasks]);
+  }, [subTasks]);
 
   const handleChangeInput = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -46,25 +46,26 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
   ) => {
     const { checked } = event.target;
 
-    const newSubTasks: TSubTasks[] = subTaskCheckBox.map((subTask, i) => {
-      if (i === index) {
-        dispatch(
-          setNewSubTaskConcluded({
-            uuid: subTask.uuid as string,
+    const newSubTasks: TSubTasks[] = subTaskCheckBox.map((subTask, i) =>
+      i === index
+        ? {
+            ...subTask,
             concluded: checked,
-            task,
-          }),
-        );
-
-        return {
-          ...subTask,
-          concluded: checked,
-        };
-      }
-      return subTask;
-    });
+          }
+        : subTask,
+    );
 
     setSubTaskCheckBox(newSubTasks);
+
+    const subTask = newSubTasks[index];
+
+    dispatch(
+      setNewSubTaskConcluded({
+        uuid: subTask.uuid as string,
+        concluded: subTask.concluded as boolean,
+        task: task,
+      }),
+    );
   };
 
   return (
