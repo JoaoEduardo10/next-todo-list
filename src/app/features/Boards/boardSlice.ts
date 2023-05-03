@@ -1,7 +1,7 @@
 import { TBoard, TBoardWithTasks, TTasks } from '@/src/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { initialState } from '../initalState';
+import { initialState } from './initalState';
 
 export const boardsSlice = createSlice({
   name: 'counter',
@@ -54,6 +54,37 @@ export const boardsSlice = createSlice({
     postNewTasksInBoard: (state, action: PayloadAction<TTasks>) => {
       state.actualBoardWithTasks.tasks.push(action.payload);
     },
+    setNewSubTaskConcluded: (
+      state,
+      action: PayloadAction<{ uuid: string; concluded: boolean; task: TTasks }>,
+    ) => {
+      const { uuid, concluded, task: actionTask } = action.payload;
+
+      const { tasks } = state.actualBoardWithTasks;
+
+      if ( tasks && tasks.length <= 0) {
+        return;
+      }
+
+      const index = tasks.findIndex((task) => task._id == actionTask._id);
+
+      const actualTask = tasks[index];
+
+      if (!actualTask) return;
+
+      const updatedSubTasks = actualTask.subTasks?.map((subTask) => {
+        if (subTask.uuid === uuid) {
+          return { ...subTask, concluded };
+        }
+        return subTask;
+      });
+
+      const updatedTask = { ...actualTask, subTasks: updatedSubTasks };
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(index, 1, updatedTask);
+
+      state.actualBoardWithTasks.tasks = [...updatedTasks];
+    },
   },
 });
 
@@ -65,5 +96,6 @@ export const {
   deleteBoard,
   updateBoard,
   setTasksInBoard,
+  setNewSubTaskConcluded,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;
