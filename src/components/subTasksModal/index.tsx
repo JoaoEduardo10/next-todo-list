@@ -3,11 +3,16 @@ import * as S from './styles';
 import { TSubTasks } from '@/src/types';
 import { returnedSubTasksConcluded } from '@/src/utils/utilsFactions';
 
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setNewSubTaskConcluded } from '../../app/features/Boards/boardSlice';
+
 export type SubTasksModalProps = {
   subTasks: TSubTasks[];
 };
 
 export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
+  const dispatch = useAppDispatch();
+  const task = useAppSelector((store) => store.task.actualTask);
   const [subTaskCheckBox, setSubTaskCheckBox] = useState<TSubTasks[]>([]);
 
   useEffect(() => {
@@ -22,12 +27,19 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
 
     const newSubTasks: TSubTasks[] = subTaskCheckBox.map((subTask, i) => {
       if (i === index) {
+        dispatch(
+          setNewSubTaskConcluded({
+            uuid: subTask.uuid as string,
+            concluded: checked,
+            task,
+          }),
+        );
+
         return {
           ...subTask,
           concluded: checked,
         };
       }
-
       return subTask;
     });
 
