@@ -4,6 +4,8 @@ import { Task, TaskProps } from '.';
 import { GlobalStyles } from '../../styles/globals-styles';
 import { theme } from '../../styles/theme';
 import { mockTask } from './mock';
+import { Provider } from 'react-redux';
+import { store } from '../../utils/mocks';
 
 export default {
   title: 'Task',
@@ -13,10 +15,12 @@ export default {
   } as TaskProps,
   decorators: [
     (Story) => (
+      <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Story />
         <GlobalStyles />
       </ThemeProvider>
+      </Provider>
     ),
   ],
 } as Meta;

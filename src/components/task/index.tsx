@@ -4,7 +4,7 @@ import { returnedSubTasksConcluded } from '../../utils/utilsFactions';
 import { TasksModal } from '../taskModal';
 import { useEffect, useState } from 'react';
 
-import { useAppDispatch } from '@/src/app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { setActualTask } from '../../app/features/tasks/tasksSlice';
 
 export type TaskProps = {
