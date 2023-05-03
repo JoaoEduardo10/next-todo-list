@@ -4,6 +4,8 @@ import { SubTasksModal, SubTasksModalProps } from '.';
 import { GlobalStyles } from '../../styles/globals-styles';
 import { theme } from '../../styles/theme';
 import { mockSubTask } from './mock';
+import { Provider } from 'react-redux';
+import { store } from '../../utils/mocks';
 
 export default {
   title: 'SubTasksModal',
@@ -13,10 +15,12 @@ export default {
   } as SubTasksModalProps,
   decorators: [
     (Story) => (
-      <ThemeProvider theme={theme}>
-        <Story />
-        <GlobalStyles />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Story />
+          <GlobalStyles />
+        </ThemeProvider>
+      </Provider>
     ),
   ],
 } as Meta;

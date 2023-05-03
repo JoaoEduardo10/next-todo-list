@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as S from './styles';
 import { TSubTasks } from '../../types';
-import { returnedSubTasksConcluded } from '@/src/utils/utilsFactions';
+import { returnedSubTasksConcluded } from '../../utils/utilsFactions';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setNewSubTaskConcluded } from '../../app/features/Boards/boardSlice';
