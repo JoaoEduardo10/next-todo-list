@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initalState';
 
+type TStatus = 'pending' | 'progress' | 'concluded';
+
 export const boardsSlice = createSlice({
   name: 'counter',
   initialState,
@@ -62,7 +64,7 @@ export const boardsSlice = createSlice({
 
       const { tasks } = state.actualBoardWithTasks;
 
-      if ( tasks && tasks.length <= 0) {
+      if (tasks && tasks.length <= 0) {
         return;
       }
 
@@ -85,6 +87,33 @@ export const boardsSlice = createSlice({
 
       state.actualBoardWithTasks.tasks = [...updatedTasks];
     },
+
+    setNewStatus: (
+      state,
+      action: PayloadAction<{ status: TStatus; task: TTasks }>,
+    ) => {
+      const { status, task: actionTask } = action.payload;
+
+      const { tasks } = state.actualBoardWithTasks;
+
+      if (tasks && tasks.length <= 0) {
+        return;
+      }
+
+      const index = tasks.findIndex((task) => task._id == actionTask._id);
+
+      const actualTask = tasks[index];
+
+      if (!actualTask) return;
+
+      const updatedSubTasks = (actualTask.status = status);
+
+      const updatedTask = { ...actualTask, status: updatedSubTasks };
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(index, 1, updatedTask);
+
+      state.actualBoardWithTasks.tasks = [...updatedTasks];
+    },
   },
 });
 
@@ -97,5 +126,6 @@ export const {
   updateBoard,
   setTasksInBoard,
   setNewSubTaskConcluded,
+  setNewStatus,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;
