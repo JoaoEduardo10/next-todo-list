@@ -22,9 +22,10 @@ export const TaskModal = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.primaryColor};
     width: 40%;
-    height: 60%;
+    height: 64%;
     padding: ${theme.padding.extra_small};
     border-radius: 0.5rem;
+    overflow-y: auto;
 
     ${Heading} {
       svg {
