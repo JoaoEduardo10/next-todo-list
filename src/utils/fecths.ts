@@ -165,6 +165,25 @@ const updateSubTask = async (
   return data;
 };
 
+const updateStatus = async (
+  token: string,
+  status: 'pending' | 'progress' | 'concluded',
+  taskId: string,
+) => {
+  const response = await fetch(`${urlApi}/tasks/${taskId}/status`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ status }),
+  });
+
+  const data: TTasks = await response.json();
+
+  return data;
+};
+
 export {
   loginUser,
   createUser,
@@ -176,4 +195,5 @@ export {
   updateBoard,
   createTask,
   updateSubTask,
+  updateStatus,
 };
