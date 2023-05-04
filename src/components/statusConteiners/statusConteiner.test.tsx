@@ -3,6 +3,7 @@ import { StatusConteiner } from '.';
 import { renderTheme } from '../../utils/render-theme';
 import { mockTask } from '../task/mock';
 import { useSession } from 'next-auth/react';
+import fetchMock from 'jest-fetch-mock';
 
 jest.mock('next-auth/react');
 
@@ -11,10 +12,16 @@ describe('<StatusConteiner />', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    fetchMock.enableMocks();
 
     useSessionMock.mockReturnValue({
       data: [{ user: 'test 4' }],
       status: 'authenticated',
+    } as any);
+
+    fetchMock.mockReturnValue({
+      ok: true,
+      json: () => Promise.resolve({}),
     } as any);
   });
 

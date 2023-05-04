@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { SubTasksModal } from '.';
 import { renderTheme } from '../../utils/render-theme';
 import { mockSubTask } from './mock';

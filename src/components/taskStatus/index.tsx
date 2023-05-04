@@ -34,7 +34,7 @@ export const TaskStatus = ({ status, update }: TaskStatusProps) => {
 
       handleUpdateStatus();
     }
-  }, [status, valueStatus, update]);
+  }, [valueStatus, update]);
 
   const handleChangeValueSelect = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -47,10 +47,20 @@ export const TaskStatus = ({ status, update }: TaskStatusProps) => {
   return (
     <S.Conteiner>
       <S.Heading>Status atual</S.Heading>
-      <S.Select value={valueStatus} onChange={handleChangeValueSelect}>
-        <S.Option value="concluded">Concluido</S.Option>
-        <S.Option value="pending">Pendente</S.Option>
-        <S.Option value="progress">Em progresso</S.Option>
+      <S.Select
+        role="combobox"
+        value={valueStatus}
+        onChange={handleChangeValueSelect}
+      >
+        <S.Option role="option" value="concluded">
+          Concluido
+        </S.Option>
+        <S.Option role="option" value="pending">
+          Pendente
+        </S.Option>
+        <S.Option role="option" value="progress">
+          Em progresso
+        </S.Option>
       </S.Select>
     </S.Conteiner>
   );
