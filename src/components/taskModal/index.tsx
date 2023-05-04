@@ -4,6 +4,7 @@ import { Heading } from '../forms/createTask/styles';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaEllipsisV } from 'react-icons/fa';
 import { SubTasksModal } from '../subTasksModal';
+import { TaskStatus } from '../taskStatus';
 
 export type TasksModalProps = {
   actualTasks: TTasks;
@@ -36,6 +37,7 @@ export const TasksModal = ({
           </span>
         </Heading>
         <SubTasksModal subTasks={actualTasks?.subTasks ?? []} />
+        <TaskStatus status={actualTasks?.status ?? 'pending'} />
       </S.TaskModal>
     </S.Conteiner>
   );
