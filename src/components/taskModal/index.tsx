@@ -37,7 +37,7 @@ export const TasksModal = ({
           </span>
         </Heading>
         <SubTasksModal subTasks={actualTasks?.subTasks ?? []} />
-        <TaskStatus status={actualTasks?.status ?? 'pending'} />
+        <TaskStatus status={actualTasks?.status ?? 'pending'} update={!show} />
       </S.TaskModal>
     </S.Conteiner>
   );

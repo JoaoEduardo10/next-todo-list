@@ -11,6 +11,7 @@ export default {
   component: TaskStatus,
   args: {
     status: 'pending',
+    update: false,
   } as TaskStatusProps,
   decorators: [
     (Story) => (

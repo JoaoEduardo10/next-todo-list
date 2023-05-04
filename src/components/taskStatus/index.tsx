@@ -9,47 +9,39 @@ import { updateStatus } from '../../utils/fecths';
 
 export type TaskStatusProps = {
   status: 'pending' | 'progress' | 'concluded';
+  update: boolean;
 };
 
-export const TaskStatus = ({ status }: TaskStatusProps) => {
+export const TaskStatus = ({ status, update }: TaskStatusProps) => {
   const { data: Session } = useSession() as TSession;
   const dispatch = useAppDispatch();
   const task = useAppSelector((store) => store.task.actualTask);
   const [valueStatus, setValueStatus] =
     useState<TaskStatusProps['status']>('pending');
-  const [rendered, setRendered] = useState(false);
-
-  useEffect(() => {
-    setRendered(true);
-  }, []);
 
   useEffect(() => {
     setValueStatus(status);
   }, [status]);
 
   useEffect(() => {
-    if (Session) {
-      const time = setTimeout(async () => {
-        await updateStatus(
-          Session.acessToken,
-          valueStatus,
-          task._id as TaskStatusProps['status'],
-        );
-      }, 2000);
+    if (!Session) return;
 
-      return () => clearTimeout(time);
+    if (update) {
+      dispatch(setNewStatus({ status: valueStatus, task }));
+      const handleUpdateStatus = async () => {
+        await updateStatus(Session.acessToken, valueStatus, task._id as string);
+      };
+
+      handleUpdateStatus();
     }
-  }, [status, valueStatus]);
+  }, [status, valueStatus, update]);
 
   const handleChangeValueSelect = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const value = event.target.value as TaskStatusProps['status'];
 
-    if (rendered) {
-      setValueStatus(value);
-      dispatch(setNewStatus({ status: value, task }));
-    }
+    setValueStatus(value);
   };
 
   return (
