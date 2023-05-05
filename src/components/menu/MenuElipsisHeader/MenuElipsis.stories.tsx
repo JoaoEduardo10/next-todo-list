@@ -1,15 +1,15 @@
 import { Meta, ComponentStory } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { MenuElipsis, MenuElipsisProps } from '.';
+import { MenuElipsisHeader, MenuElipsisHeaderProps } from '.';
 import { GlobalStyles } from '../../../styles/globals-styles';
 import { theme } from '../../../styles/theme';
 
 export default {
-  title: 'menu/MenuElipsis',
-  component: MenuElipsis,
+  title: 'menu/MenuElipsisHeader',
+  component: MenuElipsisHeader,
   args: {
     show: true,
-  } as MenuElipsisProps,
+  } as MenuElipsisHeaderProps,
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
@@ -20,9 +20,9 @@ export default {
   ],
 } as Meta;
 
-export const TamplateMenuElipsis: ComponentStory<typeof MenuElipsis> = (
-  agrs: MenuElipsisProps,
-) => {
+export const TamplateMenuElipsisHeader: ComponentStory<
+  typeof MenuElipsisHeader
+> = (agrs: MenuElipsisHeaderProps) => {
   return (
     <div
       style={{
@@ -31,7 +31,7 @@ export const TamplateMenuElipsis: ComponentStory<typeof MenuElipsis> = (
         width: '100%',
       }}
     >
-      <MenuElipsis {...agrs} />
+      <MenuElipsisHeader {...agrs} />
     </div>
   );
 };

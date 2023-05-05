@@ -1,5 +1,5 @@
 import { store } from '../../../utils/mocks';
-import { MenuElipsis } from '.';
+import { MenuElipsisHeader } from '.';
 import { renderTheme } from '../../../utils/render-theme';
 import { useSession, signOut } from 'next-auth/react';
 import { act, fireEvent, screen } from '@testing-library/react';
@@ -7,7 +7,7 @@ import fetchMock from 'jest-fetch-mock';
 
 jest.mock('next-auth/react');
 
-describe('<MenuElipsis />', () => {
+describe('<MenuElipsisHeader />', () => {
   const setMenuElipisis = jest.fn();
   const useSessionMock = useSession as jest.MockedFunction<typeof useSession>;
   const signOutMock = signOut as jest.MockedFunction<typeof signOut>;
@@ -28,13 +28,13 @@ describe('<MenuElipsis />', () => {
     fetchMock.resetMocks();
   });
 
-  it('should render a MenuElipisi Component', () => {
+  it('should render a MenuElipisiHeader Component', () => {
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={true} />,
       store,
     );
 
-    const menuElipsis = screen.getByLabelText('MenuElipsis');
+    const menuElipsis = screen.getByLabelText('MenuElipsisHeader');
     const conteinerDelete = screen.getByLabelText('conteinerDelete');
     const buttonEdit = screen.getByLabelText('Editar Quadro');
     const buttonDelete = screen.getByLabelText('Deletar Quadro');
@@ -51,7 +51,7 @@ describe('<MenuElipsis />', () => {
 
   it('should show the updateBoard for the board on click', () => {
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={true} />,
       store,
     );
 
@@ -72,7 +72,7 @@ describe('<MenuElipsis />', () => {
 
   it('should show the containerDelete for the board on click', () => {
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={true} />,
       store,
     );
 
@@ -98,7 +98,7 @@ describe('<MenuElipsis />', () => {
     } as any);
 
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={true} />,
       store,
     );
 
@@ -122,7 +122,7 @@ describe('<MenuElipsis />', () => {
     } as any);
 
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={true} />,
       store,
     );
 
@@ -155,7 +155,7 @@ describe('<MenuElipsis />', () => {
     } as any);
 
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={true} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={true} />,
       store,
     );
 
@@ -166,11 +166,11 @@ describe('<MenuElipsis />', () => {
 
   it('should not render a MenuElipisi Component', () => {
     renderTheme(
-      <MenuElipsis setMenuElipsis={setMenuElipisis} show={false} />,
+      <MenuElipsisHeader setMenuElipsisHeader={setMenuElipisis} show={false} />,
       store,
     );
 
-    const menuElipsis = screen.getByLabelText('MenuElipsis');
+    const menuElipsis = screen.getByLabelText('MenuElipsisHeader');
 
     expect(menuElipsis).toBeInTheDocument();
 

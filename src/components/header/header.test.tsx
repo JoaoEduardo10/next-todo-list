@@ -38,7 +38,7 @@ describe('<Header  />', () => {
     const OpenMenuDropdownModal = screen.getByLabelText(
       'Menu Open/DropdownModal',
     );
-    const OpenMenuElipsis = screen.getByLabelText('Open/Elipsis');
+    const OpenMenuElipsisHeader = screen.getByLabelText('Open/Elipsis');
 
     expect(header).toBeInTheDocument();
     expect(logoImg).toBeInTheDocument();
@@ -49,26 +49,26 @@ describe('<Header  />', () => {
     expect(OpenMenuDropdownModal).toHaveStyle({
       display: 'none',
     });
-    expect(OpenMenuElipsis).toBeInTheDocument();
+    expect(OpenMenuElipsisHeader).toBeInTheDocument();
   });
 
-  it('should appear MenuElipsis when clicking on bottuno Open and disappear when clicking on bottan close', () => {
+  it('should appear MenuElipsisHeader when clicking on bottuno Open and disappear when clicking on bottan close', () => {
     renderTheme(<Header logo={'test.svg'} />, store);
 
-    const menuElipsis = screen.getByLabelText('MenuElipsis');
-    const openMenuElipsis = screen.getByLabelText('Open/Elipsis');
+    const menuElipsis = screen.getByLabelText('MenuElipsisHeader');
+    const openMenuElipsisHeader = screen.getByLabelText('Open/Elipsis');
 
-    fireEvent.click(openMenuElipsis);
+    fireEvent.click(openMenuElipsisHeader);
 
-    const closeMenuElipsis = screen.getByLabelText('Close/Elipsis');
+    const closeMenuElipsisHeader = screen.getByLabelText('Close/Elipsis');
 
     expect(menuElipsis).toHaveStyle({
       animation: 'openShow 300ms ease-in-out',
     });
 
-    expect(closeMenuElipsis).toBeInTheDocument();
+    expect(closeMenuElipsisHeader).toBeInTheDocument();
 
-    fireEvent.click(closeMenuElipsis);
+    fireEvent.click(closeMenuElipsisHeader);
 
     expect(menuElipsis).toHaveStyle({
       animation: 'closeShow 0.5s ease-in-out',

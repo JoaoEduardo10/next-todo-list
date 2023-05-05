@@ -11,12 +11,15 @@ import { deleteBoard as deleteBoardSlice } from '../../../app/features/Boards/bo
 import { act } from 'react-dom/test-utils';
 import { UpdateBoard } from '../../forms/updateBoard';
 
-export type MenuElipsisProps = {
+export type MenuElipsisHeaderProps = {
   show: boolean;
-  setMenuElipsis: React.Dispatch<React.SetStateAction<boolean>>;
+  setMenuElipsisHeader: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
+export const MenuElipsisHeader = ({
+  show,
+  setMenuElipsisHeader,
+}: MenuElipsisHeaderProps) => {
   const { data: Session } = useSession() as TSession;
   const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const dispatch = useAppDispatch();
@@ -61,7 +64,7 @@ export const MenuElipsis = ({ show, setMenuElipsis }: MenuElipsisProps) => {
   };
 
   return (
-    <S.Conteiner aria-label="MenuElipsis" show={show} rendered={rendered}>
+    <S.Conteiner aria-label="MenuElipsisHeader" show={show} rendered={rendered}>
       <ConteinerDelete
         loading={loading}
         showDelete={showDelete}
