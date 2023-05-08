@@ -87,7 +87,6 @@ export const boardsSlice = createSlice({
 
       state.actualBoardWithTasks.tasks = [...updatedTasks];
     },
-
     setNewStatus: (
       state,
       action: PayloadAction<{ status: TStatus; task: TTasks }>,
@@ -109,6 +108,30 @@ export const boardsSlice = createSlice({
       const updatedSubTasks = (actualTask.status = status);
 
       const updatedTask = { ...actualTask, status: updatedSubTasks };
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(index, 1, updatedTask);
+
+      state.actualBoardWithTasks.tasks = [...updatedTasks];
+    },
+    setNewTask: (
+      state,
+      action: PayloadAction<{ actionTask: TTasks; newTask: TTasks }>,
+    ) => {
+      const { actionTask, newTask } = action.payload;
+
+      const { tasks } = state.actualBoardWithTasks;
+
+      if (tasks && tasks.length <= 0) {
+        return;
+      }
+
+      const index = tasks.findIndex((task) => task._id == actionTask._id);
+
+      const actualTask = tasks[index];
+
+      if (!actualTask) return;
+
+      const updatedTask = { ...newTask };
       const updatedTasks = [...tasks];
       updatedTasks.splice(index, 1, updatedTask);
 
@@ -145,6 +168,7 @@ export const {
   setTasksInBoard,
   setNewSubTaskConcluded,
   setNewStatus,
+  setNewTask,
   removeTask,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;
