@@ -38,7 +38,7 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
 
       return () => clearTimeout(time);
     }
-  }, [subTasks, tasks, subTaskCheckBox]);
+  }, [subTasks, subTaskCheckBox]);
 
   const handleChangeInput = (
     event: React.ChangeEvent<HTMLInputElement>,

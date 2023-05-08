@@ -10,9 +10,10 @@ import { updateStatus } from '../../utils/fecths';
 export type TaskStatusProps = {
   status: 'pending' | 'progress' | 'concluded';
   update: boolean;
+  rendered: boolean;
 };
 
-export const TaskStatus = ({ status, update }: TaskStatusProps) => {
+export const TaskStatus = ({ status, update, rendered }: TaskStatusProps) => {
   const { data: Session } = useSession() as TSession;
   const dispatch = useAppDispatch();
   const task = useAppSelector((store) => store.task.actualTask);
@@ -26,7 +27,7 @@ export const TaskStatus = ({ status, update }: TaskStatusProps) => {
   useEffect(() => {
     if (!Session) return;
 
-    if (update) {
+    if (!update && rendered && task._id) {
       dispatch(setNewStatus({ status: valueStatus, task }));
       const handleUpdateStatus = async () => {
         await updateStatus(Session.acessToken, valueStatus, task._id as string);

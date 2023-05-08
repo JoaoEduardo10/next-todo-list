@@ -91,13 +91,11 @@ export const CreateTasks = ({
     const task = await createTask(Session.acessToken, formTask);
     dispatch(setTasksInBoard(task));
 
-    act(() => {
-      setLoading(false);
-      setSubTasks([]);
-      setValueTaskName('');
-      setValueDescription('');
-      setClearInput(true);
-    });
+    setLoading(false);
+    setSubTasks([]);
+    setValueTaskName('');
+    setValueDescription('');
+    setClearInput(true);
     setShowCreateTask(false);
   };
 
