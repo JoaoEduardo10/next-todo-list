@@ -184,6 +184,20 @@ const updateStatus = async (
   return data;
 };
 
+const deleteTask = async (token: string, taskId: string) => {
+  const response = await fetch(`${urlApi}/tasks/${taskId}`, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data: TTasks = await response.json();
+  console.log(data);
+  return data;
+};
+
 export {
   loginUser,
   createUser,
@@ -196,4 +210,5 @@ export {
   createTask,
   updateSubTask,
   updateStatus,
+  deleteTask,
 };
