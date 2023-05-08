@@ -194,7 +194,26 @@ const deleteTask = async (token: string, taskId: string) => {
   });
 
   const data: TTasks = await response.json();
-  console.log(data);
+
+  return data;
+};
+
+const updateCompleteTask = async (
+  token: string,
+  task: TTasks,
+  taskId: string,
+) => {
+  const response = await fetch(`${urlApi}/tasks/${taskId}`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ ...task }),
+  });
+
+  const data: TTasks = await response.json();
+
   return data;
 };
 
@@ -211,4 +230,5 @@ export {
   updateSubTask,
   updateStatus,
   deleteTask,
+  updateCompleteTask,
 };
