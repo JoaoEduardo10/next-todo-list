@@ -17,9 +17,7 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
   const { data: Session } = useSession() as TSession;
   const dispatch = useAppDispatch();
   const task = useAppSelector((store) => store.task.actualTask);
-  const { tasks } = useAppSelector(
-    (store) => store.boards.actualBoardWithTasks,
-  );
+
   const [subTaskCheckBox, setSubTaskCheckBox] = useState<TSubTasks[]>([]);
 
   useEffect(() => {

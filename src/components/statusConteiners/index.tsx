@@ -2,6 +2,7 @@ import * as S from './styles';
 import { TTasks } from '../../types';
 import { Task } from '../task';
 import { useEffect, useState } from 'react';
+import { useAppSelector } from '@/src/app/hooks';
 
 export type StatusConteinerProps = {
   heading: 'pending' | 'concluded' | 'progress';
@@ -9,6 +10,9 @@ export type StatusConteinerProps = {
 };
 
 export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
+  const actualBoard = useAppSelector(
+    (store) => store.boards.actualBoardWithTasks,
+  );
   const [actualTask, setActualTask] = useState<TTasks[]>([]);
 
   useEffect(() => {
@@ -19,7 +23,7 @@ export const StatusConteiner = ({ heading, tasks }: StatusConteinerProps) => {
 
       setActualTask(actualTaskFilter);
     }
-  }, [tasks, heading]);
+  }, [tasks, heading, actualBoard]);
 
   return (
     <S.Conteiner aria-label="Conteiners Tasks">

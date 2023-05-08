@@ -47,15 +47,10 @@ export const SubTasksInputs = ({
 
   useEffect(() => {
     if (actualSubTasks && actualSubTasks.length > 0) {
-      const subTasksText: string[] = [];
-
-      actualSubTasks.map((subTask) => {
-        subTasksText.push(subTask.text);
-      });
-
-      setInputs([...subTasksText]);
+      const subTasksText = actualSubTasks.map((subTask) => subTask.text);
+      setInputs(subTasksText);
     }
-  }, []);
+  }, [actualSubTasks]);
 
   useEffect(() => {
     const subTasks = inputs.map((input) => ({

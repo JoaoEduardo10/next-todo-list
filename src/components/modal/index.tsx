@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { setActualBoardWithTasks } from '../../app/features/Boards/boardSlice';
 import { StatusConteiner } from '../statusConteiners';
+import { TBoardWithTasks } from '@/src/types';
 
 export type TSession = {
   data: {
@@ -29,6 +30,7 @@ export const Modal = () => {
   );
   const actualBoard = useAppSelector((store) => store.boards.actualBoard);
   const [loading, setLoading] = useState(false);
+  const [boardWithTask, setBoardWithtask] = useState<any>();
 
   useEffect(() => {
     if (Session) {
@@ -48,6 +50,10 @@ export const Modal = () => {
     }
   }, [actualBoard, Session]);
 
+  useEffect(() => {
+    setBoardWithtask(actualBoardWithTasks);
+  }, [actualBoardWithTasks]);
+
   if (actualBoard.id == '') {
     return (
       <S.NotBoard aria-label="Sem Quadros">
@@ -59,9 +65,9 @@ export const Modal = () => {
   return (
     <S.Conteiner aria-label="Modal">
       {loading && <Loading />}
-      <StatusConteiner heading="pending" tasks={actualBoardWithTasks.tasks} />
-      <StatusConteiner heading="progress" tasks={actualBoardWithTasks.tasks} />
-      <StatusConteiner heading="concluded" tasks={actualBoardWithTasks.tasks} />
+      <StatusConteiner heading="pending" tasks={boardWithTask?.tasks} />
+      <StatusConteiner heading="progress" tasks={boardWithTask?.tasks} />
+      <StatusConteiner heading="concluded" tasks={boardWithTask?.tasks} />
     </S.Conteiner>
   );
 };

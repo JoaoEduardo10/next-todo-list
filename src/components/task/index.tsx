@@ -16,6 +16,7 @@ export const Task = ({ tasks }: TaskProps) => {
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [rendering, setRendering] = useState(false);
   const [getTask, setGetTask] = useState<any>();
+  const [allTasks, setAllTasks] = useState<TTasks[]>([]);
 
   useEffect(() => {
     const time = setTimeout(() => {
@@ -24,6 +25,10 @@ export const Task = ({ tasks }: TaskProps) => {
 
     return () => clearTimeout(time);
   }, []);
+
+  useEffect(() => {
+    setAllTasks(tasks);
+  }, [tasks]);
 
   const handleShowTaskModalClisk = (task: TTasks) => {
     setShowTaskModal(true);
@@ -39,7 +44,7 @@ export const Task = ({ tasks }: TaskProps) => {
         actualTasks={getTask}
         rendering={rendering}
       />
-      {tasks.map((task, index) => (
+      {allTasks.map((task, index) => (
         <S.Tasks
           aria-label="Task"
           key={task.id + task.boardConnect + index}

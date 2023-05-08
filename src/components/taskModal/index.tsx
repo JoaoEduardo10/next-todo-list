@@ -1,4 +1,4 @@
-import { TTasks } from '@/src/types';
+import { TSubTasks, TTasks } from '@/src/types';
 import * as S from './styles';
 import { Heading } from '../forms/createTask/styles';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -6,7 +6,8 @@ import { FaEllipsisV } from 'react-icons/fa';
 import { SubTasksModal } from '../subTasksModal';
 import { TaskStatus } from '../taskStatus';
 import { MenuElipsisTask } from '../menu/MenuElipsisTask';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
 
 export type TasksModalProps = {
   actualTasks: TTasks;
@@ -21,7 +22,16 @@ export const TasksModal = ({
   show,
   rendering,
 }: TasksModalProps) => {
+  const task = useAppSelector((store) => store.task.actualTask);
+  const actualBoard = useAppSelector(
+    (store) => store.boards.actualBoardWithTasks,
+  );
   const [openMenu, setOpenMenu] = useState(false);
+  const [subTasks, setSubTask] = useState<TSubTasks[]>([]);
+
+  useEffect(() => {
+    setSubTask(actualTasks?.subTasks ?? []);
+  }, [task, actualBoard, actualTasks]);
 
   const handleCloseTaskModal = () => {
     setShowTaskModal(false);
@@ -55,7 +65,7 @@ export const TasksModal = ({
               />
             </span>
           </Heading>
-          <SubTasksModal subTasks={actualTasks?.subTasks ?? []} />
+          <SubTasksModal subTasks={subTasks} />
           <TaskStatus
             rendered={rendering}
             status={actualTasks?.status!}
