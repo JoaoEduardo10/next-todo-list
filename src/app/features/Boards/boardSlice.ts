@@ -114,6 +114,24 @@ export const boardsSlice = createSlice({
 
       state.actualBoardWithTasks.tasks = [...updatedTasks];
     },
+    removeTask: (state, action: PayloadAction<{ task: TTasks }>) => {
+      const { task: actionTask } = action.payload;
+
+      const { tasks } = state.actualBoardWithTasks;
+
+      if (tasks && tasks.length <= 0) {
+        return;
+      }
+
+      const index = tasks.findIndex((task) => task._id == actionTask._id);
+
+      if (index !== -1) {
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+
+        state.actualBoardWithTasks.tasks = [...updatedTasks];
+      }
+    },
   },
 });
 
@@ -127,5 +145,6 @@ export const {
   setTasksInBoard,
   setNewSubTaskConcluded,
   setNewStatus,
+  removeTask,
 } = boardsSlice.actions;
 export default boardsSlice.reducer;
