@@ -98,6 +98,22 @@ export const Heading = styled.h2`
   `}
 `;
 
+export const Input = styled.input`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & span {
+      color: ${theme.colors.lite_greenColor};
+      display: inline-block;
+      font-size: 3.5rem;
+      transform: translateY(13%);
+    }
+  `}
+`;
+
 export const ConteinerInput = styled.div`
   ${() => css`
     display: flex;
