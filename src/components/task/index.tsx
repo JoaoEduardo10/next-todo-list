@@ -30,6 +30,16 @@ export const Task = ({ tasks }: TaskProps) => {
     setAllTasks(tasks);
   }, [tasks]);
 
+  useEffect(() => {
+    if (!getTask?._id) return;
+
+    const newTask = allTasks.find((task) => {
+      if (task._id === getTask._id) {
+        console.log(task);
+      }
+    });
+  }, [allTasks, getTask]);
+
   const handleShowTaskModalClisk = (task: TTasks) => {
     setShowTaskModal(true);
     setGetTask(task);
