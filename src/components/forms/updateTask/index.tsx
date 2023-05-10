@@ -43,14 +43,12 @@ export const UpdateTask = ({
     actualTask.description ?? '',
   );
   const [subTasks, setSubTasks] = useState<TSubTasks[]>([]);
-  const [clearInput, setClearInput] = useState(false);
+  const [clearInput] = useState(false);
 
   useEffect(() => {
-    if (actualTask) {
-      setValueTaskName(actualTask.text);
-      setValueDescription(actualTask?.description ?? '');
-    }
-  }, [actualTask]);
+    setValueTaskName(actualTask.text ?? '');
+    setValueDescription(actualTask?.description ?? '');
+  }, [actualTask, actualBoard]);
 
   const handleSubmitFormTask = async (
     event: React.FormEvent<HTMLFormElement>,
@@ -107,11 +105,7 @@ export const UpdateTask = ({
       formTask,
       actualTask._id as string,
     );
-    dispatch(deleteActualTask());
-    dispatch(setActualTask({ ...task }));
     dispatch(setNewTask({ actionTask: actualTask, newTask: task }));
-    setValueTaskName('');
-    setValueTaskName(task.text);
     setLoading(false);
   };
 
@@ -139,10 +133,10 @@ export const UpdateTask = ({
         </S.Heading>
         <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>Nome da tarefa</S.Label>
-          <Inpult
+          <S.Input
             placeholder="Por exemplo: faça uma pausa para café"
             type="text"
-            onChange={setValueTaskName}
+            onChange={({ target }) => setValueTaskName(target.value)}
             value={valueTaskName}
           />
         </S.ConteinerInput>
