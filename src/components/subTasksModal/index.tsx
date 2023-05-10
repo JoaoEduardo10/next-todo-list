@@ -25,7 +25,7 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
   }, [subTasks]);
 
   useEffect(() => {
-    if (subTasks.length > 0 && subTaskCheckBox.length > 0) {
+    if (task._id && subTasks.length > 0 && subTaskCheckBox.length > 0) {
       const time = setTimeout(async () => {
         await updateSubTask(
           Session.acessToken,
@@ -36,7 +36,7 @@ export const SubTasksModal = ({ subTasks }: SubTasksModalProps) => {
 
       return () => clearTimeout(time);
     }
-  }, [subTasks, subTaskCheckBox]);
+  }, [subTasks, subTaskCheckBox, task]);
 
   const handleChangeInput = (
     event: React.ChangeEvent<HTMLInputElement>,
