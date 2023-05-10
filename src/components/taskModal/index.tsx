@@ -22,16 +22,15 @@ export const TasksModal = ({
   show,
   rendering,
 }: TasksModalProps) => {
-  const task = useAppSelector((store) => store.task.actualTask);
   const actualBoard = useAppSelector(
     (store) => store.boards.actualBoardWithTasks,
   );
   const [openMenu, setOpenMenu] = useState(false);
-  const [subTasks, setSubTask] = useState<TSubTasks[]>([]);
+  const [task, setTask] = useState<TTasks>(actualTasks);
 
   useEffect(() => {
-    setSubTask(actualTasks?.subTasks ?? []);
-  }, [task, actualBoard, actualTasks]);
+    setTask(actualTasks);
+  }, [actualBoard, actualTasks]);
 
   const handleCloseTaskModal = () => {
     setShowTaskModal(false);
@@ -53,7 +52,7 @@ export const TasksModal = ({
       <S.Conteiner show={show} rendering={rendering}>
         <S.TaskModal>
           <Heading>
-            {actualTasks?.text ?? ''}{' '}
+            {task?.text ?? ''}{' '}
             <span>
               <FaEllipsisV
                 aria-label="Open/Elipsis"
@@ -65,10 +64,10 @@ export const TasksModal = ({
               />
             </span>
           </Heading>
-          <SubTasksModal subTasks={subTasks} />
+          <SubTasksModal subTasks={task?.subTasks ?? []} />
           <TaskStatus
             rendered={rendering}
-            status={actualTasks?.status!}
+            status={task?.status!}
             update={show}
           />
         </S.TaskModal>
