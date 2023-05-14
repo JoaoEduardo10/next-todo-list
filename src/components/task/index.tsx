@@ -16,7 +16,6 @@ export const Task = ({ tasks }: TaskProps) => {
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [rendering, setRendering] = useState(false);
   const [getTask, setGetTask] = useState<any>();
-  const [allTasks, setAllTasks] = useState<TTasks[]>([]);
 
   useEffect(() => {
     const time = setTimeout(() => {
@@ -27,18 +26,14 @@ export const Task = ({ tasks }: TaskProps) => {
   }, []);
 
   useEffect(() => {
-    setAllTasks(tasks);
-  }, [tasks]);
+    if (!getTask || tasks.length <= 0) return;
 
-  useEffect(() => {
-    if (!getTask?._id) return;
-
-    const newTask = allTasks.find((task) => {
-      if (task._id === getTask._id) {
-        console.log(task);
-      }
+    const updateTask = tasks.findIndex((task) => {
+      return task._id == getTask._id;
     });
-  }, [allTasks, getTask]);
+
+    setGetTask(tasks[updateTask]);
+  }, [getTask, tasks]);
 
   const handleShowTaskModalClisk = (task: TTasks) => {
     setShowTaskModal(true);
@@ -54,7 +49,7 @@ export const Task = ({ tasks }: TaskProps) => {
         actualTasks={getTask}
         rendering={rendering}
       />
-      {allTasks.map((task, index) => (
+      {tasks.map((task, index) => (
         <S.Tasks
           aria-label="Task"
           key={task.id + task.boardConnect + index}

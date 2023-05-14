@@ -105,7 +105,15 @@ export const UpdateTask = ({
       formTask,
       actualTask._id as string,
     );
-    dispatch(setNewTask({ actionTask: actualTask, newTask: task }));
+    dispatch(
+      setNewTask({
+        actionTask: actualTask,
+        newTask: {
+          _id: task.id,
+          ...task,
+        },
+      }),
+    );
     setLoading(false);
   };
 
