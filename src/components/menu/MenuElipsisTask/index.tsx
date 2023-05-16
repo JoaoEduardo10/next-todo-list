@@ -39,8 +39,12 @@ export const MenuElipsisTask = ({
     dispatch(removeTask({ task }));
     dispatch(deleteActualTask());
     setLoading(false);
-    closeMenu(false);
-    setShowTaskModal(false);
+    setShowDelete(false);
+
+    setTimeout(() => {
+      closeMenu(false);
+      setShowTaskModal(false);
+    }, 500);
   };
 
   const handleMenuElipsiEditClick = () => {
