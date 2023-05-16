@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { Button } from '../../button/styles';
-import { Label } from '../../inpult/styles';
+import { Input } from '../createTask/styles';
 import { MessageError } from '../../messageError/styles';
 import { LoadingCicle1, LoadingCicle2 } from '../../loading/styles';
 
@@ -51,7 +51,7 @@ export const ShowBoardConteiner = styled.div<{
     top: 0%;
     left: 0%;
     width: 100%;
-    height: 100vh;
+    height: 100% !important;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
@@ -104,7 +104,7 @@ export const FormBoard = styled.form`
       height: 5rem;
     }
 
-    ${Label} {
+    ${Input} {
       width: 80%;
     }
 
@@ -112,7 +112,7 @@ export const FormBoard = styled.form`
       width: 90%;
       height: 50%;
 
-      ${Label} {
+      ${Input} {
         width: 100%;
       }
 
@@ -126,12 +126,16 @@ export const FormBoard = styled.form`
 
 export const ConteinerButton = styled.div`
   ${({ theme }) => css`
-    height: 5rem;
+    height: 7rem !important;
     width: 40% !important;
     margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    & > ${Button} {
+    & ${Button} {
       margin-top: 0;
+      padding: 0%;
       width: 100%;
       height: 100%;
     }
