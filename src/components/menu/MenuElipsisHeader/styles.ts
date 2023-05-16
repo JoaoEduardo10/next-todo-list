@@ -64,6 +64,10 @@ export const Conteiner = styled.div<{ show: boolean; rendered: boolean }>`
 
     & div {
       width: 100%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       & ${Button} {
         width: 100%;

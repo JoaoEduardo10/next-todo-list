@@ -70,8 +70,9 @@ export const MessageError = styled.div<{ messageError: boolean }>`
     z-index: 3;
     background-color: ${theme.colors.redColor};
     width: 40rem;
+    height: 5rem !important;
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
     gap: 2rem;
     padding: ${theme.padding.small};
     border-radius: 1.6rem;
@@ -84,6 +85,12 @@ export const MessageError = styled.div<{ messageError: boolean }>`
       height: 100%;
       align-items: center;
 
+      & svg {
+        color: ${theme.colors.secondaryColor};
+      }
+    }
+
+    & span.icon {
       &::before {
         content: '';
         position: absolute;
@@ -92,10 +99,6 @@ export const MessageError = styled.div<{ messageError: boolean }>`
         height: 4rem;
         border-radius: 0.5rem;
         background-color: #d9bf6c;
-      }
-
-      & svg {
-        color: ${theme.colors.secondaryColor};
       }
     }
 

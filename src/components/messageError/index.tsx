@@ -10,7 +10,7 @@ export const MessageError = ({ text, error }: MessageErrorProps) => {
   return (
     <S.MessageError aria-label="Message Error" messageError={error}>
       {' '}
-      <span>
+      <span className="icon">
         <AiFillInfoCircle />
       </span>{' '}
       <span aria-label="Message">{text}</span>
