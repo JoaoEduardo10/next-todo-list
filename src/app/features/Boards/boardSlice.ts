@@ -125,7 +125,7 @@ export const boardsSlice = createSlice({
         return;
       }
 
-      const index = tasks.findIndex((task) => task._id == actionTask._id);
+      const index = tasks?.findIndex((task) => task._id == actionTask._id);
 
       const actualTask = tasks[index];
 
