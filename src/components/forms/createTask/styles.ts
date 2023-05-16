@@ -94,22 +94,21 @@ export const Heading = styled.h2`
       display: inline-block;
       font-size: 3.5rem;
       transform: translateY(13%);
+      cursor: pointer;
     }
   `}
 `;
 
 export const Input = styled.input`
   ${({ theme }) => css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    border: none;
+    outline: none;
+    padding: ${theme.padding.small};
+    border: 0.1rem solid gray;
+    border-radius: 0.5rem;
 
-    & span {
-      color: ${theme.colors.lite_greenColor};
-      display: inline-block;
-      font-size: 3.5rem;
-      transform: translateY(13%);
+    &:focus {
+      border: 0.1rem solid ${theme.colors.purpleColor};
     }
   `}
 `;
