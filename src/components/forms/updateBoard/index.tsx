@@ -3,7 +3,7 @@ import * as S from '../createBoard/styles';
 import { MessageError } from '../../messageError';
 import { Loading } from '../../loading';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Inpult } from '../../inpult/inpult';
+import { Input } from '../createTask/styles';
 import { Button } from '../../button';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
@@ -83,10 +83,10 @@ export const UpdateBoard = ({ rendering, show, setShow }: UpdateBoardProps) => {
           onClick={() => setShow(false)}
         />
         <h2 role="heading">Editar quadro</h2>
-        <Inpult
+        <Input
           placeholder="Nome do Quadro"
           type="text"
-          onChange={setValueBoardName}
+          onChange={({ target }) => setValueBoardName(target.value)}
           value={valueBoardName}
         />
         <S.ConteinerButton>

@@ -141,10 +141,10 @@ export const CreateTasks = ({
         </S.Heading>
         <S.ConteinerInput aria-label="ConteinerInput">
           <S.Label>Nome da tarefa</S.Label>
-          <Inpult
+          <S.Input
             placeholder="Por exemplo: faça uma pausa para café"
             type="text"
-            onChange={setValueTaskName}
+            onChange={({ target }) => setValueTaskName(target.value)}
             value={valueTaskName}
           />
         </S.ConteinerInput>

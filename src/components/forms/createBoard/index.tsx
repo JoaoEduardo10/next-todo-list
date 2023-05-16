@@ -1,5 +1,5 @@
 import * as S from './styles';
-import { Inpult } from '../../inpult/inpult';
+import { Input } from '../createTask/styles';
 import { Button } from '../../button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FormEvent, useEffect, useState } from 'react';
@@ -79,10 +79,10 @@ export const CreateBoard = ({
           onClick={() => setShow(false)}
         />
         <h2 role="heading">{text}</h2>
-        <Inpult
+        <Input
           placeholder="Nome do Quadro"
           type="text"
-          onChange={setValueBoardName}
+          onChange={({ target }) => setValueBoardName(target.value)}
           value={valueBoardName}
         />
         <Button>{buttonName}</Button>
