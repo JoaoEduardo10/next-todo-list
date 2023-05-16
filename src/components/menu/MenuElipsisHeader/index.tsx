@@ -60,6 +60,9 @@ export const MenuElipsisHeader = ({
     act(() => {
       setLoading(false);
       setShowDelete(false);
+      setTimeout(() => {
+        setMenuElipsisHeader(false);
+      }, 500);
     });
   };
 
