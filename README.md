@@ -1,5 +1,7 @@
 # Projeto Lista de Tarefas
 
+- Ainda em desenvolvimento....
+
 O objetivo deste projeto é criar uma lista de tarefas versátil, na qual você pode organizar suas tarefas em quadros. Cada quadro possui suas próprias tarefas, e as tarefas podem ter suas sub tarefas, que você pode marcar como concluídas ou não concluídas. Além disso, cada tarefa pode ser marcada como pendente, em andamento ou concluida. É importante destacar que cada quadro e tarefa são separados por usuário, garantindo uma experiência personalizada.
 
 ## Features
